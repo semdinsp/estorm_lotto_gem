@@ -7,3 +7,10 @@ estorm_lotto_gem
 
 Gem for lottery actions and remote stuff
 
+
+Setup for Gemfury
+=================
+git remote add fury https://semdinsp@git.fury.io/semdinsp/<package-name>.git
+git push --tags fury master
+
+
