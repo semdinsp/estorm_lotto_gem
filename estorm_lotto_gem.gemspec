@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
-  s.name        = "randprize"
-  s.version     = "0.1.4"
+  s.name        = "estorm_lotto_gem"
+  s.version     = "0.1.0"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
-  s.homepage    = "http://github.com/semdinsp/randprize"
-  s.summary     = "Random prize from hash with odds values"
-  s.description = "Select a random prize from a list with odds" 
-  s.executables = ['']    #should be "name.rb"
+  s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
+  s.summary     = "Estorm lottery tools"
+  s.description = "Tools for raspberry pi and other remote access" 
+  s.executables = ['button_controller.rb']    #should be "name.rb"
   s.files        = Dir["{lib,test}/**/*"] +Dir["bin/*.rb"] + Dir["[A-Z]*"] # + ["init.rb"]
   s.require_path = "lib"
   s.license = 'MIT'
