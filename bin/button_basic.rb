@@ -11,19 +11,19 @@ include PiPiper
 t=Time.now
 def tap
 puts "button TAPPED"
-system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
+#system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
 end
 
 def bootup
 puts "bootup script"
-system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
+#system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
 end
 
 def halt
 puts "shutdown script"
-system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py")
-system("/bin/sync")
-system("/sbin/shutdown -h now")
+#system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py")
+#system("/bin/sync")
+#system("/sbin/shutdown -h now")
 end
 
 PiPiper.watch :pin => 23,:trigger => :rising do
