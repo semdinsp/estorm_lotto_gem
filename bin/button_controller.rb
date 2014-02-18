@@ -15,7 +15,7 @@ system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
 end
 
 def bootup
-puts "bootup script"
+puts "button HELD bootup script"
 system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
 end
 
