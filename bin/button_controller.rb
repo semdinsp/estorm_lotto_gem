@@ -1,6 +1,11 @@
-puts "waiting for system to boot and settle down loading pi_piter"
+#!/usr/bin/env ruby
+delay=30
+puts "waiting #{delay} seconds for system to boot and settle down loading pi_piter"
+sleep delay-10
+puts "ten seconds left"
+sleep 5
+puts "starting....."
 require 'pi_piper'
-sleep 30
 
 include PiPiper
 
