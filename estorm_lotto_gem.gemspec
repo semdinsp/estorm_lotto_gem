@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "0.1.0"
+  s.version     = "0.1.1"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.rubyforge_project = s.name
   s.required_rubygems_version = ">= 1.3.4"
+  s.add_runtime_dependency 'httpclient'
 end

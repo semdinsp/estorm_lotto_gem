@@ -12,6 +12,6 @@ SimpleCov.command_name 'test'
 #end
 SimpleCov.start 
 
-require File.dirname(__FILE__) + '/../lib/randprize'
+require File.dirname(__FILE__) + '/../lib/estorm_lotto_gem'
 
 

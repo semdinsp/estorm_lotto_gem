@@ -1,4 +1,7 @@
+puts "waiting for system to boot and settle down loading pi_piter"
 require 'pi_piper'
+sleep 30
+
 include PiPiper
 
 t=Time.now
