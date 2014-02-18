@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 delay=30
 puts "waiting #{delay} seconds for system to boot and settle down loading pi_piter"
+puts "to update run: sudo gem install estorm_lotto_gem  --source https://n6ojjVsAxpecp7UjaAzD@gem.fury.io/semdinsp/"
 sleep delay-10
 puts "ten seconds left"
 sleep 5
