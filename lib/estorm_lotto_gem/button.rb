@@ -22,8 +22,13 @@ module EstormLottoGem
     end
     #ADD MUTEX TO MANAGE TIME
     def manage_buttons
+       
       @@pin=PiPiper::Pin.new(:pin => 23, :pull => :up)
       @@led=PiPiper::Pin.new(:pin => 18, :direction => :out)
+      EstormLottoGem::Button.led_mgr(bootup)
+      @@pin=PiPiper::Pin.new(:pin => 23, :pull => :up)
+      @@led=PiPiper::Pin.new(:pin => 18, :direction => :out)
+      @@led.on
       @@t=Time.now
       PiPiper.watch :pin => 23,:trigger => :falling , :pull => :up do
         #puts "Button pressed changed from #{last_value} to #{value}"
@@ -38,7 +43,7 @@ module EstormLottoGem
         #puts "debounce" if 0.1 > delta
       end
       sleep 5
-      EstormLottoGem::Button.led_mgr(bootup)
+     
       @@led.off
       @@t=Time.now
       PiPiper.wait
