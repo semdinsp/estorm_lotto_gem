@@ -14,7 +14,7 @@ module EstormLottoGem
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
     end
 
-    def sbootup
+    def bootup
     puts "bootup script"
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
     end
