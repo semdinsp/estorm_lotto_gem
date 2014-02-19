@@ -23,7 +23,7 @@ module EstormLottoGem
     self.led.on
     end
 
-    def halt
+    def held
     self.led.on
     puts "button HELD: shutdown script"
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py")
