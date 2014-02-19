@@ -1,6 +1,7 @@
 require 'pi_piper'
 module EstormLottoGem
   class Button
+    include PiPiper
     def tap(led)
     led.on
     puts "button TAPPED"
@@ -26,7 +27,7 @@ module EstormLottoGem
     #system("/sbin/shutdown -h now")
     end
     def manage_buttons
-      include PiPiper
+     
       pin=PiPiper::Pin.new(:pin => 23, :pull => :up)
       led=PiPiper::Pin.new(:pin => 18, :direction => :out)
       t=Time.now
