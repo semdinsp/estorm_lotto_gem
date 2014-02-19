@@ -10,20 +10,26 @@ require 'estorm_lotto_gem'
 module EstormLottoGem
   class Button
     def tap
+    self.led.on
     puts "button TAPPED"
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
+    self.led.off
     end
 
     def bootup
+    self.led.on
     puts "bootup script"
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
+    self.led.on
     end
 
     def halt
+    self.led.on
     puts "button HELD: shutdown script"
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py")
     system("/bin/sync")
     system("/sbin/shutdown -h now")
+    self.led.off
     end
   end   # button class
 end
