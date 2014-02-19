@@ -22,10 +22,7 @@ module EstormLottoGem
     end
     #ADD MUTEX TO MANAGE TIME
     def manage_buttons
-       
-      @@pin=PiPiper::Pin.new(:pin => 23, :pull => :up)
-      @@led=PiPiper::Pin.new(:pin => 18, :direction => :out)
-      EstormLottoGem::Button.led_mgr(bootup)
+      bootup
       @@pin=PiPiper::Pin.new(:pin => 23, :pull => :up)
       @@led=PiPiper::Pin.new(:pin => 18, :direction => :out)
       @@led.on

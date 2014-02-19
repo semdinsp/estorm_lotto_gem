@@ -16,6 +16,14 @@ module EstormLottoGem
 
     def bootup
     puts "bootup script"
+    # needs to call python script with following to setup GPIO board.
+    # ledPin       = 18
+    #buttonPin    = 23
+    # Use Broadcom pin numbers (not Raspberry Pi pin numbers) for GPIO
+    #GPIO.setmode(GPIO.BCM)
+    # Enable LED and button (w/pull-up on latter)
+    #GPIO.setup(ledPin, GPIO.OUT)
+    #GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
     end
 
