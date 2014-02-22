@@ -22,7 +22,7 @@ module EstormLottoGem
        src=resp['customersrc']
        code=resp['md5short']
        msgs=resp['resp_extra_messages']
-       balance=res.first['balance'] if res.first['success']
+       puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{msgs} resp: #{resp}"
        system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,msgs)
      end
     end
