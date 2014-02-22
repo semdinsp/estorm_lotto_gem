@@ -6,8 +6,8 @@ require File.dirname(__FILE__) + '/test_helper.rb'
 class EstormLottoGemTest <  Minitest::Test
 
   def setup
-    @f=EstormLottoGem::Base.new
-    @btn-EstormLotoGem::Button.new
+    @f=  EstormLottoGem::Base.new
+    @btn=EstormLottoGem::Button.new
   end
   
   def test_basic
@@ -21,7 +21,7 @@ class EstormLottoGemTest <  Minitest::Test
    end
    def test_button
      assert @btn!=nil, "should not be nil"
-     assert @btn.test, "should return true"
+     assert EstormLottoGem::Button.test_flag, "should return true"
      
    end
   

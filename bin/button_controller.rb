@@ -16,7 +16,7 @@ module EstormLottoGem
     src='6590683565'
     res=wb.get_ticket(src)
     if res.first['success']
-       resp=res.first
+       resp=res.first['ticket']
        digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
        drawdate=resp['drawdate']
        src=resp['customersrc']

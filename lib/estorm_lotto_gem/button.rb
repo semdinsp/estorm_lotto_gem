@@ -7,7 +7,7 @@ module EstormLottoGem
     def self.tap
     puts "button TAPPED"
     end
-    def self.test
+    def self.test_flag
       true
     end
     def bootup
