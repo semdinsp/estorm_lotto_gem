@@ -51,8 +51,8 @@ module EstormLottoGem
         Timeout::timeout(40) do    
           res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
         end
-      rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError => e
-           res=MultiJson.dump({'success'=>false,'error'=> 'application error response or timeout'})
+      rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError => e, Exception => e
+           res=MultiJson.dump({'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"})
            # SHOULD SEND EMAIL HERE
            puts "BAD RESPONSE #{e.inspect}"
       end
