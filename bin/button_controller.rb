@@ -29,7 +29,13 @@ module EstormLottoGem
 
     def self.held
     puts "button HELD: shutdown script"
-    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py")
+    wb=EstormLottoGem::WbBalance.new
+    wb.set_host('Scotts-MacBook-Pro.local:8080')
+    src='6590683565'
+    res=wb.get_balance(src)
+    balance='unknown'
+    balance=res['balance'] if res['success']
+    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py", balance)
     system("/bin/sync")
     system("/sbin/shutdown -h now")
     end

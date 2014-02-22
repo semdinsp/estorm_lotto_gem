@@ -1,7 +1,8 @@
-require 'pi_piper'
+OS_FLAG=(/darwin/ =~ RUBY_PLATFORM) != nil
+require 'pi_piper' if !OS_FLAG
 module EstormLottoGem
   class Button
-    include PiPiper
+    include PiPiper if !OS_FLAG
 
     def self.tap
     puts "button TAPPED"

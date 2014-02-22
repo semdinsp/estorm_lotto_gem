@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'httpclient'
+require 'multi_json'
+
 module EstormLottoGem
   class Base
    # attr_accessor :randgen, :myrange
@@ -27,16 +29,17 @@ module EstormLottoGem
     @clnt
   end
    def action_url
-     url="http://#{@host}/text_applications/handle_wallet_message"
+     url="http://#{@host}/text_applications/handle_wallet_message.json"
      url
    end
    def build_postdata(appname, src,params={})
      @postdata={}
      @postdata[:security_code]='12345'
-     @postdata[:auto_token]='EAc9S1JXBN5MXstisRC6'
+     @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
      @postdata[:source]=src
      @postdata[:application]=appname
      @postdata.merge params
+     puts "postdata is #{@postdata}"
      @postdata
    end
   def perform(url,postdata={})
@@ -46,14 +49,14 @@ module EstormLottoGem
       begin
         @clnt=self.build_client 
         Timeout::timeout(40) do    
-          res=self.clnt.post_content(self.uri, postdata,{'Content-Type' => 'application/json'}) 
+          res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
         end
       rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError => e
-           res='application error response or timeout'
+           res=MultiJson.dump({'success'=>false,'error'=> 'application error response or timeout'})
            # SHOULD SEND EMAIL HERE
            puts "BAD RESPONSE #{e.inspect}"
       end
-          res
+          MultiJson.load(res)
    end
   
 
