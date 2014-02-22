@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'thor'
+require 'estorm_lotto_gem'
+# needs upgrade to thor
+#puts "Check emailcheck.rb check  <address>  --from <from>"
+# CALL IT LIKE THIS bin/create_free_entry_list.rb process --filename testfree
+class TestCli < Thor
+    desc "get_balance", "get balance"
+    option :source, :required => true
+    option :host, :required => true
+    def get_balance
+      wb=EstormLottoGem::WbBalance.new
+      wb.set_host(options[:host])
+      res=wb.get_balance(options[:source])
+      res
+    end
+    
+    
+end
+
+TestCli.start(ARGV)
