@@ -15,6 +15,15 @@ class TestCli < Thor
       res=wb.get_balance(options[:source])
       res
     end
+    option :source, :required => true
+    option :host, :required => true
+     option :message, :required => false
+    def get_lotto
+      wb=EstormLottoGem::WbLotto4d.new
+      wb.set_host(options[:host])
+      res=wb.get_ticket(options[:source],options[:message])
+      res
+    end
     
     
 end
