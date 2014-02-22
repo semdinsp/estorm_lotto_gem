@@ -39,7 +39,7 @@ module EstormLottoGem
      @postdata[:source]=src
      @postdata[:application]=appname
      @postdata.merge params
-     puts "postdata is #{@postdata}"
+     #puts "postdata is #{@postdata}"
      @postdata
    end
   def perform(url,postdata={})
@@ -52,7 +52,7 @@ module EstormLottoGem
           res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
         end
       rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError,Exception => e
-           res=MultiJson.dump({'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"})
+           res=MultiJson.dump([{'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"}])
            # SHOULD SEND EMAIL HERE
            puts "BAD RESPONSE #{e.inspect}"
       end
