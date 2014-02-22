@@ -15,7 +15,7 @@ class TestCli < Thor
       res=wb.get_balance(options[:source])
       res
     end
-    desc "get_lotto4d_ticket"
+    desc "get_lotto4d_ticket", "get a 4d lottery ticket"
     option :source, :required => true
     option :host, :required => true
      option :message, :required => false

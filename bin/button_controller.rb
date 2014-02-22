@@ -11,7 +11,20 @@ module EstormLottoGem
   class Button
     def self.tap
     puts "button TAPPED"
-    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py")
+    wb=EstormLottoGem::WbLotto4d.new
+    wb.set_host('Scotts-MacBook-Pro.local:8080')
+    src='6590683565'
+    res=wb.get_ticket(src)
+    if res.first['success']
+       resp=res.first
+       digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
+       drawdate=resp['drawdate']
+       src=resp['customersrc']
+       code=resp['md5short']
+       msgs=resp['resp_extra_messages']
+       balance=res.first['balance'] if res.first['success']
+       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,msgs)
+     end
     end
 
     def bootup
