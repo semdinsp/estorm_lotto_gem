@@ -6,7 +6,7 @@ module EstormLottoGem
   def debug
     true
   end
-  attr_accessor :clnt, :account, :password, :extheader, :uri, :host
+  attr_accessor :clnt, :account, :password, :extheader, :uri, :host, :postdata
     @host= 'localhost:8080'
    # @@host= 'estorm-lotto4d.herokuapp.com' if ['production','staging'].include?(Rails.env)
   def set_debug
@@ -27,8 +27,17 @@ module EstormLottoGem
     @clnt
   end
    def action_url
-     url="http://#{@host}/api_lotto/create.json"
+     url="http://#{@host}/text_applications/handle_wallet_message"
      url
+   end
+   def build_postdata(appname, src,params={})
+     @postdata={}
+     @postdata[:security_code]='12345'
+     @postdata[:auto_token]='EAc9S1JXBN5MXstisRC6'
+     @postdata[:source]=src
+     @postdata[:application]=appname
+     @postdata.merge params
+     @postdata
    end
   def perform(url,postdata={})
       @uri=URI.parse(url)
