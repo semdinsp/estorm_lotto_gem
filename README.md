@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/semdinsp/randprize.png)](https://travis-ci.org/semdinsp/randprize)
-[![Code Climate](https://codeclimate.com/repos/524654d9c7f3a31b29038e3a/badges/58ed8386e3e6d266c7ac/gpa.png)](https://codeclimate.com/repos/524654d9c7f3a31b29038e3a/feed)
-[![Gem Version](https://badge.fury.io/rb/randprize.png)](http://badge.fury.io/rb/randprize)
+[![Build Status](https://magnum.travis-ci.com/semdinsp/estorm_lotto_gem.png?token=fw5zxPYM6WV8YEvtmrxJ&branch=master)](https://magnum.travis-ci.com/semdinsp/estorm_lotto_gem)
+[[![Code Climate](https://codeclimate.com/repos/5308ca80695680067600452f/badges/7d75a935ef5116947595/gpa.png)](https://codeclimate.com/repos/5308ca80695680067600452f/feed)
+[![Gem Version](https://badge.fury.io/rb/estorm_lotto_gem.png)](http://badge.fury.io/rb/estorm_lotto_gem)
 
 estorm_lotto_gem
 ============
