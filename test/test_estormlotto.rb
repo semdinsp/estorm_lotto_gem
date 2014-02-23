@@ -1,5 +1,5 @@
 puts File.dirname(__FILE__)
-require 'estorm_lotto_gem'
+#require 'estorm_lotto_gem'
 require File.dirname(__FILE__) + '/test_helper.rb' 
 
 
