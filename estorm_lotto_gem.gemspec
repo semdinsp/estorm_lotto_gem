@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "0.3.5"
+  s.version     = "0.3.7"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'pi_piper' if !(/darwin/ =~ RUBY_PLATFORM) != nil
   s.add_runtime_dependency 'thor'
   s.add_runtime_dependency 'multi_json'
+  s.add_runtime_dependency 'estorm_lotto_tools'
+  
 end

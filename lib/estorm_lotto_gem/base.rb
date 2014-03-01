@@ -32,6 +32,13 @@ module EstormLottoGem
      url="http://#{@host}/text_applications/handle_wallet_message.json"
      url
    end
+   def get_config
+     if @@config==nil then
+       @@config=  EstormLottoTools::ConfigMgr.new
+       @@config.read_config()
+     end
+     @@config.config.params
+   end
    def build_postdata(appname, src,params={})
      @postdata={}
      @postdata[:security_code]='12345'
@@ -44,7 +51,7 @@ module EstormLottoGem
    end
   def perform(url,postdata={})
       @uri=URI.parse(url)
-      puts "url is #{url}"
+     # puts "url is #{url}"
       res=''
       begin
         @clnt=self.build_client 

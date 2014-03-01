@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-delay=30
+delay=20
 puts "waiting #{delay} seconds for system to boot and settle down loading pi_piter"
 # puts "to update run: sudo gem install estorm_lotto_gem  --source https://n6ojjVsAxpecp7UjaAzD@gem.fury.io/semdinsp/"
 sleep delay-10
@@ -7,24 +7,21 @@ puts "ten seconds left"
 sleep 5
 puts "starting....."
 require 'estorm_lotto_gem'
+require 'estorm_lotto_tools'
 module EstormLottoGem
   class Button
+    def self.config
+    end
     def self.tap
     puts "button TAPPED"
     wb=EstormLottoGem::WbLotto4d.new
-    wb.set_host('Scotts-MacBook-Pro.local:8080')
-    src='6590683565'
+    params=@wb.get_config
+    wb.set_host(params['wallethost'])
+   # wb.set_host('Scotts-MacBook-Pro.local:8080')
+   # src='6590683565'
+    src=params['identity']
     res=wb.get_ticket(src)
-    if res.first['success']
-       resp=res.first['ticket']
-       digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
-       drawdate=resp['drawdate']
-       src=resp['customersrc']
-       code=resp['md5short']
-       msgs=resp['resp_extra_messages']
-       puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{msgs} resp: #{resp}"
-       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,msgs)
-     end
+    digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first) if res.first['success']
     end
 
     def bootup
