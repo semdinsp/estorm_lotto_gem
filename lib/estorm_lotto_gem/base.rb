@@ -38,7 +38,6 @@ module EstormLottoGem
        @@config=  EstormLottoTools::ConfigMgr.new 
        puts "environment #{ENV['TRAVIS']} file: #{File.dirname(__FILE__)}"
        @@config = EstormLottoTools::ConfigMgr.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']=='true'    #TESTING
-       @@config.read_config()
      end
      @@config.config.params
    end
