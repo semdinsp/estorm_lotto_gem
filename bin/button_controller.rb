@@ -15,7 +15,7 @@ module EstormLottoGem
     def self.tap
     puts "button TAPPED"
     wb=EstormLottoGem::WbLotto4d.new
-    params=@wb.get_config
+    params=wb.get_config
     wb.set_host(params['wallethost'])
    # wb.set_host('Scotts-MacBook-Pro.local:8080')
    # src='6590683565'
@@ -40,7 +40,7 @@ module EstormLottoGem
     def self.held
     puts "button HELD: shutdown script"
     wb=EstormLottoGem::WbBalance.new
-    params=@wb.get_config
+    params=wb.get_config
     wb.set_host(params['wallethost'])
     src=params['identity']
     res=wb.get_balance(src)
