@@ -3,8 +3,7 @@ require 'rubygems'
 require 'thor'
 require 'estorm_lotto_gem'
 # needs upgrade to thor
-#puts "Check emailcheck.rb check  <address>  --from <from>"
-# CALL IT LIKE THIS bin/create_free_entry_list.rb process --filename testfree
+# test_cli.rb get_balance --host=Scotts-MacBook-Pro.local:8080 --source=6590683565
 class TestCli < Thor
     desc "get_balance", "get balance"
     option :source, :required => true
