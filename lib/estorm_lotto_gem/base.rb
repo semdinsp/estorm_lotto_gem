@@ -35,7 +35,7 @@ module EstormLottoGem
    @@config=nil
    def get_config
      if @@config==nil then
-       @@config =  EstormLottoTools::BasicConfig.new(nil,nil)
+       @@config =  EstormLottoTools::BasicConfig.new(nil,nil) if ENV['TRAVIS']!='true' 
        puts "SCOTT environment #{ENV['TRAVIS']} file: #{File.dirname(__FILE__)}"
        @@config = EstormLottoTools::BasicConfig.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']=='true'    #TESTING
      end
