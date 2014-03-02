@@ -37,7 +37,7 @@ module EstormLottoGem
      if @@config==nil then
        @@config=  EstormLottoTools::ConfigMgr.new 
        # puts "environment #{ENV['TRAVIS']} file: #{File.dirname(__FILE__)}"
-       @basic = EstormLottoTools::BasicConfig.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']!=nil    #TESTING
+       @config = EstormLottoTools::BasicConfig.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']!=nil    #TESTING
        @@config.read_config()
      end
      @@config.config.params
