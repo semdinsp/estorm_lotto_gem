@@ -40,8 +40,9 @@ module EstormLottoGem
     def self.held
     puts "button HELD: shutdown script"
     wb=EstormLottoGem::WbBalance.new
-    wb.set_host('Scotts-MacBook-Pro.local:8080')
-    src='6590683565'
+    params=@wb.get_config
+    wb.set_host(params['wallethost'])
+    src=params['identity']
     res=wb.get_balance(src)
     balance='unknown'
     balance=res.first['balance'] if res.first['success']

@@ -25,6 +25,14 @@ class EstormLottoGemTest <  Minitest::Test
      
    end
   
+    def test_cfg
+      assert @f!=nil, "should not be nil"
+      params=@f.get_config
+      puts "cnfig file #{params}"
+      assert params !=nil, "should have params "
+
+    end
+  
   
 
 end

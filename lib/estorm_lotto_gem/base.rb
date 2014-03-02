@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'httpclient'
 require 'multi_json'
-
+require 'estorm_lotto_tools'
 module EstormLottoGem
   class Base
    # attr_accessor :randgen, :myrange
@@ -32,6 +32,7 @@ module EstormLottoGem
      url="http://#{@host}/text_applications/handle_wallet_message.json"
      url
    end
+   @@config=nil
    def get_config
      if @@config==nil then
        @@config=  EstormLottoTools::ConfigMgr.new
