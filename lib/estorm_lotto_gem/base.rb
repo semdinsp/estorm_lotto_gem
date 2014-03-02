@@ -35,11 +35,11 @@ module EstormLottoGem
    @@config=nil
    def get_config
      if @@config==nil then
-       @@config=  EstormLottoTools::ConfigMgr.new 
+       @@config =  EstormLottoTools::BasicConfig.new(nil,nil)
        puts "environment #{ENV['TRAVIS']} file: #{File.dirname(__FILE__)}"
-       @@config = EstormLottoTools::ConfigMgr.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']=='true'    #TESTING
+       @@config = EstormLottoTools::BasicConfig.new(File.dirname(__FILE__),'../../test/test.conf') if ENV['TRAVIS']=='true'    #TESTING
      end
-     @@config.config.params
+     @@config.params
    end
    def build_postdata(appname, src,params={})
      @postdata={}
