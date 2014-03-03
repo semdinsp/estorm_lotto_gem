@@ -21,8 +21,8 @@ module EstormLottoGem
    # src='6590683565'
     src=params['identity']
     res=wb.get_ticket(src)
-    digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first) if res.first['success']
-    wb.print_msg(res.first['error'])  if !res.first['success']
+    digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first,params['printer']) if res.first['success']
+    wb.print_msg(res.first['error'],params['printer'])  if !res.first['success']
     end
 
     def bootup
@@ -47,7 +47,7 @@ module EstormLottoGem
     res=wb.get_balance(src)
     balance='unknown'
     balance=res.first['balance'] if res.first['success']
-    wb.print_msg(res.first['error'])  if !res.first['success']
+    wb.print_msg(res.first['error'],params['printer'])  if !res.first['success']
     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py", balance)
     system("/bin/sync")
     system("/sbin/shutdown -h now")

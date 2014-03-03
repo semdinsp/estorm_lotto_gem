@@ -16,7 +16,7 @@ module EstormLottoGem
        msgs=resp['resp_extra_messages']
        txid=""
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{msgs} resp: #{resp}"
-       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,msgs) if printer_type=='adafruit'
+       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,msgs,printer_type) 
        [digits,drawdate,src,code,msgs,txid]
     end
   end # clase
