@@ -13,7 +13,8 @@ module EstormLottoGem
        drawdate=resp['drawdate']
        src=resp['customersrc']
        code=resp['md5short']
-       exmsgs=resp['resp_extra_messages'] || "none"
+       exmsgs=resp['resp_extra_messages'] 
+       exmsgs = "none" if exmsgs==nil
        txid=""
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp}"
        system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) 
