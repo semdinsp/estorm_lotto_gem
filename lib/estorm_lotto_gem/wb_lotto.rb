@@ -17,7 +17,7 @@ module EstormLottoGem
        exmsgs = "none" if exmsgs==nil or exmsgs==""
        txid=""
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
-       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) 
+       system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        [digits,drawdate,src,code,exmsgs,txid]
     end
   end # clase
