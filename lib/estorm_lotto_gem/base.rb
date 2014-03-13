@@ -6,12 +6,18 @@ module EstormLottoGem
   class Base
    # attr_accessor :randgen, :myrange
   def debug
-    true
+    @debug
   end
-  attr_accessor :clnt, :account, :password, :extheader, :uri, :host, :postdata
-    @host= 'localhost:8080'
+  attr_accessor :clnt, :account, :password, :extheader, :uri, :host, :postdata,:debug
+  def initialize
+     @host= 'estorm-sms.herokuapp.com'
+      @debug=false
+  end
+   
    # @@host= 'estorm-lotto4d.herokuapp.com' if ['production','staging'].include?(Rails.env)
   def set_debug
+    set_host('localhost:8080')
+    @debug=true
     # @@host= 'localhost:8083'
   end
   def set_host(ht)

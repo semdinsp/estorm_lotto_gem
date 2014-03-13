@@ -11,8 +11,16 @@ class EstormLottoGemTest <  Minitest::Test
   end
   
   def test_basic
-    assert @f.debug, "should be true"
+    assert !@f.debug, "should be false"
   end
+  def test_debug
+     @f.build_client
+     assert @f.clnt!=nil, "should be not nil"
+     assert @f.action_url.include?('estorm-sms'), "action url shuld be included #{@f.action_url}"
+     @f.set_debug
+     assert @f.action_url.include?('localhost'), "action url shuld be included #{@f.action_url}"
+      assert @f.debug, "should be true"
+   end
   def test_client
      @f.build_client
      assert @f.clnt!=nil, "should be not nil"
