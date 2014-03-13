@@ -74,7 +74,7 @@ module EstormLottoGem
           MultiJson.load(res)
    end
    def print_msg(msg, printer_type='adafruit')
-     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type) 
+     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type)  if printer_type!= "none"
    end
 
    end    # Class
