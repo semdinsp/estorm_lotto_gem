@@ -35,7 +35,8 @@ module EstormLottoGem
     @clnt
   end
    def action_url
-     url="http://#{@host}/text_applications/handle_wallet_message.json"
+     url="https://#{@host}/text_applications/handle_wallet_message.json"
+     url="http://#{@host}/text_applications/handle_wallet_message.json" if @debug
      url
    end
    @@config=nil
