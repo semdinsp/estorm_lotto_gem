@@ -13,7 +13,10 @@ module EstormLottoGem
      @host= 'estorm-sms.herokuapp.com'
       @debug=false
   end
-   
+  def file_info
+    puts " directory #{File.dirname(__FILE__))}"
+    puts " filename #{__FILE__}"
+  end
    # @@host= 'estorm-lotto4d.herokuapp.com' if ['production','staging'].include?(Rails.env)
   def set_debug
     set_host('localhost:8080')
