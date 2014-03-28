@@ -11,11 +11,14 @@ module EstormLottoGem
   attr_accessor :clnt, :account, :password, :extheader, :uri, :host, :postdata,:debug
   def initialize
      @host= 'estorm-sms.herokuapp.com'
-      @debug=false
+     @debug=false
   end
   def file_info
-    puts " directory #{File.dirname(__FILE__))}"
+    puts " directory #{File.dirname(__FILE__)}"
     puts " filename #{__FILE__}"
+  end
+  def python_directory
+      "#{File.dirname(__FILE__)}/python"
   end
    # @@host= 'estorm-lotto4d.herokuapp.com' if ['production','staging'].include?(Rails.env)
   def set_debug
@@ -79,7 +82,8 @@ module EstormLottoGem
           MultiJson.load(res)
    end
    def print_msg(msg, printer_type='adafruit')
-     system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type)  if printer_type!= "none"
+     system("/usr/bin/python","#{self.python_directory}/print_msg.py",msg,printer_type) if printer_type!= "none"
+      # system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type)  if printer_type!= "none"
    end
 
    end    # Class
