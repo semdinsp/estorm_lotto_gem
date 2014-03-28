@@ -46,7 +46,7 @@ class Epson_Printer(Base_Printer):
         self.my_printer = printer.Usb(0x04b8,usbid)
     def println(self,atext):
         self.my_printer.text(atext)
-        self.my_Printer.text("\n")
+        self.my_printer.text("\n")
     def large(self):
         self.my_printer.set("CENTER","A","B",2,2)
     def normal(self):
