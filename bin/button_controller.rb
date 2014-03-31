@@ -21,7 +21,7 @@ module EstormLottoGem
    # src='6590683565'
     src=params['identity']
     res=wb.get_ticket(src)
-    digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first,params['printer']) if res.first['success']
+    digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first,src,params['printer']) if res.first['success']
     wb.print_msg(res.first['error'],params['printer'])  if !res.first['success']
     end
 
@@ -35,7 +35,7 @@ module EstormLottoGem
     # Enable LED and button (w/pull-up on latter)
     #GPIO.setup(ledPin, GPIO.OUT)
     #GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")
+    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/startup.py")   #FIX LOCATION
     end
 
     def self.held
@@ -48,7 +48,7 @@ module EstormLottoGem
     balance='unknown'
     balance=res.first['balance'] if res.first['success']
     wb.print_msg(res.first['error'],params['printer'])  if !res.first['success']
-    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py", balance)
+    system("/usr/bin/python","/home/pi/Python-Thermal-Printer/shutdown.py", balance)  #FIX LOCATION
     system("/bin/sync")
     system("/sbin/shutdown -h now")
     end

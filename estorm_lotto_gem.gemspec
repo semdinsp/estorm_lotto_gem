@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "0.6.0"
+  s.version     = "0.6.1"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -12,10 +12,10 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.rubyforge_project = s.name
   s.required_rubygems_version = ">= 1.3.4"
-  s.add_runtime_dependency 'httpclient', '~> 0'
+  s.add_runtime_dependency 'httpclient', '>= 2.3'
   s.add_runtime_dependency 'pi_piper' if !(/darwin/ =~ RUBY_PLATFORM) != nil
-  s.add_runtime_dependency 'thor', '~> 0'
-  s.add_runtime_dependency 'multi_json', '~> 0'
+  s.add_runtime_dependency 'thor', '>= 0.19'
+  s.add_runtime_dependency 'multi_json', '>= 1.9'
   s.add_runtime_dependency 'estorm_lotto_tools'
   
 end
