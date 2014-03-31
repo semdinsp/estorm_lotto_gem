@@ -10,6 +10,8 @@ module EstormLottoGem
     def print_ticket(res,seller,drawtype,printer_type='adafruit')
        resp=res['ticket']
        digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
+       digits="#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}" if drawtype=='3d'
+       
        drawdate=resp['drawdate']
        src=resp['customersrc']
        code=resp['md5short']
