@@ -7,7 +7,7 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    def print_ticket(res,seller,printer_type='adafruit')
+    def print_ticket(res,seller,drawtype,printer_type='adafruit')
        resp=res['ticket']
        digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
        drawdate=resp['drawdate']
@@ -18,7 +18,7 @@ module EstormLottoGem
        txid=""
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
-       system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller) if printer_type!= "none"
+       system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
        [digits,drawdate,src,code,exmsgs,txid]
     end
   end # clase
