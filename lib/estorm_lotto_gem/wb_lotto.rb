@@ -7,7 +7,7 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    def print_ticket(res,printer_type='adafruit')
+    def print_ticket(res,seller,printer_type='adafruit')
        resp=res['ticket']
        digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
        drawdate=resp['drawdate']
