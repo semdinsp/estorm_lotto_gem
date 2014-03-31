@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (0.5.9)
+    estorm_lotto_gem (0.6.0)
       estorm_lotto_tools
       httpclient
       multi_json
