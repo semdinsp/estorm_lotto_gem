@@ -59,6 +59,7 @@ module EstormLottoGem
      @postdata[:security_code]='12345'
     # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
      @postdata[:auth_token]='stxpgBdjcrWt9iAZUAyZ'
+     @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6' if @debug
      @postdata[:source]=src
      @postdata[:application]=appname
      @postdata.merge params
