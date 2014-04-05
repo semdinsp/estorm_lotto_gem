@@ -9,7 +9,7 @@ module EstormLottoGem
     end
     
     def print_results(res,seller,drawtype,printer_type='adafruit')
-       respstring=" "
+       respstring=""
        puts  "rpint results #{res} class #{res.class}"
        res['draws'].each { |r| respstring <<  "#{r['drawdate']}: #{r['digits']}\n"   }
        puts "respstring: #{respstring}  printer #{printer_type}"
