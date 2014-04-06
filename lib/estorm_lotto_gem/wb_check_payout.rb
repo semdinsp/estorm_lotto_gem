@@ -14,12 +14,15 @@ module EstormLottoGem
        puts  "print payouts #{res} class #{res.class}"
        if res.first['success']
          value=res.first['payout']['value']
-         system("/usr/bin/python","#{self.python_directory}/winning_ticket.py",res.first.to_s,seller,drawtype,drawdate,md5,value,printer_type) if printer_type!= "none"
+         valstr="#{value}"
+         resString=res.first.inspect.to_s
+         system("/usr/bin/python","#{self.python_directory}/winning_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
        else
-         system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",res.first.to_s,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
+         resString=res.first.inspect.to_s
+         system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",resString,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
        end
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
-       [res.first]
+       [resString]
     end
     
   end # clase
