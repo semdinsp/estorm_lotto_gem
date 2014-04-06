@@ -55,6 +55,20 @@ class TestCli < Thor
       res
     end
     
+    desc "check_payout", "check Payout for entry"
+    option :source, :required => true
+    option :host, :required => true
+    option :drawtype, :required => true
+    option :drawdate, :required => true
+    option :md5, :required => true
+    def check_payout
+      wb=EstormLottoGem::WbCheckPayout.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.check_payout(options[:source],options[:md5],options[:drawdate],options[:drawtype])
+      res
+    end
+    
     
 end
 
