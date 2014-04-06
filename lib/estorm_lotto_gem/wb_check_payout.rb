@@ -3,7 +3,8 @@ module EstormLottoGem
     def check_payout(src,md5,drawdate,drawtype='4d')
       appname="wallet_check_payout_#{drawtype}"
       build_postdata(appname, src)
-      self.postdata[:message]="#{md5}:#{drawdate}"
+      message={:md5 => md5, :drawdate=> drawdate}
+      self.postdata[:message]=MultiJson.dump(message)
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res
