@@ -1,8 +1,9 @@
 module EstormLottoGem
   class WbDrawResults < EstormLottoGem::Base
     def get_results(src,drawtype='4d')
-      build_postdata('wallet_draw_results', src)
-      self.postdata[:message]="wallet_draw_results_#{drawtype}"
+      appnmae="wallet_draw_results_#{drawtype}"
+      build_postdata(appname, src)
+      self.postdata[:message]=appname
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res
