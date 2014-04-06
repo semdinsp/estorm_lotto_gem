@@ -20,7 +20,7 @@ module EstormLottoGem
          system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",res,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
        end
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
-       [respstring]
+       [res]
     end
     
   end # clase
