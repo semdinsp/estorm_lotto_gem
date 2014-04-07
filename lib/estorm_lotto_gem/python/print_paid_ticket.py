@@ -3,7 +3,7 @@ from Teds_Printer import *
 import Image, sys
 from datetime import datetime
 from escpos import *
-rrespstring=sys.argv[1]
+respstring=sys.argv[1]
 seller=sys.argv[2]
 drawtype=sys.argv[3]
 drawdate=sys.argv[4]
