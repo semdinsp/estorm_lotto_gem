@@ -17,12 +17,7 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    number=sys.argv[1]
-    drawdate=sys.argv[2]
-    sec_code=sys.argv[3]
-    printer_type=sys.argv[4]
-    seller=sys.argv[5]
-    drawtype=sys.argv[6]
+   
     def print_free_entry(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
       print "Free entry #{res}"
       system("/usr/bin/python","#{self.python_directory}/print_free_entry.py",res['digits'],res['drawdate'],res['md5short'],printer_type,seller,drawtype)    
