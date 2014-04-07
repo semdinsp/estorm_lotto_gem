@@ -17,8 +17,32 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    
-    
+    number=sys.argv[1]
+    drawdate=sys.argv[2]
+    sec_code=sys.argv[3]
+    printer_type=sys.argv[4]
+    seller=sys.argv[5]
+    drawtype=sys.argv[6]
+    def print_free_entry(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
+      print "Free entry #{res}"
+      system("/usr/bin/python","#{self.python_directory}/print_free_entry.py",res['digits'],res['drawdate'],res['md5short'],printer_type,seller,drawtype)    
+    end
+    def print_paid_ticket(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
+       respstring=""
+       puts  "print payouts #{res} class #{res.class}"
+       if res.first['success']
+         value=res.first['payout']['value']
+         valstr="#{value}"
+         resString=res.first.inspect.to_s
+         system("/usr/bin/python","#{self.python_directory}/print_paid_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
+         print_free_entry(res.first['payout']['freeentry'],seller,drawtype,drawdate,md5,printer_type) if res.first['payout']['freeflag']  
+       else
+         resString=res.first.inspect.to_s
+         system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",resString,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
+       end
+       #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
+       [resString]
+    end
     def print_payout(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
        respstring=""
        puts  "print payouts #{res} class #{res.class}"
