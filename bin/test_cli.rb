@@ -77,7 +77,7 @@ class TestCli < Thor
     option :drawdate, :required => true
     option :md5, :required => true
     option :debug
-    def check_payout
+    def process_payout
       wb=EstormLottoGem::WbCheckPayout.new
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'

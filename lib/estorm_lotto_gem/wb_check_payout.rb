@@ -2,15 +2,14 @@ module EstormLottoGem
   class WbCheckPayout < EstormLottoGem::Base
     def check_payout(src,md5,drawdate,drawtype='4d')
       appname="wallet_check_payout_#{drawtype}"
-      build_postdata(appname, src)
-      message={:md5 => md5, :drawdate=> drawdate,  :source => src}
-      self.postdata[:message]=MultiJson.dump(message)
-      res=self.perform(self.action_url,self.postdata)
-      puts "res is #{res}"
-      res
+      send_process(md5,src,drawdate,appname)
     end
     def process_payout(src,md5,drawdate,drawtype='4d')
       appname="wallet_process_payout_#{drawtype}"
+      send_process(md5,src,drawdate,appname)
+    end
+    
+    def send_process(md5,src,drawdate,appname)
       build_postdata(appname, src)
       message={:md5 => md5, :drawdate=> drawdate, :source => src}
       self.postdata[:message]=MultiJson.dump(message)
@@ -18,6 +17,7 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
+    
     
     def print_payout(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
        respstring=""
