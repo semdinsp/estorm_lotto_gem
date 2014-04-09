@@ -61,10 +61,10 @@ class Epson_Printer(Base_Printer):
         self.space()
         self.my_printer.cut()
 
-class Mosart_Printer(Epson_Printer):
+class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
         # usbi id 0x0e03
-        self.my_printer = printer.Usb(0x13ee,usbid)  
+        self.my_printer = printer.Usb(0x0483,usbid)    #0483:811e
 
 class Teds_Printer(object):
     def  __init__(self, printer_type):
@@ -73,8 +73,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e03)
         if printer_type == 'epson2':
             self.my_printer = Epson_Printer(0x0e15)
-        if printer_type == 'mosart':
-            self.my_printer = Mosart_Printer(0x0001)
+        if printer_type == 'sgsprinter':
+            self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':
             self.my_printer = Ada_Printer()
         if self.my_printer == 'none':
