@@ -17,7 +17,10 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-   
+    def print_error
+      resString=res.first.inspect.to_s
+      system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",resString,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
+    end
     def print_free_entry(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
       print "Free entry #{res}"
       system("/usr/bin/python","#{self.python_directory}/print_free_entry.py",res['digits'],res['drawdate'],res['md5short'],printer_type,seller,drawtype)    
