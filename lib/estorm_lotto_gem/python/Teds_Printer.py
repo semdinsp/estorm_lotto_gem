@@ -74,7 +74,7 @@ class Teds_Printer(object):
         if printer_type == 'epson2':
             self.my_printer = Epson_Printer(0x0e15)
         if printer_type == 'mosart':
-            self.my_printer = MosArt_Printer(0x0001)
+            self.my_printer = Mosart_Printer(0x0001)
         if printer_type == 'adafruit':
             self.my_printer = Ada_Printer()
         if self.my_printer == 'none':
