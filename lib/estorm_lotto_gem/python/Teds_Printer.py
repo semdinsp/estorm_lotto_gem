@@ -64,7 +64,7 @@ class Epson_Printer(Base_Printer):
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
         # usbi id 0x0e03
-        self.my_printer = printer.Usb(0x0483,usbid)    #0483:811e
+        self.my_printer = printer.Usb(0x0483,usbid,0,0x81,0x02) #printer.Usb(0x0483,usbid)    #0483:811e
 
 class Teds_Printer(object):
     def  __init__(self, printer_type):
