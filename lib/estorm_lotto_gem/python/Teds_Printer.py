@@ -73,6 +73,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e03)
         if printer_type == 'epson2':
             self.my_printer = Epson_Printer(0x0e15)
+        if printer_type == 'epsont81':
+            self.my_printer = Epson_Printer(0x0202)
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':
