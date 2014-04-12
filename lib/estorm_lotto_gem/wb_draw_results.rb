@@ -19,5 +19,24 @@ module EstormLottoGem
        [respstring]
     end
     
+    
+   
+    def print_ramalan(res,seller,drawtype,printer_type='adafruit')
+       respstring=""
+       puts  "rpint ramalan #{res} class #{res.class}"
+       shiolist=[ "kambing" ,"kuda", "ular", "naga","kalenci","mecan","capi","tikus","monyet","babi","anjing","ayam" ]
+       yday=Time.now.yday()
+       shio=shiolist[yday % shiolist.size]
+       r0=res['draws'][0]
+       r1=res['draws'][1]
+       yest=r0['digits']
+       older=r1['digits']
+       pastdraws="#{r0['drawdate']}: #{r0['digits']}\n#{r1['drawdate']}: #{r1['digits']}\n"
+       
+       #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
+       system("/usr/bin/python","#{self.python_directory}/print_ramalan.py",pastdraws,shio,seller,"ekor","kapala",printer_type,seller,drawtype) if printer_type!= "none"
+       ["#{shio} pastdraows: #{pastdraws}"]
+    end
+    
   end # clase
 end #module
