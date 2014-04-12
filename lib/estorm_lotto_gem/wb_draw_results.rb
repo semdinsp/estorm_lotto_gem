@@ -26,6 +26,7 @@ module EstormLottoGem
        puts  "rpint ramalan #{res} class #{res.class}"
        shiolist=[ "kambing" ,"kuda", "ular", "naga","kalenci","mecan","capi","tikus","monyet","babi","anjing","ayam" ]
        yday=Time.now.yday()
+       yday = yday +3 if drawtype=='3d'
        shio=shiolist[yday % shiolist.size]
        r0=res['draws'][0]
        r1=res['draws'][1]
