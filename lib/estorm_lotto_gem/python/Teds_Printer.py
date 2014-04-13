@@ -20,7 +20,7 @@ class Base_Printer(object):
         pass
 
 class Ada_Printer(Base_Printer):
-    def __init__(self):
+    def __init__(self,tty):
         # usbi id 0x0e03
         self.my_printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5) 
     def println(self,atext):
@@ -78,9 +78,9 @@ class Teds_Printer(object):
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':
-            self.my_printer = Ada_Printer()
+            self.my_printer = Ada_Printer('ttya')
         if self.my_printer == 'none':
-            self.my_printer = Base_Printer()
+            self.my_printer = Base_Printer('test')
     def println(self,atext):
         self.my_printer.println(atext)
     def large(self):
