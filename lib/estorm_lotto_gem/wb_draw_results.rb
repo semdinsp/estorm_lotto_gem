@@ -37,7 +37,7 @@ module EstormLottoGem
        pastdraws="#{r0['drawdate']}: #{r0['digits']}\n#{r1['drawdate']}: #{r1['digits']}\n"
        
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
-       system("/usr/bin/python","#{self.python_directory}/print_ramalan.py",pastdraws,shio,ekor.abs,kapala.abs,printer_type,seller,drawtype) if printer_type!= "none"
+       system("/usr/bin/python","#{self.python_directory}/print_ramalan.py",pastdraws,shio,"#{ekor.abs}","#{kapala.abs}",printer_type,seller,drawtype) if printer_type!= "none"
        ["#{shio} pastdraows: #{pastdraws}"]
     end
     
