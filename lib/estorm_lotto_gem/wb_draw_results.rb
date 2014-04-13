@@ -32,8 +32,8 @@ module EstormLottoGem
        r1=res['draws'][1]
        yest=r0['digits']
        older=r1['digits']
-       ekor= 120 - yest[-2]*10 - yest[-1]
-       kapala= older[0]*10 - yest[0]*10 - yest[1]+ older[1]
+       ekor= 120 - yest[-2].to_i*10 - yest[-1].to_i
+       kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i+ older[1].to_i
        pastdraws="#{r0['drawdate']}: #{r0['digits']}\n#{r1['drawdate']}: #{r1['digits']}\n"
        
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
