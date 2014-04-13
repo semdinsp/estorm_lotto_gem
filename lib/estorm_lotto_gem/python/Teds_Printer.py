@@ -18,6 +18,9 @@ class Base_Printer(object):
     def space(self):
         # do thonthing
         pass
+    def closing(self):
+        # do thonthing
+        pass
 
 class Ada_Printer(Base_Printer):
     def __init__(self,tty):
