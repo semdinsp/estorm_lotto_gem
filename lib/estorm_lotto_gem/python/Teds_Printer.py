@@ -38,7 +38,7 @@ class Ada_Printer(Base_Printer):
     def closing(self):
         now=str(datetime.now())
         self.my_printer.setSize('S')
-        self.my_printer.println("www.lucky-sms.net")
+        self.my_printer.println("www.teds-timor.com")
         self.my_printer.setDefault()
         self.my_printer.println(now)
         self.space()
@@ -59,7 +59,7 @@ class Epson_Printer(Base_Printer):
     def closing(self):
         now=str(datetime.now())
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
-        self.my_printer.text("www.lucky-sms.net\n")
+        self.my_printer.text("www.teds-timor.com\n")
         self.my_printer.text(now)
         self.space()
         self.my_printer.cut()
