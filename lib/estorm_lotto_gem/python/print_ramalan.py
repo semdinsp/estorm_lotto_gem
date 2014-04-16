@@ -10,6 +10,7 @@ kapala=sys.argv[4]
 printer_type=sys.argv[5]
 seller=sys.argv[6]
 drawtype=sys.argv[7]
+rama=sys.argv[8]
 
 
 pos_printer=Teds_Printer(printer_type)
@@ -28,7 +29,9 @@ pos_printer.println(shio)
 pos_printer.space()
 pos_printer.normal()
 pos_printer.println("Ramalan\n")
-pos_printer.println(ekor)
+pos_printer.println(rama[0])
+pos_printer.println(rama[1:3])
+pos_printer.println(rama[4])
 pos_printer.println("Ekor")
 pos_printer.println(ekor)
 pos_printer.println("AWAS Kapala")

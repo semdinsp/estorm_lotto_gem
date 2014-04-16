@@ -57,6 +57,7 @@ module EstormLottoGem
    def build_postdata(appname, src,params={})
      @postdata={}
      @postdata[:security_code]='12345'
+     @postdata[:timestamp]=Time.now.to_s
     # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
      @postdata[:auth_token]='stxpgBdjcrWt9iAZUAyZ'
      @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6' if @debug
