@@ -42,7 +42,7 @@ class Ada_Printer(Base_Printer):
         self.my_printer.setDefault()
         self.my_printer.println(now)
         self.space()
-         self.my_printer.feed(4)
+        self.my_printer.feed(4)
 
 class Epson_Printer(Base_Printer):
     def __init__(self,usbid):
