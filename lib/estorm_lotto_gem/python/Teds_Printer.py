@@ -27,7 +27,7 @@ class Ada_Printer(Base_Printer):
         # usbi id 0x0e03
         self.my_printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5) 
     def println(self,atext):
-        self.my_printer.text(atext)
+        self.my_printer.println(atext)
     def large(self):
         self.my_printer.justify('C')
         self.my_printer.setSize('L')
