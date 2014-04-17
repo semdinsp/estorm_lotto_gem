@@ -30,9 +30,9 @@ class Ada_Printer(Base_Printer):
         self.my_printer.println(atext)
     def large(self):
         self.my_printer.justify('C')
-        self.my_printer.setSize('L')
-    def normal(self):
         self.my_printer.setSize('M')
+    def normal(self):
+        self.my_printer.setSize('S')
     def space(self):
         self.my_printer.feed(1)
     def closing(self):
@@ -42,6 +42,7 @@ class Ada_Printer(Base_Printer):
         self.my_printer.setDefault()
         self.my_printer.println(now)
         self.space()
+         self.my_printer.feed(4)
 
 class Epson_Printer(Base_Printer):
     def __init__(self,usbid):
