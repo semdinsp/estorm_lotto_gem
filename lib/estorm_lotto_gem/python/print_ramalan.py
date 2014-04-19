@@ -18,7 +18,7 @@ shiolist3="Monyet 09,21,33,45,57,69,81,93\nKambing 10,22,34,46,58,70,82,94\nKuda
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
-pos_printer.println("Lucky Loja Ramalan"}
+pos_printer.println("Lucky Loja Ramalan")
 pos_printer.println("Prediksi Tahun Kuda 2014")
 pos_printer.println(drawtype)
 pos_printer.normal()
@@ -34,8 +34,8 @@ pos_printer.normal()
 pos_printer.println("Ramalan\n")
 pos_printer.large()
 pos_printer.println(rama[0])
-temp=rama[1]+" "+rama[2]+" "+rama[3]
-pos_printer.println(temp)
+tempstr= rama[1]+" "+rama[2]+" "+rama[3]
+pos_printer.println(tempstr)
 pos_printer.println(rama[4])
 pos_printer.normal()
 pos_printer.println("Ekor")
