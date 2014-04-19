@@ -24,7 +24,7 @@ module EstormLottoGem
     def print_ramalan(res,seller,drawtype,printer_type='adafruit')
        respstring=""
        puts  "rpint ramalan #{res} class #{res.class}"
-       shiolist=[ "kambing" ,"kuda", "ular", "naga","kalenci","mecan","sapi","tikus","monyet","babi","anjing","ayam" ]
+       shiolist=[ "kambing" ,"kuda", "ular", "naga","kelenci","macan","sapi","tikus","monyet","babi","anjing","ayam" ]
        yday=Time.now.yday()
        yday = yday +3 if drawtype=='3d'
        shio=shiolist[yday % shiolist.size]
