@@ -18,5 +18,14 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-  end # clase
+    def changepin(oldpin,newpin)
+      build_postdata('wallet_changepin', src)
+      self.postdata[:oldpin]=oldpin
+      self.postdata[:newpin]=newpin
+      self.postdata[:message]="changepin"
+      res=self.perform(self.action_url,self.postdata)
+      puts "res is #{res}"
+      res
+    end
+  end # class
 end #module

@@ -19,12 +19,13 @@ class TestCli < Thor
     option :source, :required => true
     option :host, :required => true
     option :destination, :required => true
-    option :pin
+    option :pin, :required => true
     option :value, :required => true
+    option :debug
     def transfer
       wb=EstormLottoGem::WbBalance.new
       wb.set_host(options[:host])
-      wb.set_debug
+      wb.set_debug if options[:debug]=='true'
       res=wb.transfer(options[:source],options[:destination],options[:value],options[:pin])
       res
     end

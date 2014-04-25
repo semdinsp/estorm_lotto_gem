@@ -76,7 +76,7 @@ module EstormLottoGem
       res=''
       begin
         @clnt=self.build_client 
-        Timeout::timeout(40) do    
+        Timeout::timeout(60) do    
           res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
         end
       rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError,Exception => e
@@ -89,6 +89,13 @@ module EstormLottoGem
    def print_msg(msg, printer_type='adafruit')
      system("/usr/bin/python","#{self.python_directory}/print_msg.py",msg,printer_type) if printer_type!= "none"
       # system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type)  if printer_type!= "none"
+   end
+   
+   def print_transaction(res,seller,txtype,printer_type='adafruit')
+      respstring=res
+      puts  "rpint results #{res} class #{res.class}"
+      system("/usr/bin/python","#{self.python_directory}/print_transaction.py",respstring,seller,txtype,printer_type,res['success']) if printer_type!= "none"
+      [respstring]
    end
 
    end    # Class
