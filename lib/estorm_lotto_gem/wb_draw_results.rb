@@ -27,6 +27,8 @@ module EstormLottoGem
        shiolist=[ "kambing" ,"kuda", "ular", "naga","kelinci","macan","sapi","tikus","monyet","babi","anjing","ayam" ]
        yday=Time.now.yday()
        yday = yday +3 if drawtype=='3d'
+       yday = yday +6 if drawtype=='2d'
+       yday =yday-364 if yday > 365
        shio=shiolist[yday % shiolist.size]
        r0=res['draws'][0]
        r1=res['draws'][1]

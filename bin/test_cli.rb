@@ -8,9 +8,11 @@ class TestCli < Thor
     desc "get_balance", "get balance"
     option :source, :required => true
     option :host, :required => true
+    option :debug
     def get_balance
       wb=EstormLottoGem::WbBalance.new
       wb.set_host(options[:host])
+       wb.set_debug if options[:debug]=='true'
       res=wb.get_balance(options[:source])
       res
     end
@@ -27,6 +29,22 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.transfer(options[:source],options[:destination],options[:value],options[:pin])
+      res
+    end
+    
+    desc "release_cash", "release_cash from destination to src"
+    option :source, :required => true
+    option :host, :required => true
+    option :from_account, :required => true
+    option :pin, :required => true
+    option :from_pin, :required => true
+    option :value, :required => true
+    option :debug
+    def release_cash
+      wb=EstormLottoGem::WbBalance.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.release_cash(options[:source],options[:from_account],options[:value],options[:pin],options[:from_pin])
       res
     end
     

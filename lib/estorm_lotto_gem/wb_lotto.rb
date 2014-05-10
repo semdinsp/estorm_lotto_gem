@@ -11,6 +11,8 @@ module EstormLottoGem
        resp=res['ticket']
        digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
        digits="#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}" if drawtype=='3d'
+       digits="#{resp['digit3']}#{resp['digit4']}" if drawtype=='2d'
+       
        
        drawdate=resp['drawdate']
        src=resp['customersrc']

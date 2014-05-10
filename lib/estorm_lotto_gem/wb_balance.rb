@@ -18,11 +18,22 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    def changepin(oldpin,newpin)
-      build_postdata('wallet_changepin', src)
-      self.postdata[:oldpin]=oldpin
+    def release_cash(src,from_account,value,pin,from_pin)
+      build_postdata('wallet_release_cash', src)
+      self.postdata[:message]="release_cash"
+      self.postdata[:value]=value
+      self.postdata[:pin]=pin
+      self.postdata[:from_pin]=from_pin
+      self.postdata[:from_account]=from_account
+      res=self.perform(self.action_url,self.postdata)
+      puts "res is #{res}"
+      res
+    end
+    def update_pin(src,oldpin,newpin)
+      build_postdata('wallet_update_pin', src)
+      self.postdata[:pin]=oldpin
       self.postdata[:newpin]=newpin
-      self.postdata[:message]="changepin"
+      self.postdata[:message]="wallet_update_pin"
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res
