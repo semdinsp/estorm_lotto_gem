@@ -17,6 +17,9 @@ module EstormLottoGem
     puts " directory #{File.dirname(__FILE__)}"
     puts " filename #{__FILE__}"
   end
+  def gem_file_directory
+    "#{File.dirname(__FILE__)}"
+  end
   def python_directory
       "#{File.dirname(__FILE__)}/python"
   end
