@@ -1,4 +1,5 @@
 OS_FLAG=(/arm-linux/ =~ RUBY_PLATFORM) != nil
+gem 'pi_piper' if OS_FLAG
 require 'pi_piper' if OS_FLAG
 module EstormLottoGem
   class Button
