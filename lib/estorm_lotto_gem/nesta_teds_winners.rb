@@ -1,5 +1,5 @@
 module Nesta
-  class NestaTedsConfig < Nesta::NestaBase    #winners and ramalan
+  class NestaTedsWinners < Nesta::NestaBase    #winners and ramalan
     
     post '/printramalan' do
       puts "Print Ramalan params: #{params} settings #{settings.estorm_printer}"
