@@ -1,11 +1,6 @@
 module Nesta
   class NestaWalletRoutes < Nesta::NestaBase
-    def awb_balance_setup
-      wb=EstormLottoGem::WbBalance.new
-      wb.set_host(settings.estorm_host)
-      # wb.set_debug
-       wb
-    end
+   
 post "/changepin" do
   puts "change pin params: #{params} settings #{settings.estorm_printer}"
   wb=EstormLottoGem::WbBalance.new
