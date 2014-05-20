@@ -1,5 +1,5 @@
 module Nesta
-  class NestaWalletRoutes < Nesta::NestaBase
+  class NestaWalletRoutes < Nesta::NestaCoreBase
    
 post "/changepin" do
   puts "change pin params: #{params} settings #{settings.estorm_printer}"

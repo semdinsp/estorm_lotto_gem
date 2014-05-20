@@ -1,7 +1,7 @@
 #require 'nesta_base'
 require 'sinatra/support/numeric'
 module Nesta
-  class NestaTedsBalance < Nesta::NestaBase
+  class NestaTedsBalance < Nesta::NestaCoreBase
     register Sinatra::Numeric
     post '/getbalance' do
       wb=awb_balance_setup

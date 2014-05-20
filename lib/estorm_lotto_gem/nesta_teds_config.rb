@@ -1,5 +1,5 @@
 module Nesta
-  class NestaTedsConfig < Nesta::NestaBase
+  class NestaTedsConfig < Nesta::NestaCoreBase
     post '/update_printer' do
       puts "update printer params #{params}"
       @basic = build_config

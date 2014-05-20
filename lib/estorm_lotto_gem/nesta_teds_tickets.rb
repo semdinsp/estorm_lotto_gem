@@ -1,5 +1,5 @@
 module Nesta
-  class NestaTedsTickets < Nesta::NestaBase    # ticket stuff
+  class NestaTedsTickets < Nesta::NestaCoreBase    # ticket stuff
     def teds_parse_message(msg)
       atype=:notice
       atype=:error if msg['paid']==true
