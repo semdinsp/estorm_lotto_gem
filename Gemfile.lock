@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (1.2.6)
+    estorm_lotto_gem (1.2.7)
       estorm_lotto_tools
       httpclient (>= 2.3)
       multi_json (>= 1.9)
@@ -51,5 +51,6 @@ DEPENDENCIES
   estorm_lotto_tools
   minitest
   multi_json
+  pi_piper
   sinatra
   sinatra-support
