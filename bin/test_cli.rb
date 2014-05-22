@@ -31,6 +31,18 @@ class TestCli < Thor
       res=wb.transfer(options[:source],options[:destination],options[:value],options[:pin])
       res
     end
+    desc "get_session", "get_session for src"
+    option :source, :required => true
+    option :host, :required => true
+    option :pin, :required => true
+    option :debug
+    def transfer
+      wb=EstormLottoGem::WbBalance.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.get_session(options[:source],options[:pin])
+      res
+    end
     
     desc "release_cash", "release_cash from destination to src"
     option :source, :required => true

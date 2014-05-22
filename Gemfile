@@ -7,5 +7,6 @@ gem "minitest"
 gem 'estorm_lotto_tools'
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-support'
+gem 'bcrypt'
 gemspec
 #gem "minitest-rails"
