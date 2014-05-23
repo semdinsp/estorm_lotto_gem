@@ -100,6 +100,17 @@ class TestCli < Thor
       res=wb.get_results(options[:source],options[:drawtype])
       res
     end
+    desc "teds_simple_reporting", "get simple reporting"
+    option :source, :required => true
+    option :host, :required => true
+    option :debug
+    def teds_simple_reporting
+      wb=EstormLottoGem::WbDrawResults.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.teds_simple_reporting(options[:source])
+      res
+    end
     
     desc "check_payout", "check Payout for entry"
     option :source, :required => true
