@@ -1,10 +1,10 @@
 module Nesta
   class NestaTedsWinners < Nesta::NestaCoreBase    #winners and ramalan
-    
+     register  Nesta::SessionHelper
     post '/printramalan' do
       puts "Print Ramalan params: #{params} settings #{settings.estorm_printer}"
       res,wb=get_draw_results(params)
-      manage_success_message(res)   {  respstring = wb.print_ramalan(res.first,settings.estorm_src,params['ticket_type'],settings.estorm_printer) 
+      manage_success_message(res)   {  respstring = wb.print_ramalan(res.first,current_user.estorm_src,params['ticket_type'],settings.estorm_printer) 
                                         msg="#{respstring}"
                                         teds_flash_and_redirect(msg,:notice,"/tickets") }
       manage_error_message(res) { print_error(res,"/tickets") }
@@ -14,7 +14,7 @@ module Nesta
       puts "Print Winners params: #{params} settings #{settings.estorm_printer}"
       res,wb=get_draw_results(params)
      
-      manage_success_message(res)   {  respstring = wb.print_results(res.first,settings.estorm_src,params['ticket_type'],settings.estorm_printer) 
+      manage_success_message(res)   {  respstring = wb.print_results(res.first,current_user.estorm_src,params['ticket_type'],settings.estorm_printer) 
                                         msg="#{respstring}"
                                         teds_flash_and_redirect(msg,:notice,"/tickets") }
       manage_error_message(res) { print_error(res,"/tickets") }

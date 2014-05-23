@@ -1,5 +1,6 @@
 module Nesta
   class NestaTedsConfig < Nesta::NestaCoreBase
+     register  Nesta::SessionHelper
     post '/update_printer' do
       puts "update printer params #{params}"
       @basic = build_config

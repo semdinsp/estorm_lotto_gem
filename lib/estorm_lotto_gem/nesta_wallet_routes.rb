@@ -1,6 +1,6 @@
 module Nesta
   class NestaWalletRoutes < Nesta::NestaCoreBase
-   
+    register  Nesta::SessionHelper
 post "/changepin" do
   puts "change pin params: #{params} settings #{settings.estorm_printer}"
   wb=EstormLottoGem::WbBalance.new
@@ -14,7 +14,7 @@ post "/changepin" do
   if errmsg!=""
      teds_flash_and_redirect(errmsg,:error,"/balance")
    else
-     res=wb.update_pin(settings.estorm_src,params['pin'],params['newpin'])
+     res=wb.update_pin(current_user.estorm_src,params['pin'],params['newpin'])
      manage_success_message(res)   {
         teds_flash_and_redirect("pin changed",:notice,"/balance")   }
       manage_error_message(res)   {
@@ -24,11 +24,11 @@ post "/changepin" do
    post "/wbrelease_cash" do
      puts "params: #{params}"
      wb=awb_balance_setup    
-     res=wb.release_cash(settings.estorm_src,params['from_account'],params['amount'],params['pin'],params['from_pin'])
+     res=wb.release_cash(current_user.estorm_src,params['from_account'],params['amount'],params['pin'],params['from_pin'])
      manage_success_message(res)   {  #res,seller,txtype,printer_type='adafruit')
         respstring=""
         ["","Copy"].each { |v|
-            respstring = wb.print_transaction(res.first.to_s,settings.estorm_src,"Release Cash #{v}",settings.estorm_printer)
+            respstring = wb.print_transaction(res.first.to_s,current_user.estorm_src,"Release Cash #{v}",settings.estorm_printer)
                }
         teds_flash_and_redirect(respstring,:notice,"/balance")   }
       manage_error_message(res)   {
@@ -40,11 +40,11 @@ post "/changepin" do
    post "/wbtransfer" do
      puts "params: #{params}"
      wb=awb_balance_setup
-     res=wb.transfer(settings.estorm_src,params['destination'],params['amount'],params['pin'])
+     res=wb.transfer(current_user.estorm_src,params['destination'],params['amount'],params['pin'])
      manage_success_message(res)   {  #res,seller,txtype,printer_type='adafruit')
        respstring=""
        ["","Copy"].each { |v|
-           respstring = wb.print_transaction(res.first.to_s,settings.estorm_src,"Transfer #{v}",settings.estorm_printer)
+           respstring = wb.print_transaction(res.first.to_s,current_user.estorm_src,"Transfer #{v}",settings.estorm_printer)
               }
         teds_flash_and_redirect(respstring,:notice,"/balance")   }
       manage_error_message(res)   {

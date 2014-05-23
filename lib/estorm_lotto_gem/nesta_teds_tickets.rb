@@ -1,5 +1,6 @@
 module Nesta
   class NestaTedsTickets < Nesta::NestaCoreBase    # ticket stuff
+     register  Nesta::SessionHelper
     def teds_parse_message(msg)
       atype=:notice
       atype=:error if msg['paid']==true
@@ -13,13 +14,13 @@ module Nesta
       wb=EstormLottoGem::WbCheckPayout.new
       # wb.set_debug
       wb.set_host(settings.estorm_host)
-      res=wb.check_payout(settings.estorm_src,params['md5'],params['drawdate'],params['drawtype'])
+      res=wb.check_payout(current_user.estorm_src,params['md5'],params['drawdate'],params['drawtype'])
        manage_success_message(res)   {
-        respstring = wb.print_payout(res,settings.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer)
+        respstring = wb.print_payout(res,current_user.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer)
           msg,atype=teds_parse_message(res.first['payout'])
           teds_flash_and_redirect(msg,atype,"/redeem")   }
         manage_error_message(res)   {
-         system("/usr/bin/python","#{wb.python_directory}/print_no_payout.py",res.inspect.to_s,settings.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer) 
+         system("/usr/bin/python","#{wb.python_directory}/print_no_payout.py",res.inspect.to_s,current_user.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer) 
          teds_flash_and_redirect(res.inspect.to_s,:error,"/redeem")
        }
      
@@ -46,10 +47,10 @@ module Nesta
       wb=EstormLottoGem::WbLotto4d.new
       wb.set_host(settings.estorm_host)
       #wb.set_debug
-      res=wb.get_ticket(settings.estorm_src,imsg,params['ticket_type']) 
+      res=wb.get_ticket(current_user.estorm_src,imsg,params['ticket_type']) 
       msgtype=:notice
       msg=""
-      manage_success_message(res)  {  digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first,settings.estorm_src,params['ticket_type'],settings.estorm_printer) 
+      manage_success_message(res)  {  digits,drawdate,src,code,msgs,txid = wb.print_ticket(res.first,current_user.estorm_src,params['ticket_type'],settings.estorm_printer) 
           msg="digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{msgs} type: #{params['ticket_type']}"
           flash[:notice]=msg         
       }
@@ -66,9 +67,9 @@ module Nesta
       wb=EstormLottoGem::WbCheckPayout.new
       # wb.set_debug
       wb.set_host(settings.estorm_host)
-      res=wb.process_payout(settings.estorm_src,params['md5'],params['drawdate'],params['drawtype'])
+      res=wb.process_payout(current_user.estorm_src,params['md5'],params['drawdate'],params['drawtype'])
       manage_success_message(res)   {
-             respstring = wb.print_paid_ticket(res,settings.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer)
+             respstring = wb.print_paid_ticket(res,current_user.estorm_src,params['drawtype'],params['drawdate'],params['md5'],settings.estorm_printer)
              msg="#{respstring}"
              #msg=res.first['payout']
              teds_flash_and_redirect(msg,:notice,"/redeem")  }

@@ -1,11 +1,23 @@
 module Nesta
+    module SessionHelper extend self
+      module Helpers
+      def current_user
+        puts "session is #{session.inspect}"
+        # THIS IS A HACK
+        User.get(session['warden.user.default.key'])
+      end
+      end
+      def registered(app)
+             app.helpers Helpers
+      end
+    end
   class NestaCoreBase <  NestaBase
-
+   register  Nesta::SessionHelper
 def get_draw_results(params)
   wb=EstormLottoGem::WbDrawResults.new
   # wb.set_debug
   wb.set_host(settings.estorm_host)
-  res=wb.get_results(settings.estorm_src,params['ticket_type']) 
+  res=wb.get_results(current_user.estorm_src,params['ticket_type']) 
   [res,wb]
 end
 def print_error(res,dest="/")
@@ -31,5 +43,7 @@ def awb_balance_setup
   # wb.set_debug
    wb
 end
+
 end #class
+
 end #module

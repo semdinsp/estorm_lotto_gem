@@ -3,11 +3,12 @@ require 'sinatra/support/numeric'
 module Nesta
   class NestaTedsBalance < Nesta::NestaCoreBase
     register Sinatra::Numeric
+    register  Nesta::SessionHelper
     post '/getbalance' do
       wb=awb_balance_setup
       session[:balance]=0
       #wb.set_debug
-      res=wb.get_balance(settings.estorm_src)
+      res=wb.get_balance(current_user.estorm_src)
       atype=:error
       msg=""
       manage_success_message(res)  {  atype=:notice
@@ -19,5 +20,6 @@ module Nesta
          session[:balance]='Connection issue'  }
         teds_flash_and_redirect(msg,atype,'/balance')
     end
+    
   end
 end #module

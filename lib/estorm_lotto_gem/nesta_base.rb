@@ -21,7 +21,6 @@ module Nesta
     configure do
       setup_configuration
      end
-    
-    
+   
   end
 end
