@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'thor'
 require 'estorm_lotto_gem'
+require 'I18n'
 # needs upgrade to thor
 # test_cli.rb get_balance --host=Scotts-MacBook-Pro.local:8080 --source=6590683565
 class TestCli < Thor
@@ -31,16 +32,30 @@ class TestCli < Thor
       res=wb.transfer(options[:source],options[:destination],options[:value],options[:pin])
       res
     end
+    
     desc "get_session", "get_session for src"
     option :source, :required => true
     option :host, :required => true
     option :pin, :required => true
     option :debug
-    def transfer
+    def get_session
       wb=EstormLottoGem::WbBalance.new
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.get_session(options[:source],options[:pin])
+      res
+    end
+    desc "update_pin", "update pin on account"
+    option :source, :required => true
+    option :host, :required => true
+    option :pin, :required => true
+    option :newpin, :required => true
+    option :debug
+    def update_pin
+      wb=EstormLottoGem::WbBalance.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.update_pin(options[:source],options[:pin],options[:newpin])
       res
     end
     

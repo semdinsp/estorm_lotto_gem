@@ -12,7 +12,7 @@ module EstormLottoGem
       self.postdata[:value]=value
       self.postdata[:pin]=pin
       self.postdata[:api_balance]='encrypted_pin'
-      self.postdata[:encrypted_pin]=BCrypt::Password.create(pin)
+      #self.postdata[:encrypted_pin]=BCrypt::Password.new(pin)
     end
     def transfer(src,dest,value,pin)
       build_postdata('wallet_transfer', src)
@@ -23,7 +23,7 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
-    def session(src,pin)
+    def get_session(src,pin)
       build_postdata('wallet_get_session', src)
       self.postdata[:message]="wallet_get_session"
       self.update_value_pin("0",pin)
@@ -36,7 +36,7 @@ module EstormLottoGem
       self.postdata[:message]="release_cash"
       self.update_value_pin(value,pin)
       self.postdata[:from_pin]=from_pin
-      self.postdata[:encrypted_frompin]=BCrypt::Password.create(frompin)
+      self.postdata[:encrypted_frompin]=BCrypt::Password.create(from_pin)
       self.postdata[:from_account]=from_account
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
@@ -44,7 +44,7 @@ module EstormLottoGem
     end
     def update_pin(src,oldpin,newpin)
       build_postdata('wallet_update_pin', src)
-      self.update_value_pin("0",pin)
+      self.update_value_pin("0",oldpin)
       self.postdata[:newpin]=newpin
       self.postdata[:encrypted_newpin]=BCrypt::Password.create(newpin)
       self.postdata[:message]="wallet_update_pin"

@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'I18n'
 module Nesta
   class NestaBase < Sinatra::Base
     def self.setup_configuration
