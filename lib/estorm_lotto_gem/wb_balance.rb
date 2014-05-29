@@ -31,6 +31,14 @@ module EstormLottoGem
       puts "res is #{res}"
       res
     end
+    def customer_list(src)
+      build_postdata('wallet_misc_custs', src)
+      self.postdata[:message]="wallet_misc_custs"
+      self.update_value_pin("0",'pin')
+      res=self.perform(self.action_url,self.postdata)
+      puts "res is #{res}"
+      res
+    end
     def release_cash(src,from_account,value,pin,from_pin)
       build_postdata('wallet_release_cash', src)
       self.postdata[:message]="release_cash"

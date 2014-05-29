@@ -33,6 +33,18 @@ class TestCli < Thor
       res
     end
     
+    desc "customer_list", "customer list for source"
+    option :source, :required => true
+    option :host, :required => true
+    option :debug
+    def customer_list
+      wb=EstormLottoGem::WbBalance.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.customer_list(options[:source])
+      res
+    end
+    
     desc "get_session", "get_session for src"
     option :source, :required => true
     option :host, :required => true
@@ -45,6 +57,7 @@ class TestCli < Thor
       res=wb.get_session(options[:source],options[:pin])
       res
     end
+    
     desc "update_pin", "update pin on account"
     option :source, :required => true
     option :host, :required => true
