@@ -33,6 +33,18 @@ class TestCli < Thor
       res
     end
     
+    desc "sports", "sports instant win"
+    option :source, :required => true
+    option :host, :required => true
+    option :debug
+    def sports
+      wb=EstormLottoGem::WbSports.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.sports_instantwin(options[:source])
+      res
+    end
+    
     desc "customer_list", "customer list for source"
     option :source, :required => true
     option :host, :required => true
