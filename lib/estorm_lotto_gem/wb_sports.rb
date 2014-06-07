@@ -8,7 +8,7 @@ module EstormLottoGem
       res
     end
     def self.teams
-      [["Brasil","Brasil"],["Spain","Spain"], ["Barcelona","Barcelona"],["Croatia","Croatia"]]
+      [["Spain","Spain"], ["Barcelona","Barcelona"],["Croatia","Croatia"],["Brasil","Brasil"]]
     end
     def print_instant_first(seller,team,txid,printer_type='adafruit')
       
@@ -24,12 +24,13 @@ module EstormLottoGem
     def print_results(res,seller,team,txid,printer_type='adafruit')
        respstring=""
        puts  "print sports results #{res} class #{res.class}"
-       success=["#{team} remains the lead by five point","Game over #{team} leads by 3"].sample
-       failure=["Penalty kick! #{team} lost","MVP goes to other team keeper"].sample
+       score=["1","2","3","4","6","8"].sample
+       success=["#{team} remains in the lead by #{score} points","You won. Game over! #{team} leads by #{score} point","Last minute penalty kick #{team} WINS!"].sample
+       failure=["Opponents beat #{team} by #{score} points. Sorry!","Penalty kick! #{team} LOST","MVP goes to other team keeper for saving #{score} goals"].sample
        msg=failure
        msg=success if res!=nil and res['prize'] > 0.1
-       respstring=msg #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
-       system("/usr/bin/python","#{self.python_directory}/print_sports.py",respstring,seller,team,txid,printer_type,res.first['prize'] ) if printer_type!= "none"
+       respstring="#{msg} team #{team} prize #{res['prize']}" #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
+       system("/usr/bin/python","#{self.python_directory}/print_sports.py",respstring,seller,team,txid,printer_type,res['prize'].to_s ) if printer_type!= "none"
        [respstring]
     end
   end # clase
