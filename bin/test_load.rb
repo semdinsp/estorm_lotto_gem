@@ -18,10 +18,15 @@ class TestLoad < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       total=0
+      wincount=0
       1.upto(options["count"].to_i)  {
          res=wb.sports_instantwin(options[:source]) 
-          total=total+res.first['prize']  }
-          puts "Count #{options[:count]} total payout #{total}"
+         if res.first['prize']!=nil
+          total=total+res.first['prize'] 
+          wincount=wincount+1 if res.first['prize']>0
+         end
+          }
+          puts "Count #{options[:count]} total payout #{total} winning count #{wincount}"
      end
   end
 

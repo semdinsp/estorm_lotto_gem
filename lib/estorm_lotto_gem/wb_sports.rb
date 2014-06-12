@@ -19,11 +19,12 @@ module EstormLottoGem
        teams=EstormLottoGem::WbSports.teams
        teams.delete([team,team])
        @opponents=teams.sample.first
-       msg0=["It is #{team} versus #{@opponents}"].sample
-       msg1=["It is #{team} in the lead by one point","1 minute to go #{team} leads by 1"].sample
-       msg3=["#{team} shoots","#{@opponents} shoots","The crowd screams but my view is blocked","Goal!"].sample
+       score=["1","2","3"].sample
+       msg0=["#{team} versus #{@opponents}"].sample
+       msg1=["#{team} Lidera ho #{score} - 0","#{score} minute ida #{team} lidera ho 1"].sample
+       msg3=["#{team} shuta","#{@opponents} shuta","penontong Hakilar Maibe hau labele hare tamba ema taka Metin hau","Goal!"].sample
        
-       msg2=["Oh no! Yellow card against #{team}", "Penalty kick for #{team}","Red card!","They shoot","The crowd screams but the view is blocked"].sample
+       msg2=["Oh no! hetan kartu kuning #{team}", "Marka penalti ba  #{team}","Red card!","They shuta"].sample
        msgs=[msg0,msg1,msg2,msg3].join("\n").to_s
         
        system("/usr/bin/python","#{self.python_directory}/print_instant1.py",team,txid,seller,msgs,printer_type) if printer_type!= "none"
@@ -34,8 +35,8 @@ module EstormLottoGem
        respstring=""
        puts  "print sports results #{res} class #{res.class}"
        score=["1","2","3","4","6","8"].sample
-       success=["#{team} remains in the lead by #{score} points","You won. Game over! #{team} leads #{@opponents} by #{score} point","Last minute penalty kick #{team} WINS!"].sample
-       failure=["#{@opponents} wins in sudden death","#{@opponents} beat #{team} by #{score} points. Sorry!","Penalty kick by #{@opponents}! #{team} LOST","MVP goes to #{@opponents} team keeper for saving #{score} goals"].sample
+       success=["#{team} lidera ho points #{score}","Ita manan. Jogo remata ! #{team} lidera ho  #{@opponents}  #{score} points","Last minute marca penalti, manan  #{team} WINS!"].sample
+       failure=["Sorry! #{@opponents} Manan husi mate","#{@opponents} halakon ho  #{team} by #{score} points. Sorry!","Marca penalti hus #{@opponents}! #{team} Lakon","MVP goes to #{@opponents} keeper for saving #{score} goals"].sample
        msg=failure
        winner=""
        if res!=nil and res['prize'] > 0.1
