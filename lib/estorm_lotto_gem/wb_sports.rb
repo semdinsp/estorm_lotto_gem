@@ -22,9 +22,9 @@ module EstormLottoGem
        score=["1","2","3"].sample
        msg0=["#{team} versus #{@opponents}"].sample
        msg1=["#{team} Lidera ho #{score} - 0","#{score} minute ida #{team} lidera ho 1"].sample
-       msg3=["#{team} shuta","#{@opponents} shuta","penontong Hakilar Maibe hau labele hare tamba ema taka Metin hau","Goal!"].sample
+       msg3=["#{team} suta","#{@opponents} shuta","penontong Hakilar Maibe hau labele hare tamba ema taka Metin hau","Goal!"].sample
        
-       msg2=["Oh no! hetan kartu kuning #{team}", "Marka penalti ba  #{team}","Red card!","They shuta"].sample
+       msg2=["Oh no! hetan kartu kuning #{team}", "Marka penalti ba  #{team}","Kartaun mean!","Sira suta"].sample
        msgs=[msg0,msg1,msg2,msg3].join("\n").to_s
         
        system("/usr/bin/python","#{self.python_directory}/print_instant1.py",team,txid,seller,msgs,printer_type) if printer_type!= "none"
@@ -35,8 +35,8 @@ module EstormLottoGem
        respstring=""
        puts  "print sports results #{res} class #{res.class}"
        score=["1","2","3","4","6","8"].sample
-       success=["#{team} lidera ho points #{score}","Ita manan. Jogo remata ! #{team} lidera ho  #{@opponents}  #{score} points","Last minute marca penalti, manan  #{team} WINS!"].sample
-       failure=["Sorry! #{@opponents} Manan husi mate","#{@opponents} halakon ho  #{team} by #{score} points. Sorry!","Marca penalti hus #{@opponents}! #{team} Lakon","MVP goes to #{@opponents} keeper for saving #{score} goals"].sample
+       success=["#{team} lidera ho points #{score}","Ita manan. Jogo remata ! #{team} lidera ho  #{@opponents}  #{score} points","Minutu ikus marka ho penalti,  #{team}  manan WINS!","#{team} suta kantu GOAL"].sample
+       failure=["Sorry! #{@opponents} Manan husi mate","#{@opponents} halakon ho  #{team} by #{score} points. Sorry!","Marca penalti hus #{@opponents}! #{team} Lakon","MVP #{@opponents} baliza defende #{score} goals"].sample
        msg=failure
        winner=""
        if res!=nil and res['prize'] > 0.1

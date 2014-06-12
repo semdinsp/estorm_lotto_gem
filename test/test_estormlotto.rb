@@ -21,6 +21,20 @@ class EstormLottoGemTest <  Minitest::Test
      assert @f.action_url.include?('localhost'), "action url shuld be included #{@f.action_url}"
       assert @f.debug, "should be true"
    end
+   def test_urls
+        @f.build_client
+        assert @f.auth_token=='stxpgBdjcrWt9iAZUAyZ', "should be correct"
+
+        assert @f.action_url.include?('estorm-sms'), "action url shuld be included #{@f.action_url}"
+        assert @f.action_url.include?('https'), "action url shuld be https #{@f.action_url}"
+        
+        @f.set_debug
+                assert @f.auth_token=='EAc9S1JXBN5MXstisRC6', "should be correct"
+        assert @f.action_url.include?('localhost'), "action url shuld be included #{@f.action_url}"
+        assert @f.action_url.include?('http'), "action url shuld be http #{@f.action_url}"
+        
+        assert @f.debug, "should be true"
+   end
   def test_client
      @f.build_client
      assert @f.clnt!=nil, "should be not nil"

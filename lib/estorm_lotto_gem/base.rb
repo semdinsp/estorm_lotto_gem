@@ -43,9 +43,21 @@ module EstormLottoGem
     end
     @clnt
   end
+  def get_path
+    "text_applications/handle_wallet_message.json"
+  end
+  def auth_token
+    at='stxpgBdjcrWt9iAZUAyZ'
+    at='EAc9S1JXBN5MXstisRC6' if @debug
+    at
+  end
+  def get_transport
+    transport='https'
+    transport='http' if @debug
+    transport
+  end
    def action_url
-     url="https://#{@host}/text_applications/handle_wallet_message.json"
-     url="http://#{@host}/text_applications/handle_wallet_message.json" if @debug
+     url="#{self.get_transport}://#{@host}/#{self.get_path}"
      url
    end
    @@config=nil
@@ -57,13 +69,13 @@ module EstormLottoGem
      end
      @@config.params
    end
+  
    def build_postdata(appname, src,params={})
      @postdata={}
      @postdata[:security_code]='12345'
      @postdata[:timestamp]=Time.now.to_s
     # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
-     @postdata[:auth_token]='stxpgBdjcrWt9iAZUAyZ'
-     @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6' if @debug
+     @postdata[:auth_token]=self.auth_token
      @postdata[:source]=src
      @postdata[:application]=appname
      @postdata.merge params
