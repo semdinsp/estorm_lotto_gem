@@ -4,7 +4,7 @@ module EstormLottoGem
       "api/create.json"
     end
     def auth_token
-      at='stxpgBdjcrWt9iAZUAyZ'
+      at='hu4j9HPXbSxEpyzedmWs'
       at='mxtMzuqEdY528ibp8noy' if @debug
       at
     end
