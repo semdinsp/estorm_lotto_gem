@@ -36,8 +36,8 @@ module EstormLottoGem
        puts  "print sports results #{res} class #{res.class}"
        score=["1","2","3","4","6","8"].sample
        success=["#{team} lidera ho points #{score}","Ita manan. Jogo remata ! #{team} lidera ho  #{@opponents}  #{score} points","Minutu ikus marka ho penalti,  #{team}  manan WINS!","#{team} suta kantu GOAL"].sample
-       failure=["Sorry! #{@opponents} Manan husi mate","#{@opponents} halakon ho  #{team} by #{score} points. Sorry!","Marca penalti hus #{@opponents}! #{team} Lakon","MVP #{@opponents} baliza defende #{score} goals"].sample
-       msg=failure
+       failure=["#{@opponents} Manan husi mate","#{@opponents} halakon ho  #{team} by #{score} points.","Marca penalti husi #{@opponents}! #{team} Lakon","MVP #{@opponents} baliza defende #{score} goals"].sample
+       msg="Sorry: #{@opponents} manan! Reason: #{failure}"
        winner=""
        if res!=nil and res['prize'] > 0.1
          winner="WINNER:"
