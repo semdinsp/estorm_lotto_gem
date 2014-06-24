@@ -10,7 +10,7 @@ class TestLoad < Thor
     
     desc "sports", "sports instant win"
     option :source, :required => true
-     option :count, :required => true
+    option :count, :required => true
     option :host, :required => true
     option :debug
     def sports

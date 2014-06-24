@@ -21,6 +21,10 @@ class Base_Printer(object):
     def closing(self):
         # do thonthing
         pass
+    def security_code(self,code):
+        print("Security Code")
+        print(code)
+    
 
 class Ada_Printer(Base_Printer):
     def __init__(self,tty):
@@ -44,6 +48,12 @@ class Ada_Printer(Base_Printer):
         self.space()
         self.my_printer.feed(4)
         self.my_printer.reset()
+    def security_code(self,code):
+        self.my_printer.setSize('S')
+        self.my_printer.println("Security Code")
+        self.large()
+        self.my_printer.println(code)
+        self.normal()
 
 class Epson_Printer(Base_Printer):
     def __init__(self,usbid):
@@ -66,6 +76,16 @@ class Epson_Printer(Base_Printer):
         self.space()
         self.my_printer.cut()
         self.space()
+    def security_code(self,code):
+        self.normal()
+        self.println("Security Code")
+        self.large()
+        self.println(code)
+        self.normal()
+        code2=code+"\x00"
+        self.my_printer.barcode(code2.upper(),"CODE39", 54, 5,"OFF","A")
+        self.space()
+        self.normal()
 
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
@@ -96,4 +116,6 @@ class Teds_Printer(object):
     def space(self):
         self.my_printer.space()
     def closing(self):     
-        self.my_printer.closing()   
+        self.my_printer.closing()  
+    def security_code(self,code):     
+        self.my_printer.security_code(code) 
