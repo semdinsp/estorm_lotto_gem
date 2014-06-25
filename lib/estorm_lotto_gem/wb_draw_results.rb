@@ -2,22 +2,19 @@ module EstormLottoGem
   class WbDrawResults < EstormLottoGem::Base
     def get_results(src,drawtype='4d')
       appname="wallet_draw_results_#{drawtype}"
-      build_postdata(appname, src)
-      self.postdata[:message]=appname
-      res=self.perform(self.action_url,self.postdata)
-      puts "res is #{res}"
-      res
+      send_process(src,appname)
     end
     
     def teds_simple_reporting(src,reporttype='reporting')
       appname="teds_simple_#{reporttype}"
+      send_process(src,appname)
+    end
+    def send_process(src,appname)
       build_postdata(appname, src)
       self.postdata[:message]=appname
       res=self.perform(self.action_url,self.postdata)
-      puts "res is #{res}"
       res
     end
-    
     def print_simple_reporting(res,seller,printer_type='adafruit')
        respstring=""
        puts  "print simple reportings  #{res} class #{res.class}"
