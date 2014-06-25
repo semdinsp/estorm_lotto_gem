@@ -9,7 +9,7 @@ module EstormLottoGem
       res
     end
     
-    def teds_simple_reporting(src,drawtype='4d',reporttype='reporting')
+    def teds_simple_reporting(src,reporttype='reporting')
       appname="teds_simple_#{reporttype}"
       build_postdata(appname, src)
       self.postdata[:message]=appname

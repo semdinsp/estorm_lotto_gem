@@ -128,12 +128,15 @@ class TestCli < Thor
     desc "teds_simple_reporting", "get simple reporting"
     option :source, :required => true
     option :host, :required => true
+    option :reporttype
     option :debug
     def teds_simple_reporting
       wb=EstormLottoGem::WbDrawResults.new
+      reporttype='reporting'
+      reporttype=options[:reporttype] if options[:reporttype]!=nil
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
-      res=wb.teds_simple_reporting(options[:source])
+      res=wb.teds_simple_reporting(options[:source],reporttype)
       res
     end
     
