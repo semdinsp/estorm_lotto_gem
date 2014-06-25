@@ -45,14 +45,18 @@ class Ada_Printer(Base_Printer):
         self.my_printer.println("www.teds-timor.com")
         self.my_printer.setDefault()
         self.my_printer.println(now)
-        self.space()
-        self.my_printer.feed(4)
+        self.my_printer.feed(3)
         self.my_printer.reset()
     def security_code(self,code):
         self.my_printer.setSize('S')
         self.my_printer.println("Security Code")
         self.large()
         self.my_printer.println(code)
+        code2=code[-7:]
+        self.my_printer.reset()
+        self.my_printer.setBarcodeHeight(60)
+        self.my_printer.printBarcode(code2.upper(), self.my_printer.CODE39)
+        self.my_printer.justify('C') 
         self.normal()
 
 class Epson_Printer(Base_Printer):

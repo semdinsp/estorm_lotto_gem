@@ -1,7 +1,7 @@
 module EstormLottoGem
   class WbSports < EstormLottoGem::Base
     def sports_instantwin(src,msg="wallet_sports_instant")
-      build_postdata("wallet_sports_instant", src)
+      build_postdata(msg, src)
       self.postdata[:message]=msg
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
