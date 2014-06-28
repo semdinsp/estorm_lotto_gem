@@ -12,6 +12,7 @@ class TestLoad < Thor
     option :source, :required => true
     option :count, :required => true
     option :host, :required => true
+    option :gamename, :required => true
     option :debug
     def sports
       wb=EstormLottoGem::WbSports.new
@@ -20,7 +21,7 @@ class TestLoad < Thor
       total=0
       wincount=0
       1.upto(options["count"].to_i)  {
-         res=wb.sports_instantwin(options[:source]) 
+         res=wb.sports_instantwin(options[:source],'wallet_sports_instant',options[:gamename]) 
          if res.first['prize']!=nil
           total=total+res.first['prize'] 
           wincount=wincount+1 if res.first['prize']>0

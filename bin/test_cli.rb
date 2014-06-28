@@ -36,12 +36,14 @@ class TestCli < Thor
     desc "sports", "sports instant win"
     option :source, :required => true
     option :host, :required => true
+    option :msg, :required => true
+    option :gamename, :required => true
     option :debug
     def sports
       wb=EstormLottoGem::WbSports.new
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
-      res=wb.sports_instantwin(options[:source])
+      res=wb.sports_instantwin(options[:source],options[:msg],options[:gamename])
       res
     end
     
