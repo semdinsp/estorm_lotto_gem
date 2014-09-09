@@ -9,6 +9,6 @@ gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-support'
 gem 'bcrypt'
 gem 'i18n'
-
+gem 'hwid'
 gemspec
 #gem "minitest-rails"

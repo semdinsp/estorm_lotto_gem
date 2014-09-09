@@ -139,6 +139,7 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.teds_simple_reporting(options[:source],reporttype)
+      puts res
       res
     end
     

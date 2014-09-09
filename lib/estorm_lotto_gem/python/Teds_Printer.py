@@ -90,7 +90,10 @@ class Epson_Printer(Base_Printer):
         self.my_printer.barcode(code2.upper(),"CODE39", 54, 5,"OFF","A")
         self.space()
         self.normal()
-
+class Kiosk_Printer(Epson_Printer):
+    def __init__(self,usbid):
+        # 0483:5840
+        self.my_printer = printer.Usb(0x0483,usbid,0,0x81,0x03)
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
         # usbi id 0x0e03
@@ -105,6 +108,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e15)
         if printer_type == 'epsont81':
             self.my_printer = Epson_Printer(0x0202)
+        if printer_type == 'kiosk':
+            self.my_printer = Kiosk_Printer(0x5840)
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':

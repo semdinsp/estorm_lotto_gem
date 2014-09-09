@@ -2,6 +2,7 @@ require 'rubygems'
 require 'httpclient'
 require 'multi_json'
 require 'estorm_lotto_tools'
+require 'hwid'
 module EstormLottoGem
   class Base
    # attr_accessor :randgen, :myrange
@@ -74,6 +75,7 @@ module EstormLottoGem
      @postdata={}
      @postdata[:security_code]='12345'
      @postdata[:timestamp]=Time.now.to_s
+     @postdata[:hardware_id]=Hwid.systemid
     # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
      @postdata[:auth_token]=self.auth_token
      @postdata[:source]=src
@@ -83,7 +85,7 @@ module EstormLottoGem
      @postdata
    end
   def self.printer_types
-    [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],['epsont81','epsont81']]
+    [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],['epsont81','epsont81'],['kiosk','kiosk']]
  end
   def perform(url,postdata={})
       @uri=URI.parse(url)

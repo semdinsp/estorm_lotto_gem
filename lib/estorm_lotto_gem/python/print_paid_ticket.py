@@ -15,7 +15,7 @@ printer_type=sys.argv[7]
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
-pos_printer.println("Lucky Loja Ticket")
+pos_printer.println("Lucky SMS Ticket")
 pos_printer.println("Paid Ticket")
 pos_printer.println(drawtype)
 pos_printer.normal()
