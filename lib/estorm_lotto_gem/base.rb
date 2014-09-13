@@ -86,7 +86,7 @@ module EstormLottoGem
    end
   def self.printer_types
     [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
-    ['epsont81','epsont81'],['kiosk','kiosk'].['epsont82','epsont82']]
+    ['epsont81','epsont81'],['kiosk','kiosk'],['epsont82','epsont82']]
  end
   def perform(url,postdata={})
       @uri=URI.parse(url)
