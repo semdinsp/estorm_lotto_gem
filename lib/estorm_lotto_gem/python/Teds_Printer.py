@@ -108,6 +108,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e15)
         if printer_type == 'epsont81':
             self.my_printer = Epson_Printer(0x0202)
+        if printer_type == 'epsont82':
+            self.my_printer = Epson_Printer(0x0e11)
         if printer_type == 'kiosk':
             self.my_printer = Kiosk_Printer(0x5840)
         if printer_type == 'sgsprinter':

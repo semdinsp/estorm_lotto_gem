@@ -43,6 +43,7 @@ module EstormLottoGem
        yday=Time.now.yday()
        yday = yday +3 if drawtype=='3d'
        yday = yday +6 if drawtype=='2d'
+       yday = yday +9 if drawtype=='combo'
        yday =yday-364 if yday > 365
        shio=shiolist[yday % shiolist.size]
        r0=res['draws'][0]

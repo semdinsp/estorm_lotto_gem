@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "1.5.5"
+  s.version     = "1.5.7"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -18,5 +18,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'hwid'
   s.add_runtime_dependency 'multi_json', '>= 1.9'
   s.add_runtime_dependency 'estorm_lotto_tools'
-  
 end

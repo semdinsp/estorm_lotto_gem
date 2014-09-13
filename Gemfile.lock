@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (1.5.2)
+    estorm_lotto_gem (1.5.7)
       estorm_lotto_tools
       httpclient (>= 2.3)
+      hwid
       multi_json (>= 1.9)
       pi_piper
       thor (>= 0.19)
@@ -20,7 +21,8 @@ GEM
       parseconfig
       thor
     ffi (1.9.3)
-    httpclient (2.3.4.1)
+    httpclient (2.4.0)
+    hwid (0.1.5)
     i18n (0.6.9)
     minitest (5.3.2)
     multi_json (1.9.2)
@@ -52,6 +54,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   estorm_lotto_gem!
   estorm_lotto_tools
+  hwid
   i18n
   minitest
   multi_json
