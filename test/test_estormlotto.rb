@@ -7,7 +7,6 @@ class EstormLottoGemTest <  Minitest::Test
 
   def setup
     @f=  EstormLottoGem::Base.new
-    @btn=EstormLottoGem::Button.new
   end
   
   def test_basic
@@ -41,11 +40,7 @@ class EstormLottoGemTest <  Minitest::Test
      @f.set_host('testing util')
      assert @f.action_url.include?('testing util'), "action url shuld be included #{@f.action_url}"
    end
-   def test_button
-     assert @btn!=nil, "should not be nil"
-     assert EstormLottoGem::Button.test_flag, "should return true"
-     
-   end
+
   
     def test_cfg
       assert @f!=nil, "should not be nil"
