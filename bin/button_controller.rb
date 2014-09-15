@@ -6,9 +6,11 @@ sleep delay-10
 puts "ten seconds left"
 sleep 5
 puts "starting....."
+gem 'estorm_button'
+require 'estorm_button'
 require 'estorm_lotto_gem'
 require 'estorm_lotto_tools'
-module EstormLottoGem
+module EstormButton
   class Button
     def self.config
     end
@@ -55,6 +57,6 @@ module EstormLottoGem
   end   # button class
 end
 
-mgr=EstormLottoGem::Button.new
+mgr=EstormButton::Button.new
 mgr.manage_buttons
 
