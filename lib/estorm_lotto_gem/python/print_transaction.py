@@ -8,6 +8,7 @@ seller=sys.argv[2]
 txtype=sys.argv[3]
 printer_type=sys.argv[4]
 successflag=sys.argv[5]
+txid=sys.argv[6]
 
 
 
@@ -22,6 +23,7 @@ pos_printer.normal()
 pos_printer.space()
 pos_printer.println(respstring)
 pos_printer.space()
+pos_printer.security_code(txid)
 pos_printer.normal()
 pos_printer.println("Printed by:\n")
 pos_printer.println(seller)

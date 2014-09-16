@@ -110,10 +110,10 @@ module EstormLottoGem
       # system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_msg.py",msg,printer_type)  if printer_type!= "none"
    end
    
-   def print_transaction(res,seller,txtype,printer_type='adafruit')
+   def print_transaction(res,seller,txtype,printer_type='adafruit',txid="txidFail")
       respstring=res
-      puts  "rpint results #{res} class #{res.class}"
-      system("/usr/bin/python","#{self.python_directory}/print_transaction.py",respstring,seller,txtype,printer_type,res['success']) if printer_type!= "none"
+      puts  "print results #{res} class #{res.class}"
+      system("/usr/bin/python","#{self.python_directory}/print_transaction.py",respstring,seller,txtype,printer_type,res['success'],txid) if printer_type!= "none"
       [respstring]
    end
 
