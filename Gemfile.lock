@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (1.6.2)
+    estorm_lotto_gem (1.6.3)
       estorm_lotto_tools
       httpclient (>= 2.3)
       hwid

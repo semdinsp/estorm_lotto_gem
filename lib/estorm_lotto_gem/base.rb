@@ -113,6 +113,7 @@ module EstormLottoGem
    def print_transaction(res,seller,txtype,printer_type='adafruit',txid="txidFail")
       respstring=res
       puts  "print results #{res} class #{res.class}"
+      txid="txidfail" if txid==nil
       system("/usr/bin/python","#{self.python_directory}/print_transaction.py",respstring,seller,txtype,printer_type,res['success'],txid) if printer_type!= "none"
       [respstring]
    end
