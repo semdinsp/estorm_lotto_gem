@@ -172,6 +172,21 @@ class TestCli < Thor
       res=wb.process_payout(options[:source],options[:md5],options[:drawdate],options[:drawtype])
       res
     end
+  
+    desc "retail", "retail transaction  use jwblack as sku"
+    option :source, :required => true
+    option :host, :required => true
+    option :sku, :required => true
+    option :retailprice
+    option :custname
+    option :debug
+    def retail
+      wb=EstormLottoGem::WbRetail.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.retail_sale(options[:source],options[:sku],options[:retailprice],options[:custname])
+      res
+    end
     
     
 end

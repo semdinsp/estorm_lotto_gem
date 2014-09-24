@@ -14,11 +14,12 @@ module EstormLottoGem
       self.postdata[:api_balance]='encrypted_pin'
       #self.postdata[:encrypted_pin]=BCrypt::Password.new(pin)
     end
-    def transfer(src,dest,value,pin)
+    def transfer(src,dest,value,pin,options={})
       build_postdata('wallet_transfer', src)
       self.postdata[:message]="transfer"
       self.update_value_pin(value,pin)
       self.postdata[:destination]=dest
+      self.postdata=self.postdata.merge(options)
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res

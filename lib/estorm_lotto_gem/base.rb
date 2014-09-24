@@ -84,9 +84,20 @@ module EstormLottoGem
      #puts "postdata is #{@postdata}"
      @postdata
    end
+   def self.sw_modules
+     [['4d','4d'],['3d','3d'],['2d','2d'],['sport','sport'],
+     ['combo','combo'],['product','product']]
+  end
+ def self.product_types
+   [['jwblack','jwblack'],['prolink','prolink'],['prod B','prod B'],['special Z','special Z']]
+  end
   def self.printer_types
     [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
     ['epsont81','epsont81'],['kiosk','kiosk'],['epsont82','epsont82']]
+ end
+ def merge_perform(postdata,options)
+   @postdata=postdata.merge(options)
+   self.perform(self.action_url,@postdata)
  end
   def perform(url,postdata={})
       @uri=URI.parse(url)
