@@ -113,6 +113,7 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.get_ticket(options[:source],options[:message],options[:drawtype])
+      puts "result is #{res.inspect.to_s}"
       res
     end
     desc "get_draw_results", "get draw results for a draw"
