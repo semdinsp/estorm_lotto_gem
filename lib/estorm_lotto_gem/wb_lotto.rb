@@ -29,17 +29,17 @@ module EstormLottoGem
        digits=[]
        codes=[]
        res.each {|resp|  
-         if resp['ticket']!=nil
-          digs=get_digits(drawtype,resp)
+         if resp['success'] and resp['ticket']!=nil
+          digs=get_digits(drawtype,resp['ticket'])
           digits << digs
-          codes << resp['md5short']
+          codes << resp['ticket']['md5short']
         end   
        }     
-       drawdate=res.first['drawdate']
-       src=res.first['customersrc']
+       drawdate=res.first['ticket']['drawdate'] if res.first['ticket']!=nil
+       src=res.first['ticket']['customersrc']  if res.first['ticket']!=nil
        txid=""
        exmsgs="unknown"
-       puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
+       puts "digits #{digits.inspect.to_s} dd #{drawdate} src #{src} code #{codes.inspect.to_s} printer #{printer_type}"
        system("/usr/bin/python","#{self.python_directory}/print_combo_ticket.py",digits.join(','),drawdate,codes.join(','),exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
        [digits.join(','),drawdate,src,codes.join(','),exmsgs,txid]
     end
