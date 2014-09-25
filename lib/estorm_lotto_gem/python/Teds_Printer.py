@@ -87,8 +87,7 @@ class Epson_Printer(Base_Printer):
         self.println(code)
         self.normal()
         code2=code+"\x00"
-        self.my_printer.barcode(code2.upper(),"CODE39", 54, 5,"OFF","A")
-        self.space()
+        self.my_printer.barcode(code2.upper(),"CODE39", 54, 2,"OFF","A")
         self.normal()
 class Kiosk_Printer(Epson_Printer):
     def __init__(self,usbid):

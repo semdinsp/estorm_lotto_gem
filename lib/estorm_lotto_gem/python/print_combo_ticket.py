@@ -5,6 +5,7 @@ from datetime import datetime
 from escpos import *
 from array import *
 numbers=sys.argv[1].split(',')
+entries=sys.argv[1]
 drawdate=sys.argv[2]
 sec_codes=sys.argv[3].split(',')
 extra_msg=sys.argv[4]
@@ -23,12 +24,11 @@ pos_printer.space()
 pos_printer.println("Draw Date")
 pos_printer.println(drawdate)
 pos_printer.space()
+pos_printer.println("Entries")
+pos_printer.large()
+pos_printer.println(entries)
 indices = [0,1,2,3,4]
 for i in indices:
-  pos_printer.println("Entry")
-  pos_printer.large()
-  pos_printer.println(numbers[i])
-  pos_printer.space()
   pos_printer.security_code(sec_codes[i])
 pos_printer.println("Extra messages")
 pos_printer.println(extra_msg)
