@@ -1,4 +1,4 @@
-require 'bcrypt'
+#require 'bcrypt'
 module EstormLottoGem
   class WbBalance < EstormLottoGem::Base
     def get_balance(src)
@@ -45,7 +45,7 @@ module EstormLottoGem
       self.postdata[:message]="release_cash"
       self.update_value_pin(value,pin)
       self.postdata[:from_pin]=from_pin
-      self.postdata[:encrypted_frompin]=BCrypt::Password.create(from_pin)
+    #  self.postdata[:encrypted_frompin]=BCrypt::Password.create(from_pin)
       self.postdata[:from_account]=from_account
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
@@ -55,7 +55,7 @@ module EstormLottoGem
       build_postdata('wallet_update_pin', src)
       self.update_value_pin("0",oldpin)
       self.postdata[:newpin]=newpin
-      self.postdata[:encrypted_newpin]=BCrypt::Password.create(newpin)
+    #  self.postdata[:encrypted_newpin]=BCrypt::Password.create(newpin)
       self.postdata[:message]="wallet_update_pin"
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
