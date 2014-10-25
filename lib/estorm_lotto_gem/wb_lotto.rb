@@ -22,6 +22,7 @@ module EstormLottoGem
        txid=""
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
        system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
+       EstormLottoTools::Sound.playsound('swiss_be.wav')
        [digits,drawdate,src,code,exmsgs,txid]
     end
     def print_combo_ticket(res,seller,drawtype,printer_type='adafruit')

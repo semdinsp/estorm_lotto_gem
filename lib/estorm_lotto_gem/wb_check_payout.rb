@@ -34,6 +34,7 @@ module EstormLottoGem
          resString=res.first.inspect.to_s
          system("/usr/bin/python","#{self.python_directory}/print_paid_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
          print_free_entry(res.first['payout']['freeentry'],seller,drawtype,drawdate,md5,printer_type) if res.first['payout']['freeflag']  
+         EstormLottoTools::Sound.playsound('cheering.wav')
        else
         print_no_payout(res,seller,drawtype,drawdate,md5,printer_type)
       end
@@ -53,6 +54,7 @@ module EstormLottoGem
          valstr="#{value}"
          resString=res.first.inspect.to_s
          system("/usr/bin/python","#{self.python_directory}/winning_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
+         EstormLottoTools::Sound.playsound('cheering.wav')
        else
          print_no_payout(res,seller,drawtype,drawdate,md5,printer_type)
        end
