@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (1.6.9)
+    estorm_lotto_gem (1.7.1)
       estorm_lotto_tools
-      httpclient (>= 2.3)
+      httpclient (>= 2.4)
       hwid
       multi_json (>= 1.9)
       thor (>= 0.19)
@@ -16,15 +16,15 @@ GEM
     codeclimate-test-reporter (0.4.0)
       simplecov (>= 0.7.1, < 1.0.0)
     docile (1.1.5)
-    estorm_lotto_tools (0.2.1)
+    estorm_lotto_tools (0.2.6)
       parseconfig
       thor
-    httpclient (2.4.0)
+    httpclient (2.5.1)
     hwid (0.1.5)
     i18n (0.6.11)
     minitest (5.4.1)
     multi_json (1.10.1)
-    parseconfig (1.0.4)
+    parseconfig (1.0.6)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack

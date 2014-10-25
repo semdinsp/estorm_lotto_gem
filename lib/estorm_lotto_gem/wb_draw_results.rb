@@ -31,6 +31,7 @@ module EstormLottoGem
        puts "respstring: #{respstring}  printer #{printer_type}"
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        system("/usr/bin/python","#{self.python_directory}/print_results.py",respstring,seller,drawtype,printer_type) if printer_type!= "none"
+       EstormLottoTools::Sound.playsound('kidscheering.wav')
        [respstring]
     end
     
