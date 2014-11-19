@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (1.7.2)
+    estorm_lotto_gem (1.7.3)
       estorm_lotto_tools
       httpclient (>= 2.4)
       hwid
@@ -19,7 +19,7 @@ GEM
     estorm_lotto_tools (0.2.6)
       parseconfig
       thor
-    httpclient (2.5.1)
+    httpclient (2.5.3.3)
     hwid (0.1.5)
     i18n (0.6.11)
     minitest (5.4.1)
