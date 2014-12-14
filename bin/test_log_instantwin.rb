@@ -21,6 +21,20 @@ class TestLog < Thor
       logger.set_debug if options[:debug]=='true'
       logger.log_result(options[:source],options[:prize],options[:message],options[:game])
      end
+     
+     desc "pulsa", "get pulsa pin and serial number"
+     option :source, :required => true
+     option :telco, :required => true
+     option :value, :required => true
+     option :host, :required => true
+     option :debug
+     def pulsa
+       load=EstormLottoGem::WbTelcoLoad.new
+       load.set_host(options[:host])
+       load.set_debug if options[:debug]=='true'
+       load.telco_load(options[:source],options[:telco],options[:value])
+      end
+   
   end
 
   TestLog.start(ARGV)

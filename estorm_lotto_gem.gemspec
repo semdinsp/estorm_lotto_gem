@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "1.7.4"
+  s.version     = "1.7.5"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.4"
   s.add_runtime_dependency 'httpclient', '>= 2.4'
   s.add_runtime_dependency 'thor', '>= 0.19'
-  s.add_runtime_dependency 'hwid'
+  s.add_runtime_dependency 'hwid','>= 0.1'
   #s.add_runtime_dependency 'bcrypt'
   s.add_runtime_dependency 'multi_json', '>= 1.9'
   s.add_runtime_dependency 'estorm_lotto_tools'

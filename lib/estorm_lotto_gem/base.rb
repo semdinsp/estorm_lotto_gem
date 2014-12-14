@@ -47,6 +47,9 @@ module EstormLottoGem
   def get_path
     "text_applications/handle_wallet_message.json"
   end
+  def auth_email
+    'api@estormtech.com'
+  end
   def auth_token
     at='stxpgBdjcrWt9iAZUAyZ'
     at='EAc9S1JXBN5MXstisRC6' if @debug
@@ -78,23 +81,14 @@ module EstormLottoGem
      @postdata[:hardware_id]=Hwid.systemid
     # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
      @postdata[:auth_token]=self.auth_token
+     @postdata[:auth_email]=self.auth_email
      @postdata[:source]=src
      @postdata[:application]=appname
      @postdata.merge params
      #puts "postdata is #{@postdata}"
      @postdata
    end
-   def self.sw_modules
-     [['4d','4d'],['3d','3d'],['2d','2d'],['sport','sport'],
-     ['combo','combo'],['product','product']]
-  end
- def self.product_types
-   [['jwblack','jwblack'],['prolink','prolink'],['prod B','prod B'],['special Z','special Z']]
-  end
-  def self.printer_types
-    [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
-    ['epsont81','epsont81'],['kiosk','kiosk'],['epsont82','epsont82']]
- end
+  
  def merge_perform(postdata,options)
    @postdata=postdata.merge(options)
    self.perform(self.action_url,@postdata)

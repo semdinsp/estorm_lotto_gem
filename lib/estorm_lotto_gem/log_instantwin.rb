@@ -5,12 +5,10 @@ module EstormLottoGem
     end
     def auth_token
       at='hu4j9HPXbSxEpyzedmWs'
-      at='mxtMzuqEdY528ibp8noy' if @debug
+      at='K3wLZy-Nz5nPVUxysPX2' if @debug
       at
     end
-    def auth_email
-      'api@estormtech.com'
-    end
+   
     def initialize
        @host= 'estorm-logger.herokuapp.com'
        @debug=false
@@ -25,11 +23,12 @@ module EstormLottoGem
       self.postdata[:prize]=prize
       self.postdata[:message]=message
       self.postdata[:gamename]=game
-      self.postdata[:auth_email]=auth_email
+      #puts "postdata #{self.postdata}"
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res
     end
+  
    
   end
 end
