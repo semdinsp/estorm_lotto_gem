@@ -122,6 +122,19 @@ module EstormLottoGem
       system("/usr/bin/python","#{self.python_directory}/print_transaction.py",respstring,seller,txtype,printer_type,res['success'],txid) if printer_type!= "none"
       [respstring]
    end
+   
+   # THIS FOR COMPATABILITY DELETE AFTER FEW MONTS
+   def self.sw_modules
+    EstormLottoGem::Constants.modules
+  end
+ def self.product_types
+      EstormLottoGem::Constants.product_types 
+  end
+  def self.printer_types
+    EstormLottoGem::Constants.printer_types
+ end
+ 
+
 
    end    # Class
 end    #Module

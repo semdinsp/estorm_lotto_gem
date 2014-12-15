@@ -13,10 +13,16 @@ class EstormLottoGemTest <  Minitest::Test
     assert !@f.debug, "should be false"
   end
   def test_printers
+    assert EstormLottoGem::Constants.printer_types.inspect.to_s.include?('epsont82'), "should include epson t82"
+  end
+  def test_printers2
     assert EstormLottoGem::Base.printer_types.inspect.to_s.include?('epsont82'), "should include epson t82"
   end
   def test_modules
-    assert EstormLottoGem::Base.sw_modules.inspect.to_s.include?('4d'), "should include epson 4d"
+    assert EstormLottoGem::Constants.sw_modules.inspect.to_s.include?('4d'), "should include  4d"
+  end
+  def test_telcos
+    assert EstormLottoGem::Constants.telcos.inspect.to_s.include?('telkomcel'), "should include telkomcel"
   end
   def test_debug
      @f.build_client
