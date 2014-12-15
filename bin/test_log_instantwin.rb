@@ -29,7 +29,7 @@ class TestLog < Thor
      option :host, :required => true
      option :debug
      def pulsa
-       load=EstormLottoGem::WbTelcoLoad.new
+       load=EstormLottoGem::TelcoLoad.new
        load.set_host(options[:host])
        load.set_debug if options[:debug]=='true'
        load.telco_load(options[:source],options[:telco],options[:value])

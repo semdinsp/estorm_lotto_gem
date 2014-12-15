@@ -186,6 +186,22 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.retail_sale(options[:source],options[:sku],options[:retailprice],options[:custname])
+      puts res
+      res
+    end
+    
+    desc "pulsa", "pulsa telco load"
+    option :source, :required => true
+    option :host, :required => true
+    option :value, :required => true
+    option :telco, :required => true
+    option :debug
+    def pulsa
+      wb=EstormLottoGem::WbTelcoLoad.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.telco_load(options[:source],options[:telco],options[:value])
+      puts res
       res
     end
     
