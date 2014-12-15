@@ -10,6 +10,7 @@ printer_type=sys.argv[4]
 msg=sys.argv[5]
 txid=sys.argv[6]
 telco=sys.argv[7]
+serial=sys.argv[8]
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 pos_printer.println("TEDS")
@@ -25,6 +26,8 @@ pos_printer.println(msg)
 pos_printer.println("Telco")
 pos_printer.println(telco)
 pos_printer.security_code(txid)
+pos_printer.println("Telco Serial")
+pos_printer.println(serial)
 pos_printer.normal()
 pos_printer.println("Sold by:\n")
 pos_printer.println(seller)
