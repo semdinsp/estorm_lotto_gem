@@ -21,7 +21,7 @@ module EstormLottoGem
        puts  "print telco load#{res} class #{res.class}"
          system("/usr/bin/python","#{self.python_directory}/print_telco_load.py",
                 pin,seller,value.to_s,printer_type,msg,txid,telco,serial) if printer_type!= "none"    
-       respstring="Sold #{value} Telco: #{telco}\nPin #{pin}\ntxid: #{txid} serial #{serial} cost: #{cost}".gsub("\n","</p></p>")
+       respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}".gsub("\n","</p></p>")
        [respstring]
         
     end
