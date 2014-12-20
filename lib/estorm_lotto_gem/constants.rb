@@ -17,6 +17,10 @@ module EstormLottoGem
   def self.pulsa_values
     [['1','1'],['2','2'],['10','10'],['25','25']]
   end
+  
+  def self.sub_agent_list
+    ['a','b','c','d','e']
+  end
     
   end
 end

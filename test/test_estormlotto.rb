@@ -15,6 +15,9 @@ class EstormLottoGemTest <  Minitest::Test
   def test_printers
     assert EstormLottoGem::Constants.printer_types.inspect.to_s.include?('epsont82'), "should include epson t82"
   end
+  def test_printers
+    assert EstormLottoGem::Constants.sub_agent_list.inspect.to_s.include?('a'), "should include a"
+  end
   def test_printers2
     assert EstormLottoGem::Base.printer_types.inspect.to_s.include?('epsont82'), "should include epson t82"
   end
