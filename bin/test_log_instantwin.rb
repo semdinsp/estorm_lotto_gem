@@ -34,6 +34,19 @@ class TestLog < Thor
        load.set_debug if options[:debug]=='true'
        load.telco_load(options[:source],options[:telco],options[:value])
       end
+    
+      desc "reload", "check pin and get value "
+      option :source, :required => true
+      option :telco, :required => true
+      option :pin, :required => true
+      option :host, :required => true
+      option :debug
+      def reload
+        load=EstormLottoGem::ZLoadPin.new
+        load.set_host(options[:host])
+        load.set_debug if options[:debug]=='true'
+        load.reload(options[:source],options[:telco],options[:pin])
+       end
    
   end
 

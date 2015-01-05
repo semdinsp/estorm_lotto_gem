@@ -5,7 +5,12 @@ module EstormLottoGem
     def telco_load(src,telco,value,msg='wallet_telco_load')
       build_postdata(msg, src)
       res=merge_perform(self.postdata,{message: msg,telco: telco,value: value})
-      #puts "postdata #{self.postdata}"
+      res
+    end
+    
+    def reload(src,telco,pin,msg='wallet_telco_reload')
+      build_postdata(msg, src)
+      res=merge_perform(self.postdata,{message: msg,telco: telco,pin: pin})
       res
     end
     
