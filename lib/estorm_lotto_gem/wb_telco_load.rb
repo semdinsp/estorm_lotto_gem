@@ -22,11 +22,11 @@ module EstormLottoGem
        telco=res.first['telco'] if res.first!=nil
        txid=res[1]['txid'] if res[1]!=nil
        cost=res[1]['transaction_fee'] if res[1]!=nil
-       msg="thank you from Telkcomcel"
+       msg=res.first['message'] if res.first!=nil
        puts  "print telco load#{res} class #{res.class}"
          system("/usr/bin/python","#{self.python_directory}/print_telco_load.py",
                 pin,seller,value.to_s,printer_type,msg,txid,telco,serial) if printer_type!= "none"    
-       respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}".gsub("\n","</p></p>")
+       respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}\nMessage: #{msg}".gsub("\n","</p></p>")
        [respstring]
         
     end
