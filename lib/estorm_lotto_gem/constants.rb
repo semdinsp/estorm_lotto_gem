@@ -15,7 +15,7 @@ module EstormLottoGem
     [['scott','scott'],['telkomcel','telkomcel']]
   end
   def self.pulsa_values
-    [['1','1'],['2','2'],['10','10'],['25','25']]
+    [['1','1'],['2','2'],['5','5'],['10','10'],['25','25']]
   end
   
   def self.sub_agent_list
