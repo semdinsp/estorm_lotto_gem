@@ -126,6 +126,7 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.get_results(options[:source],options[:drawtype])
+      puts "result is #{res.inspect.to_s}"
       res
     end
     desc "teds_simple_reporting", "get simple reporting"

@@ -8,9 +8,9 @@ module EstormLottoGem
       res
     end
     
-    def reload(src,telco,pin,msg='wallet_telco_reload')
+    def reload(src,telco,pin,master,msg='wallet_telco_reload')
       build_postdata(msg, src)
-      res=merge_perform(self.postdata,{message: msg,telco: telco,pin: pin})
+      res=merge_perform(self.postdata,{message: msg,telco: telco,pin: pin, master: master})
       res
     end
     
@@ -24,7 +24,7 @@ module EstormLottoGem
        cost=res[1]['transaction_fee'] if res[1]!=nil
        msg=res.first['message'] if res.first!=nil
        puts  "print telco load#{res} class #{res.class}"
-         system("/usr/bin/python","#{self.python_directory}/print_telco_load.py",
+       system("/usr/bin/python","#{self.python_directory}/print_telco_load.py",
                 pin,seller,value.to_s,printer_type,msg,txid,telco,serial) if printer_type!= "none"    
        respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}\nMessage: #{msg}".gsub("\n","</p></p>")
        [respstring]
