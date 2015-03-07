@@ -5,14 +5,14 @@ module EstormLottoGem
       ['combo','combo'],['product','product']]
    end
   def self.product_types
-    [['jwblack','jwblack'],['prolink','prolink'],['prod B','prod B'],['special Z','special Z']]
+    [['jwblack_liter','jwblack_liter'],['jwblack_small','jwblack_small'],['prolink','prolink'],['prod B','prod B'],['special Z','special Z']]
    end
    def self.printer_types
      [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
      ['epsont81','epsont81'],['kiosk','kiosk'],['epsont82','epsont82']]
   end
   def self.telcos
-    [['scott','scott'],['telkomcel','telkomcel']]
+    [['scott','scott'],['telkomcel','telkomcel'],['bwdi','bwdi']]
   end
   def self.pulsa_values
     [['1','1'],['2','2'],['5','5'],['10','10'],['25','25']]
