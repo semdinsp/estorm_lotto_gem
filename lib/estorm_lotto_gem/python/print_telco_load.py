@@ -11,9 +11,11 @@ msg=sys.argv[5]
 txid=sys.argv[6]
 telco=sys.argv[7]
 serial=sys.argv[8]
+label=sys.argv[9]
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 pos_printer.println("TEDS Pulsa PIN")
+pos_printer.println(label)
 pos_printer.println(pin)
 pos_printer.normal()
 pos_printer.println("Value")
