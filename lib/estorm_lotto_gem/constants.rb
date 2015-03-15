@@ -5,7 +5,8 @@ module EstormLottoGem
       ['combo','combo'],['product','product']]
    end
   def self.product_types
-    [['jwblack_liter','jwblack_liter'],['jwblack_small','jwblack_small'],['prolink','prolink'],['prod B','prod B'],['special Z','special Z']]
+    [['jwblack_750ml','jwblack_750ml'],['jwblack_200ml','jwblack_200ml'],['jwblack_375ml','jwblack_375ml'],['jwblack_1l','jwblack_1l'],
+       ['prolink','prolink'],['special Z','special Z']]
    end
    def self.printer_types
      [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
