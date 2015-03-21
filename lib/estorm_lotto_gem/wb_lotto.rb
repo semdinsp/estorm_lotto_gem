@@ -20,9 +20,10 @@ module EstormLottoGem
        exmsgs=resp['resp_extra_messages'] 
        exmsgs = "none" if exmsgs==nil or exmsgs==""
        txid=""
+       EstormLottoTools::Sound.playsound('swiss_be.wav')
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
        system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
-       EstormLottoTools::Sound.playsound('swiss_be.wav')
+       
        [digits,drawdate,src,code,exmsgs,txid]
     end
     def print_combo_ticket(res,seller,drawtype,printer_type='adafruit')
@@ -40,6 +41,7 @@ module EstormLottoGem
        src=res.first['ticket']['customersrc']  if res.first['ticket']!=nil
        txid=""
        exmsgs="unknown"
+       EstormLottoTools::Sound.playsound('swiss_be.wav')
        puts "digits #{digits.inspect.to_s} dd #{drawdate} src #{src} code #{codes.inspect.to_s} printer #{printer_type}"
        system("/usr/bin/python","#{self.python_directory}/print_combo_ticket.py",digits.join(','),drawdate,codes.join(','),exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
        [digits.join(','),drawdate,src,codes.join(','),exmsgs,txid]
