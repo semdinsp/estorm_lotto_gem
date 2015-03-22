@@ -34,6 +34,24 @@ module EstormLottoGem
        [respstring]
         
     end
+    
+    def print_reload(res,seller,printer_type='adafruit')
+       respstring=""
+       value=res.first['value'] if res.first!=nil
+       pin=res.first['pin'] if res.first!=nil
+       serial=res.first['serial'] if res.first!=nil
+       telco=res.first['telco'] if res.first!=nil
+       msg=res.first['message'] if res.first!=nil
+       puts  "print reload load#{res} class #{res.class}"
+       ['Customer Copy'].each { |label|
+         system("/usr/bin/python","#{self.python_directory}/print_reload.py",
+                  pin,seller,value.to_s,printer_type,msg,telco,serial,label) if printer_type!= "none"    
+       }
+         
+       respstring="Reload #{value} Telco: #{telco}\nserial #{serial}\nMessage: #{msg}".gsub("\n","</p></p>")
+       [respstring]
+        
+    end
    
   end
 end
