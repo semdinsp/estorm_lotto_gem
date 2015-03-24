@@ -14,6 +14,13 @@ module EstormLottoGem
       res
     end
     
+    def cashout(src,master,value)
+      build_postdata('wallet_cashout', src)
+      res=merge_perform(self.postdata,{message: 'wallet_cashout',value: value, master: master})      
+      puts "cashout res is #{res}"
+      res
+    end
+    
     def print_telco_load(res,seller,printer_type='adafruit')
        respstring=""
        value=res.first['value'] if res.first!=nil
@@ -35,6 +42,22 @@ module EstormLottoGem
         
     end
     
+    def print_cashout(res,seller,printer_type='adafruit')
+       respstring=""
+       value=res.first['value'] if res.first!=nil
+       txid=res.first['txid'] if res.first!=nil
+       master=res.first['destination'] if res.first!=nil
+       msg=res.first['message'] if res.first!=nil
+       puts  "print reload load#{res} class #{res.class}"
+       ['Customer Copy','Merchant Copy'].each { |label|
+         system("/usr/bin/python","#{self.python_directory}/print_cashout.py",
+                  seller,value.to_s,printer_type,txid,master,label) if printer_type!= "none"    
+       }
+         
+       respstring="Reload #{value} Telco: #{telco}\nserial #{serial}\nMessage: #{msg}".gsub("\n","</p></p>")
+       [respstring]
+        
+    end
     def print_reload(res,seller,printer_type='adafruit')
        respstring=""
        value=res.first['value'] if res.first!=nil
@@ -45,7 +68,7 @@ module EstormLottoGem
        puts  "print reload load#{res} class #{res.class}"
        ['Customer Copy'].each { |label|
          system("/usr/bin/python","#{self.python_directory}/print_reload.py",
-                  pin,seller,value.to_s,printer_type,msg,telco,serial,label) if printer_type!= "none"    
+                  pin,seller,value.to_s,printer_type,telco,serial,label) if printer_type!= "none"    
        }
          
        respstring="Reload #{value} Telco: #{telco}\nserial #{serial}\nMessage: #{msg}".gsub("\n","</p></p>")

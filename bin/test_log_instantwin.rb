@@ -63,6 +63,20 @@ class TestLog < Thor
          res=load.reload(options[:source],options[:telco],options[:pin],options[:master])
          puts "RES is #{res}"
         end
+        
+        desc "cashout", "cashout and transfer "
+        option :source, :required => true
+        option :master, :required => true
+        option :value, :required => true
+        option :host, :required => true
+        option :debug
+        def cashout
+          load=EstormLottoGem::WbTelcoLoad.new
+          load.set_host(options[:host])
+          load.set_debug if options[:debug]=='true'
+          res=load.cashout(options[:source],options[:master],options[:value])
+          puts "RES is #{res}"
+         end
    
   end
 
