@@ -64,7 +64,7 @@ module EstormLottoGem
                   seller,value.to_s,printer_type,txid,master,label) if printer_type!= "none"    
        }
          
-       respstring="Reload #{value} Telco: #{telco}\nserial #{serial}\nMessage: #{msg}".gsub("\n","</p></p>")
+       respstring="Cashout: #{value} Txid:  #{txid}\nmaster #{master}".gsub("\n","</p></p>")
        [respstring]
         
     end
