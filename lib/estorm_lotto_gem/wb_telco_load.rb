@@ -57,6 +57,7 @@ module EstormLottoGem
     def print_cashout(res,seller,printer_type='adafruit')
        respstring=""
        value,pin,serial,telco,txid,cost,msg = process_message_vals(res)
+       txid = res.first['txid'] if res.first!=nil
        master=res.first['destination'] if res.first!=nil
        puts  "print reload load#{res} class #{res.class}"
        ['Customer Copy','Merchant Copy'].each { |label|
