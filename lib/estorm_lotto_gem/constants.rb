@@ -19,6 +19,10 @@ module EstormLottoGem
     [['1','1'],['2','2'],['5','5'],['10','10'],['25','25']]
   end
   
+  def self.upgrade_types
+    [['gems','gems'],['system','system']]
+  end
+  
   def self.sub_agent_list
     ['a','b','c','d','e']
   end
