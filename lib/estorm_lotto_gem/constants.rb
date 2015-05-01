@@ -23,6 +23,10 @@ module EstormLottoGem
     [['gems','gems'],['system','system']]
   end
   
+  def self.report_types
+    [['reporting','reporting'],['detail','detail'],['margin','margin']]
+  end
+  
   def self.sub_agent_list
     ['a','b','c','d','e']
   end
