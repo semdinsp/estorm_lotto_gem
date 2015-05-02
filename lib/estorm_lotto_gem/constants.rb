@@ -24,7 +24,7 @@ module EstormLottoGem
   end
   
   def self.report_types
-    [['reporting','Simple'],['detail','Detail'],['margin','margin']]
+    [['reporting','Simple'],['detail','Detail'],['margin','margin'],['pulsa','pulsa']]
   end
   
   def self.sub_agent_list
