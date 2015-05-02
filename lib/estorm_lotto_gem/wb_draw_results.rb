@@ -15,11 +15,11 @@ module EstormLottoGem
       res=self.perform(self.action_url,self.postdata)
       res
     end
-    def print_simple_reporting(res,seller,printer_type='adafruit')
+    def print_simple_reporting(res,seller,report_type,printer_type='adafruit')
        respstring=""
        puts  "print simple reportings  #{res} class #{res.class}"
        respstring="Summary Report: #{res.inspect.to_s}"
-       self.print_transaction(res.inspect.to_s,seller,"Summary Revenue Report",printer_type)
+       self.print_transaction(res.inspect.to_s,seller,"Revenue Report\n#{report_type}",printer_type)
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        [respstring]
     end
