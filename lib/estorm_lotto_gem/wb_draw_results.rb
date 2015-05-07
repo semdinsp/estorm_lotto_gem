@@ -9,9 +9,13 @@ module EstormLottoGem
       appname="teds_simple_#{reporttype}"
       send_process(src,appname)
     end
-    def send_process(src,appname)
+    def teds_sold_out(src,msg='4d')
+      appname="wallet_sold_out"
+      send_process(src,appname,msg)
+    end
+    def send_process(src,appname,msg=nil)
       build_postdata(appname, src)
-      self.postdata[:message]=appname
+      self.postdata[:message]=msg || appname
       res=self.perform(self.action_url,self.postdata)
       res
     end

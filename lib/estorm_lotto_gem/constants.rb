@@ -22,6 +22,15 @@ module EstormLottoGem
   def self.upgrade_types
     [['gems','gems'],['system','system']]
   end
+
+  def self.customer_status
+     [['none','none'],['bronze','bronze'],['gold','gold'],['platinum','platinum'],['diamond','diamond']]
+  end
+  
+  def self.district_manager_teams
+  [['unassigned','unassigned'],['None','None'],['Ricky','Ricky'],['JJ',"JJ"],
+     ['Suzana',"Suzana"],['Scott',"Scott"],['Mili',"Mili"],['Belo',"Belo"]]
+  end
   
   def self.report_types
     [['reporting','Simple'],['detail','Detail'],['margin','margin'],['pulsa','pulsa']]

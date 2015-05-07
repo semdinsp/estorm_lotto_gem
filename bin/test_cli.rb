@@ -144,6 +144,19 @@ class TestCli < Thor
       puts res
       res
     end
+    desc "sold_out", "get sold_out entries"
+    option :source, :required => true
+    option :host, :required => true
+    option :drawtype,  :required => true
+    option :debug
+    def sold_out
+      wb=EstormLottoGem::WbDrawResults.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.teds_sold_out(options[:source],options[:drawtype])
+      puts res
+      res
+    end
     
     desc "check_payout", "check Payout for entry"
     option :source, :required => true
