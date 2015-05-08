@@ -19,6 +19,13 @@ module EstormLottoGem
       res=self.perform(self.action_url,self.postdata)
       res
     end
+    def print_sold_out(res,seller,draw_type,printer_type='adafruit')
+       respstring=""
+       puts  "print sold out reportings  #{res} class #{res.class}"
+       respstring="Sold out: #{res.inspect.to_s}"
+       self.print_transaction(res.inspect.to_s,seller,"Sold Out: #{draw_type}",printer_type)
+       [respstring]
+    end
     def print_simple_reporting(res,seller,report_type,printer_type='adafruit')
        respstring=""
        puts  "print simple reportings  #{res} class #{res.class}"
