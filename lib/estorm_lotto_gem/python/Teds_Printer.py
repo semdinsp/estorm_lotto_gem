@@ -47,9 +47,9 @@ class Ada_Printer(Base_Printer):
         self.my_printer.println(now)
         self.my_printer.feed(3)
         self.my_printer.reset()
-    def security_code(self,code):
+    def security_code(self,code,label):
         self.my_printer.setSize('S')
-        self.my_printer.println("Security Code")
+        self.my_printer.println(label)
         self.large()
         self.my_printer.println(code)
         code2=code[-7:]
@@ -80,9 +80,9 @@ class Epson_Printer(Base_Printer):
         self.space()
         self.my_printer.cut()
         self.space()
-    def security_code(self,code):
+    def security_code(self,code,label):
         self.normal()
-        self.println("Security Code")
+        self.println(label)
         self.large()
         self.println(code)
         self.normal()
@@ -126,9 +126,24 @@ class Teds_Printer(object):
     def space(self):
         self.my_printer.space()
     def closing(self):     
-        self.my_printer.closing()  
+        self.my_printer.closing()
+    def draw_info(self,drawtype,drawdate):
+        self.println(drawtype)
+        self.normal()
+        self.space()
+        self.println("Draw Date")
+        self.println(drawdate)
+    def end_ticket(self,title,seller):
+        self.normal()
+        self.println(title)
+        self.println(seller)
+        self.closing()
+    def md5_code(self,code,label):     
+        self.my_printer.security_code(code,label)
+    def txid_code(self,code):     
+        self.my_printer.security_code(code,"Transaction Id")
     def security_code(self,code):     
-        self.my_printer.security_code(code) 
+        self.my_printer.security_code(code,"Security Code") 
     def get_prizes(self,drawtype):
         if drawtype=='4d':
             return ["4D  ------> $3000", "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200"]
