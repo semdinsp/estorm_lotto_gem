@@ -21,8 +21,8 @@ class Base_Printer(object):
     def closing(self):
         # do thonthing
         pass
-    def security_code(self,code):
-        print("Security Code")
+    def security_code(self,code,label):
+        print(label)
         print(code)
     
 
@@ -77,7 +77,6 @@ class Epson_Printer(Base_Printer):
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
         self.my_printer.text("www.teds-timor.com\n")
         self.my_printer.text(now)
-        self.space()
         self.my_printer.cut()
         self.space()
     def security_code(self,code,label):
@@ -130,13 +129,11 @@ class Teds_Printer(object):
     def draw_info(self,drawtype,drawdate):
         self.println(drawtype)
         self.normal()
-        self.space()
         self.println("Draw Date")
         self.println(drawdate)
     def end_ticket(self,title,seller):
         self.normal()
-        self.println(title)
-        self.println(seller)
+        self.println(title+" "+seller)
         self.closing()
     def md5_code(self,code,label):     
         self.my_printer.security_code(code,label)
@@ -149,6 +146,8 @@ class Teds_Printer(object):
             return ["4D  ------> $3000", "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200"]
         if drawtype=='combo':
             return ["4D  ------> $690", "3D -------> $90", "2D -------> $10", "Reverse ---> $50"]
+        if drawtype=='combo10':
+            return ["4D  ------> $300", "3D -------> $50", "2D -------> $1"]
         if drawtype=='3d':
             return [ "3D -----> $200"]
         if drawtype=='2d':

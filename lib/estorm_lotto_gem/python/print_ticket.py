@@ -17,14 +17,14 @@ pos_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 pos_printer.println("Lucky SMS Ticket")
 pos_printer.draw_info(drawtype,drawdate)
-pos_printer.space()
 pos_printer.println("Entry")
 pos_printer.large()
 pos_printer.println(number)
 pos_printer.space()
 pos_printer.security_code(sec_code)
-pos_printer.println("Extra messages")
-pos_printer.println(extra_msg)
+if extra_msg!="none":
+  pos_printer.println("Extra messages")
+  pos_printer.println(extra_msg)
 pos_printer.end_ticket("Sold by:",seller)
 
 

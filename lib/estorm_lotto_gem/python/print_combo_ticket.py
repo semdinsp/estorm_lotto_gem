@@ -27,8 +27,9 @@ count=len(numbers)
 #indices = [0,1,2,3,4]
 for i in range(0,count):
   pos_printer.security_code(sec_codes[i])
-pos_printer.println("Extra messages")
-pos_printer.println(extra_msg)
+if extra_msg!="none":
+  pos_printer.println("Extra messages")
+  pos_printer.println(extra_msg)
 pos_printer.end_ticket("Sold by:",seller)
 
 
