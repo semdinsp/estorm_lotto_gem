@@ -67,13 +67,18 @@ module EstormLottoGem
       yday =yday-364 if yday > 365
       yday
     end
-    def wbp_ekor_kapala(res)
-      r0=res['draws'][0]
-      r1=res['draws'][1]
+    def wbp_get_yest(draws)
+      r0=draws[0]
+      r1=draws[1]
       yest=r0['digits']
       older=r1['digits']
+      return yest,older
+    end
+    def wbp_ekor_kapala(res)
+      draws=res['draws']
+      yest,older= wbp_get_yest(draws)
       ekor= 120 - yest[-2].to_i*10 - yest[-1].to_i
-      kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i+ older[1].to_i
+      kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i + older[1].to_i
       return ekor,kapala
     end
    
