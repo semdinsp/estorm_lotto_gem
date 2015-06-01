@@ -19,20 +19,22 @@ module EstormLottoGem
       res=self.perform(self.action_url,self.postdata)
       res
     end
+    def wbp_sold_values(res)
+      sold=res.first['soldout'] || {}
+      drawdate=res.first['soldout']['draw']
+      sold.delete('draw') 
+  #puts "SOLD is #{sold}"
+      sold.each { |k,v| soldouts << "#{k} count #{v}\n" }
+      soldouts << "No sold out numbers"
+      return sold,drawdate,soldouts
+    end
     def print_sold_out(res,seller,draw_type,printer_type='adafruit')
        respstring=""
        #puts  "print sold out reportings  #{res} class #{res.class}"
        sold='none'
        soldouts=""
        drawdate=""
-       if res.first!=nil and res.first['soldout']!=nil 
-           sold=res.first['soldout'] || {}
-           drawdate=res.first['soldout']['draw']
-           sold.delete('draw') 
-       #puts "SOLD is #{sold}"
-           sold.each { |k,v| soldouts << "#{k} count #{v}\n" }
-           soldouts << "No sold out numbers"
-         end
+       sold,drawdate,soldouts=wbp_sold_values(res) if res.first!=nil and res.first['soldout']!=nil 
        system("/usr/bin/python","#{self.python_directory}/soldout.py",draw_type,seller,soldouts,printer_type,drawdate) if printer_type!= "none"
        respstring="Sold out: #{res.inspect.to_s} sold list: #{soldouts}  drawdate: #{drawdate}"
        [respstring]
@@ -58,18 +60,19 @@ module EstormLottoGem
        [respstring]
     end
     
-    
+    def wbp_adjust_year(drawtype)
+      yday=Time.now.yday()
+      adj={'4d'=>0,'2d'=>6,'3d'=>3,'combo'=>9,'combo10'=>13}
+      yday = yday + adj[drawtype]
+      yday =yday-364 if yday > 365
+      yday
+    end
    
     def print_ramalan(res,seller,drawtype,printer_type='adafruit')
        respstring=""
        puts  "rpint ramalan #{res} class #{res.class}"
        shiolist=[ "kambing" ,"kuda", "ular", "naga","kelinci","macan","sapi","tikus","monyet","babi","anjing","ayam" ]
-       yday=Time.now.yday()
-       yday = yday +3 if drawtype=='3d'
-       yday = yday +6 if drawtype=='2d'
-       yday = yday +9 if drawtype=='combo'
-       yday = yday +13 if drawtype=='combo10'
-       yday =yday-364 if yday > 365
+       yday=wbp_adjust_year(drawtype)
        shio=shiolist[yday % shiolist.size]
        r0=res['draws'][0]
        r1=res['draws'][1]

@@ -18,7 +18,7 @@ module EstormLottoGem
      
   end
   def self.telcos
-    build_array(['telcomcel','scott','bwdi'])
+    build_array(['telkomcel','scott','bwdi'])
     
   end
   def self.pulsa_values
@@ -33,7 +33,7 @@ module EstormLottoGem
   end
 
   def self.customer_status
-     [['none','none'],['bronze','bronze'],['gold','gold'],['platinum','platinum'],['diamond','diamond']]
+     build_array(['none','bronze','gold','platinum','diamond'])
   end
   
   def self.district_manager_teams

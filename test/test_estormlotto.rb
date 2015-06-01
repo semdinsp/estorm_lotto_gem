@@ -27,6 +27,9 @@ class EstormLottoGemTest <  Minitest::Test
   def test_telcos
     assert EstormLottoGem::Constants.telcos.inspect.to_s.include?('telkomcel'), "should include telkomcel"
   end
+  def test_status
+    assert EstormLottoGem::Constants.customer_status.inspect.to_s.include?('gold'), "should include gold"
+  end
   def test_debug
      @f.build_client
      assert @f.clnt!=nil, "should be not nil"

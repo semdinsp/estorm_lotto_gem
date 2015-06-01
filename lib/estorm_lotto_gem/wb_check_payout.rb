@@ -48,7 +48,7 @@ module EstormLottoGem
       valstr="#{value}"
       resString=res.first.inspect.to_s
       EstormLottoTools::Sound.playsound('cheering.wav')
-      [value,valstr,resString]
+      return value,valstr,resString
     end
     def print_payout(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
        respstring=""
