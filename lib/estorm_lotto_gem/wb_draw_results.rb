@@ -21,9 +21,19 @@ module EstormLottoGem
     end
     def print_sold_out(res,seller,draw_type,printer_type='adafruit')
        respstring=""
-       puts  "print sold out reportings  #{res} class #{res.class}"
+       #puts  "print sold out reportings  #{res} class #{res.class}"
        respstring="Sold out: #{res.inspect.to_s}"
-       self.print_transaction(res.inspect.to_s,seller,"Sold Out: #{draw_type}",printer_type)
+       sold='none'
+       sold=res.first['soldout'] if res.first!=nil and res.first['soldout']!=nil 
+       drawdate=res.first['soldout']['draw'].clone if  res.first!=nil and res.first['soldout']!=nil
+       sold.delete('draw') if sold!=nil
+       #puts "SOLD is #{sold}"
+       soldouts=""
+       sold.each { |k,v| soldouts << "#{k} count #{v}\n" }
+       soldouts << "No sold out numbers" if sold.empty?
+       print " #{soldouts} drawdate #{drawdate}"
+       system("/usr/bin/python","#{self.python_directory}/soldout.py",draw_type,seller,soldouts,printer_type,drawdate) if printer_type!= "none"
+   
        [respstring]
     end
     def print_simple_reporting(res,seller,report_type,printer_type='adafruit')
