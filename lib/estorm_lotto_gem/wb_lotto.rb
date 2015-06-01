@@ -26,7 +26,7 @@ module EstormLottoGem
        
        [digits,drawdate,src,code,exmsgs,txid]
     end
-    def wbl_getcombo_data(res)
+    def wbl_getcombo_data(res,drawtype)
       digits=[]
       codes=[]
       res.each {|resp|  
@@ -40,7 +40,7 @@ module EstormLottoGem
     end
     def print_combo_ticket(res,seller,drawtype,printer_type='adafruit')
        puts "print combo ticket #{res}"
-       digits,codes=wbl_getcombo_data(res)
+       digits,codes=wbl_getcombo_data(res,drawtype)
        drawdate=res.first['ticket']['drawdate'] if res.first['ticket']!=nil
        src=res.first['ticket']['customersrc']  if res.first['ticket']!=nil
        txid=""
