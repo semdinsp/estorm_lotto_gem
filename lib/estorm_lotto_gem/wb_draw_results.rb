@@ -28,7 +28,7 @@ module EstormLottoGem
       sold.delete('draw') 
   #puts "SOLD is #{sold}"
       sold.each { |k,v| soldouts << "#{k} count #{v}\n" }
-      soldouts << "No sold out numbers"
+      soldouts << "No sold out numbers" if sold.empty?
       return sold,drawdate,soldouts
     end
     def print_sold_out(res,seller,draw_type,printer_type='adafruit')
