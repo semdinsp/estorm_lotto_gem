@@ -18,6 +18,9 @@ module EstormLottoGem
   def self.pulsa_values
     [['1','1'],['2','2'],['5','5'],['10','10'],['25','25']]
   end
+  def self.game_types
+    [['4d','4d'],['3d','3d'],['2d','2d'],['combo','combo'],['combo10','combo10']]
+  end
   
   def self.upgrade_types
     [['gems','gems'],['system','system']]
