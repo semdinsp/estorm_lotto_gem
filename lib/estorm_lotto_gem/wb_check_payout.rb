@@ -29,12 +29,9 @@ module EstormLottoGem
        respstring=""
        puts  "print payouts #{res} class #{res.class}"
        if res.first['success']
-         value=res.first['payout']['value']
-         valstr="#{value}"
-         resString=res.first.inspect.to_s
+         value,valstr,resString=wbc_internal_values_success(res)
          system("/usr/bin/python","#{self.python_directory}/print_paid_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
          print_free_entry(res.first['payout']['freeentry'],seller,drawtype,drawdate,md5,printer_type) if res.first['payout']['freeflag']  
-         EstormLottoTools::Sound.playsound('cheering.wav')
        else
         print_no_payout(res,seller,drawtype,drawdate,md5,printer_type)
       end
@@ -46,15 +43,19 @@ module EstormLottoGem
       system("/usr/bin/python","#{self.python_directory}/print_no_payout.py",resString,seller,drawtype,drawdate,md5,printer_type) if printer_type!= "none"
  
     end
+    def wbc_internal_values_success(res)
+      value=res.first['payout']['value']
+      valstr="#{value}"
+      resString=res.first.inspect.to_s
+      EstormLottoTools::Sound.playsound('cheering.wav')
+      [value,valstr,resString]
+    end
     def print_payout(res,seller,drawtype,drawdate,md5,printer_type='adafruit')
        respstring=""
        puts  "print payouts #{res} class #{res.class}"
        if res.first['success']
-         value=res.first['payout']['value']
-         valstr="#{value}"
-         resString=res.first.inspect.to_s
+         value,valstr,resString=wbc_internal_values_success(res)
          system("/usr/bin/python","#{self.python_directory}/winning_ticket.py",resString,seller,drawtype,drawdate,md5,valstr,printer_type) if printer_type!= "none"
-         EstormLottoTools::Sound.playsound('cheering.wav')
        else
          print_no_payout(res,seller,drawtype,drawdate,md5,printer_type)
        end
