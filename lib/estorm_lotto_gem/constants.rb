@@ -1,29 +1,35 @@
 module EstormLottoGem
   class Constants
     def self.sw_modules
-      [['4d','4d'],['3d','3d'],['2d','2d'],['sport','sport'],
-      ['combo','combo'],['product','product'],['combo10','combo10']]
+      build_array(['4d','3d','2d','sport','combo','product','combo10'])
+      
    end
   def self.product_types
     [['jwblack_750ml','jwblack_750ml'],['jwblack_200ml','jwblack_200ml'],['jwblack_375ml','jwblack_375ml'],['jwblack_1l','jwblack_1l'],
        ['prolink','prolink'],['special Z','special Z']]
    end
+   def self.build_array(list)
+     res=[]
+     list.each {|li| res << [li,li]}
+     res
+   end
    def self.printer_types
-     [['epson','epson'],['epson2','epson2'],['none','none'],['adafruit','adafruit'],
-     ['epsont81','epsont81'],['kiosk','kiosk'],['epsont82','epsont82']]
+     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82'])
+     
   end
   def self.telcos
-    [['scott','scott'],['telkomcel','telkomcel'],['bwdi','bwdi']]
+    build_array(['telcomcel','scott','bwdi'])
+    
   end
   def self.pulsa_values
-    [['1','1'],['2','2'],['5','5'],['10','10'],['25','25']]
+      build_array(['1','2','5','10','25'])
   end
   def self.game_types
-    [['4d','4d'],['3d','3d'],['2d','2d'],['combo','combo'],['combo10','combo10']]
+    build_array(['4d','3d','2d','combo','combo10'])
   end
   
   def self.upgrade_types
-    [['gems','gems'],['system','system']]
+    build_array(['gems','system'])
   end
 
   def self.customer_status
@@ -31,8 +37,7 @@ module EstormLottoGem
   end
   
   def self.district_manager_teams
-  [['unassigned','unassigned'],['None','None'],['Ricky','Ricky'],['JJ',"JJ"],
-     ['Suzana',"Suzana"],['Scott',"Scott"],['Mili',"Mili"],['Belo',"Belo"]]
+    build_array(['unassigned','None','Ricky','Mili','Belo'])
   end
   
   def self.report_types
