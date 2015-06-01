@@ -2,7 +2,7 @@ module EstormLottoGem
   class Constants
     def self.sw_modules
       [['4d','4d'],['3d','3d'],['2d','2d'],['sport','sport'],
-      ['combo','combo'],['product','product']]
+      ['combo','combo'],['product','product'],['combo10','combo10']]
    end
   def self.product_types
     [['jwblack_750ml','jwblack_750ml'],['jwblack_200ml','jwblack_200ml'],['jwblack_375ml','jwblack_375ml'],['jwblack_1l','jwblack_1l'],
