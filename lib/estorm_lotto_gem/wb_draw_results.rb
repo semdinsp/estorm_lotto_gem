@@ -72,14 +72,14 @@ module EstormLottoGem
       r1=draws[1]
       yest=r0['digits']
       older=r1['digits']
-      return yest,older
+      return yest,older,r0,r1
     end
     def wbp_ekor_kapala(res)
       draws=res['draws']
-      yest,older= wbp_get_yest(draws)
+      yest,older,r0,r1= wbp_get_yest(draws)
       ekor= 120 - yest[-2].to_i*10 - yest[-1].to_i
       kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i + older[1].to_i
-      return ekor,kapala
+      return ekor,kapala,r0,r1
     end
    
     def print_ramalan(res,seller,drawtype,printer_type='adafruit')
@@ -88,7 +88,7 @@ module EstormLottoGem
        shiolist=[ "kambing" ,"kuda", "ular", "naga","kelinci","macan","sapi","tikus","monyet","babi","anjing","ayam" ]
        yday=wbp_adjust_year(drawtype)
        shio=shiolist[yday % shiolist.size]
-       ekor,kapala=wbp_ekor_kapala(res)
+       ekor,kapala,r0,r1=wbp_ekor_kapala(res)
        pastdraws="#{r0['drawdate']}: #{r0['digits']}\n#{r1['drawdate']}: #{r1['digits']}\n"
        rama="#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}"
        EstormLottoTools::Sound.playsound('kidscheering.wav')
