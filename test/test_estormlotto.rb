@@ -12,6 +12,19 @@ class EstormLottoGemTest <  Minitest::Test
   def test_basic
     assert !@f.debug, "should be false"
   end
+  def test_creation
+    assert EstormLottoGem::Base.new!=nil, "should be created"
+    assert EstormLottoGem::Constants.new!=nil, " constants should be created"
+    assert EstormLottoGem::TelcoLoad.new!=nil,  " telco laod should be created"
+    assert EstormLottoGem::WbBalance.new!=nil, "wb balance should be created"
+    assert EstormLottoGem::WbCheckPayout.new!=nil, " wb check payoutshould be created"
+    assert EstormLottoGem::WbLotto4d.new!=nil, "wb lotto should be created"
+    assert EstormLottoGem::WbRetail.new!=nil, "retailshould be created"
+    assert EstormLottoGem::WbSports.new!=nil, "wb sports should be created"
+    assert EstormLottoGem::ZLoadPin.new!=nil, "z load pin  should be created"
+    assert EstormLottoGem::LogInstantwin.new!=nil, "log instant win should be created"
+    
+  end
   def test_printers
     assert EstormLottoGem::Constants.printer_types.inspect.to_s.include?('epsont82'), "should include epson t82"
   end
