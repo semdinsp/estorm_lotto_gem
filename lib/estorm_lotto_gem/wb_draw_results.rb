@@ -20,6 +20,9 @@ module EstormLottoGem
       res
     end
     def wbp_sold_values(res)
+      sold='none'
+      soldouts=""
+      drawdate=""
       sold=res.first['soldout'] || {}
       drawdate=res.first['soldout']['draw']
       sold.delete('draw') 
@@ -31,9 +34,7 @@ module EstormLottoGem
     def print_sold_out(res,seller,draw_type,printer_type='adafruit')
        respstring=""
        #puts  "print sold out reportings  #{res} class #{res.class}"
-       sold='none'
-       soldouts=""
-       drawdate=""
+      
        sold,drawdate,soldouts=wbp_sold_values(res) if res.first!=nil and res.first['soldout']!=nil 
        system("/usr/bin/python","#{self.python_directory}/soldout.py",draw_type,seller,soldouts,printer_type,drawdate) if printer_type!= "none"
        respstring="Sold out: #{res.inspect.to_s} sold list: #{soldouts}  drawdate: #{drawdate}"
