@@ -24,16 +24,17 @@ module EstormLottoGem
        #puts  "print sold out reportings  #{res} class #{res.class}"
        sold='none'
        soldouts=""
+       drawdate=""
        if res.first!=nil and res.first['soldout']!=nil 
            sold=res.first['soldout'] || {}
-           drawdate=res.first['soldout']['draw'].clone
+           drawdate=res.first['soldout']['draw']
            sold.delete('draw') 
        #puts "SOLD is #{sold}"
            sold.each { |k,v| soldouts << "#{k} count #{v}\n" }
            soldouts << "No sold out numbers"
          end
        system("/usr/bin/python","#{self.python_directory}/soldout.py",draw_type,seller,soldouts,printer_type,drawdate) if printer_type!= "none"
-       respstring="Sold out: #{res.inspect.to_s} sold list: #{soldouts}"
+       respstring="Sold out: #{res.inspect.to_s} sold list: #{soldouts}  drawdate: #{drawdate}"
        [respstring]
     end
     def print_simple_reporting(res,seller,report_type,printer_type='adafruit')
