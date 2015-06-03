@@ -29,7 +29,7 @@ module EstormLottoGem
   end
   
   def self.upgrade_types
-    build_array(['gems','system','sound'])
+    build_array(['gems','system','sound','script'])
   end
 
   def self.customer_status
