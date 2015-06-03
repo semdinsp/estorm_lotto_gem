@@ -22,7 +22,7 @@ module EstormLottoGem
     
   end
   def self.pulsa_values
-      build_array(['1','2','5','10','25'])
+      build_array(['0.5','1','2','5','10','25'])
   end
   def self.game_types
     build_array(['4d','3d','2d','combo','combo10'])
