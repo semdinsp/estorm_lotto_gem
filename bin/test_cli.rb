@@ -116,6 +116,20 @@ class TestCli < Thor
       puts "result is #{res.inspect.to_s}"
       res
     end
+    desc "client_received", "mark transaction as received"
+    option :source, :required => true
+    option :host, :required => true
+    option :txid, :required => true
+    option :debug
+  
+    def client_received
+      debug=false
+      debug=true if options[:debug]=='true'
+      puts "txid is #{options[:txid]}"
+      EstormLottoGem::ClientReceived.mark_received(options[:source],options[:txid],debug)
+      puts "marking as printed"
+      sleep 20  # wait for thread to finish
+    end
     desc "get_draw_results", "get draw results for a draw"
     option :source, :required => true
     option :host, :required => true

@@ -101,6 +101,7 @@ module EstormLottoGem
         @clnt=self.build_client 
         Timeout::timeout(60) do    
           res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
+          puts "URI #{self.uri}" if @debug
           res=MultiJson.dump([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if res.include?('unknown app')
         end
       rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError,Exception => e

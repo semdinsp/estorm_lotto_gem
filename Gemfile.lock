@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (2.3.8)
+    estorm_lotto_gem (2.3.9)
       estorm_lotto_tools
       httpclient (>= 2.4)
       hwid (>= 0.1)
@@ -23,7 +23,7 @@ GEM
     hwid (0.1.5)
     i18n (0.7.0)
     minitest (5.5.1)
-    multi_json (1.11.0)
+    multi_json (1.11.1)
     parseconfig (1.0.6)
     rack (1.6.0)
     rack-protection (1.5.3)
@@ -49,6 +49,7 @@ DEPENDENCIES
   bcrypt
   codeclimate-test-reporter
   estorm_lotto_gem!
+  estorm_lotto_tools!
   hwid
   i18n
   minitest
