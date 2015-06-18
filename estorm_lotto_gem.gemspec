@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "2.3.9"
+  s.version     = "2.4.0"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
