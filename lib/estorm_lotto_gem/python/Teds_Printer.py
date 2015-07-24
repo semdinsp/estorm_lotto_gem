@@ -64,6 +64,8 @@ class Epson_Printer(Base_Printer):
         # usbi id 0x0e03
         self.my_printer = printer.Usb(0x04b8,usbid)
     def println(self,atext):
+        if atext == '':
+            atext=" "
         self.my_printer.text(atext)
         self.my_printer.text("\n")
     def large(self):

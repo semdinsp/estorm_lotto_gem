@@ -27,21 +27,23 @@ module EstormLottoGem
       res
     end
     def process_message_vals(res)
-      value=""
-      pin=""
-      serial=""
-      telco=""
-      txid=""
-      cost=""
-      msg=""
-      value=res.first['value'] if res.first!=nil
-      pin=res.first['pin'] if res.first!=nil
-      serial=res.first['serial'] if res.first!=nil
-      telco=res.first['telco'] if res.first!=nil
-      txid=res[1]['txid'] if res[1]!=nil
+      value=" "
+      pin=" "
+      serial=" "
+      telco=" "
+      txid=" "
+      cost=" "
+      msg=" "
+      if  !res.first.nil? then
+         value=res.first['value'] if  !res.first['value'].nil?
+         pin=res.first['pin'] if  !res.first['pin'].nil?
+         serial=res.first['serial'] if !res.first['serial'].nil?
+         telco=res.first['telco'] if  !res.first['telco'].nil?
+         msg=res.first['message'] if  !res.first['message'].nil?
+        end 
+      txid=res[1]['txid'] if res[1]!=nil 
       cost=res[1]['transaction_fee'] if res[1]!=nil
-      msg=res.first['message'] if res.first!=nil
-      [value,pin,serial,telco,txid,cost,msg]
+      [value,pin,serial,telco,txid.split('-').last,cost,msg]
     end
     
     def print_telco_load(res,seller,printer_type='adafruit')
