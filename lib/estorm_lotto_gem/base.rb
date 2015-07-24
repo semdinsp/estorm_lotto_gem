@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'httpclient'
+require 'hurley'
 require 'json'
 require 'estorm_lotto_tools'
 require 'hwid'
