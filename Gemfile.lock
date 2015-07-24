@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (2.4.2)
-      estorm_lotto_tools
+    estorm_lotto_gem (2.4.3)
+      estorm_lotto_tools (~> 0.3)
       httpclient (~> 2)
+      hurley (~> 0.1)
       hwid (~> 0.1)
-      multi_json (~> 1.9)
       thor (~> 0.19)
 
 GEM
@@ -20,6 +20,7 @@ GEM
       parseconfig
       thor
     httpclient (2.6.0.1)
+    hurley (0.1)
     hwid (0.1.5)
     i18n (0.7.0)
     minitest (5.5.1)

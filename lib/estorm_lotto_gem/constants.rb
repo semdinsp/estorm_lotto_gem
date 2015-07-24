@@ -18,7 +18,7 @@ module EstormLottoGem
      
   end
   def self.telcos
-    build_array(['telkomcel','etdl','tt','telemor','scott','bwdi'])
+    build_array(['etdl','tt','telemor','telkomcel','scott','bwdi'])
     
   end
   def self.pulsa_values

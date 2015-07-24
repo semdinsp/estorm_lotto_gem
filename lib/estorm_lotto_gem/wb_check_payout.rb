@@ -12,7 +12,7 @@ module EstormLottoGem
     def send_process(md5,src,drawdate,appname)
       build_postdata(appname, src)
       message={:md5 => md5.downcase, :drawdate=> drawdate, :source => src}
-      self.postdata[:message]=MultiJson.dump(message)
+      self.postdata[:message]=JSON.generate(message)
       res=self.perform(self.action_url,self.postdata)
       puts "res is #{res}"
       res

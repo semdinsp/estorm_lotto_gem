@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'httpclient'
-require 'multi_json'
+require 'json'
 require 'estorm_lotto_tools'
 require 'hwid'
 module EstormLottoGem
@@ -39,7 +39,9 @@ module EstormLottoGem
   end
   def build_client
     if @clnt==nil then
-     @clnt=HTTPClient.new 
+    # @clnt=HTTPClient.new 
+     @clnt=Hurley::Client.new 
+     
      #@clnt.set_auth(nil, @account, @password)   
     end
     @clnt
@@ -93,23 +95,49 @@ module EstormLottoGem
    @postdata=postdata.merge(options)
    self.perform(self.action_url,@postdata)
  end
+ def old_perform(url,postdata={})
+     @uri=URI.parse(url)
+    # puts "url is #{url}"
+     res=''
+     begin
+       @clnt=self.build_client 
+       Timeout::timeout(60) do    
+         res=self.clnt.post_content(self.uri,JSON.generate(postdata),{'Content-Type' => 'application/json'}) 
+         puts "URI #{self.uri}" if @debug
+         res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if res.include?('unknown app')
+       end
+           res=JSON.generate([{'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"}])
+          # SHOULD SEND EMAIL HERE
+          puts "BAD RESPONSE #{e.inspect}"
+     end
+         JSON.parse(res)
+  end
   def perform(url,postdata={})
       @uri=URI.parse(url)
      # puts "url is #{url}"
-      res=''
+       res=JSON.generate([{'success'=>false,'error'=> "created before processing by Hurely"}])
+      
       begin
+        timeout=45
         @clnt=self.build_client 
-        Timeout::timeout(60) do    
-          res=self.clnt.post_content(self.uri,MultiJson.dump(postdata),{'Content-Type' => 'application/json'}) 
-          puts "URI #{self.uri}" if @debug
-          res=MultiJson.dump([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if res.include?('unknown app')
-        end
-      rescue Errno::ECONNREFUSED,Timeout::Error,HTTPClient::BadResponseError,Exception => e
-           res=MultiJson.dump([{'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"}])
-           # SHOULD SEND EMAIL HERE
-           puts "BAD RESPONSE #{e.inspect}"
-      end
-          MultiJson.load(res)
+        @clnt.header[:accept] = "application/json"
+        @clnt.header[:content_type] = "application/json"
+        @clnt.request_options.timeout = timeout   # set to 60
+        response= @clnt.post(@uri)  do |req|
+            req.body=JSON.generate(postdata)
+            req.options.timeout = timeout
+            #  puts "request is #{req}"
+           end
+          
+         res=response.body if response.success?
+         res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if response.success? and response.body.include?('unknown app')
+         
+       rescue Exception => e
+         emsg="Exception Error: #{e.message} #{e.inspect}"
+         puts emsg
+         res=JSON.generate([{'success'=>false,'error'=> emsg }])
+       end
+          JSON.parse(res)
    end
    def print_msg(msg, printer_type='adafruit')
      puts "msg: #{msg} printer #{printer_type}"

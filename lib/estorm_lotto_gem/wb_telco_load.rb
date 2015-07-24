@@ -14,6 +14,12 @@ module EstormLottoGem
       res
     end
     
+    def telco_transfer(src,value,destination,msg='wallet_telco_transfer_telkomcel')
+      build_postdata(msg, src)
+      res=merge_perform(self.postdata,{message: msg,value: value,destination: destination})
+      res
+    end
+    
     def cashout(src,master,value)
       build_postdata('wallet_cashout', src)
       res=merge_perform(self.postdata,{message: 'wallet_cashout',value: value, master: master})      
