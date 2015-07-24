@@ -4,6 +4,7 @@ before_install:
 rvm:
   - "2.0.0"
 gemfile: Gemfile
+sudo: false
 script: 
   - bundle
   - bundle install
