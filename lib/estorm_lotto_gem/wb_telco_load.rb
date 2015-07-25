@@ -27,13 +27,7 @@ module EstormLottoGem
       res
     end
     def process_message_vals(res)
-      value=" "
-      pin=" "
-      serial=" "
-      telco=" "
-      txid=" "
-      cost=" "
-      msg=" "
+      value=pin=serial=telco=txid=cost=msg=" "
       if  !res.first.nil? then
          value=res.first['value'] if  !res.first['value'].nil?
          pin=res.first['pin'] if  !res.first['pin'].nil?
