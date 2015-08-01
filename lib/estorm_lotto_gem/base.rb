@@ -90,7 +90,10 @@ module EstormLottoGem
      #puts "postdata is #{@postdata}"
      @postdata
    end
-  
+   def merge_data_perform(msg,src,additional)
+     self.build_postdata(msg, src)
+     merge_perform(self.postdata,additional)
+   end 
  def merge_perform(postdata,options)
    @postdata=postdata.merge(options)
    self.perform(self.action_url,@postdata)

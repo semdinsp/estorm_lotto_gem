@@ -3,40 +3,35 @@ module EstormLottoGem
   
    
     def telco_load(src,telco,value,msg='wallet_telco_load')
-      build_postdata(msg, src)
-      res=merge_perform(self.postdata,{message: msg,telco: telco,value: value})
-      res
+       merge_data_perform(msg,src,{message: msg,telco: telco,value: value})
     end
     
     def reload(src,telco,pin,master,msg='wallet_telco_reload')
-      build_postdata(msg, src)
-      res=merge_perform(self.postdata,{message: msg,telco: telco,pin: pin, master: master})
-      res
+      merge_data_perform(msg,src,{message: msg,telco: telco,pin: pin, master: master})
     end
     
     def telco_transfer(src,value,destination,msg='wallet_telco_transfer_telkomcel')
-      build_postdata(msg, src)
-      res=merge_perform(self.postdata,{message: msg,value: value,destination: destination})
-      res
+      merge_data_perform(msg,src,{message: msg,value: value,destination: destination})   
     end
     
-    def cashout(src,master,value)
-      build_postdata('wallet_cashout', src)
-      res=merge_perform(self.postdata,{message: 'wallet_cashout',value: value, master: master})      
-      puts "cashout res is #{res}"
-      res
+   
+    def cashout(src,master,value,msg='wallet_cashout')
+      merge_data_perform(msg,src,{value: value, master: master})   
+      
+    end
+    def process_value_hash(key,srchash)
+      key=' '
+      key=srchash[key] if !srchash.nil? and !srchash[key].nil?
     end
     def process_message_vals(res)
-      value=pin=serial=telco=txid=cost=msg=" "
-      if  !res.first.nil? then
-         value=res.first['value'] if  !res.first['value'].nil?
-         pin=res.first['pin'] if  !res.first['pin'].nil?
-         serial=res.first['serial'] if !res.first['serial'].nil?
-         telco=res.first['telco'] if  !res.first['telco'].nil?
-         msg=res.first['message'] if  !res.first['message'].nil?
-        end 
-      txid=res[1]['txid'] if res[1]!=nil 
-      cost=res[1]['transaction_fee'] if res[1]!=nil
+         value=process_value_hash('value',res.first)
+         pin=process_value_hash('pin',res.first)
+         serial=process_value_hash('serial',res.first)
+         telco=process_value_hash('telco',res.first)
+         msg=process_value_hash('message',res.first)
+         txid=process_value_hash('txid',res[1])
+         cost=process_value_hash('transaction_fee',res[1])
+      
       [value,pin,serial,telco,txid.split('-').last,cost,msg]
     end
     

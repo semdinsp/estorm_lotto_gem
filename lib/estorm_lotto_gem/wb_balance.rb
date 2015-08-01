@@ -18,7 +18,6 @@ module EstormLottoGem
       build_postdata('wallet_transfer', src)
       self.update_value_pin(value,pin)
       self.postdata=self.postdata.merge(options)
-      res=self.perform(self.action_url,self.postdata)
       res=merge_perform(self.postdata,{message: 'transfer',destination: dest})
       
       puts "res is #{res}"

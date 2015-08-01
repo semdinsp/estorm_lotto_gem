@@ -1,10 +1,7 @@
 module EstormLottoGem
   class WbRetail < EstormLottoGem::Base
     def retail_sale(src,sku,retailprice,custname="unknown",msg="wallet_retail_product")
-      build_postdata(msg, src)
-      res=merge_perform(self.postdata,{message: msg,sku: sku,retailprice: retailprice, custname: custname})
-      puts "res is #{res}"
-      res
+      merge_data_perform(msg,src,{message: msg,sku: sku,retailprice: retailprice, custname: custname})   
     end
    
     def print_sales_receipt(res,seller,printer_type='adafruit')
