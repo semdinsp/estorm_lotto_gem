@@ -22,6 +22,7 @@ module EstormLottoGem
     def process_value_hash(key,srchash)
       key=' '
       key=srchash[key] if !srchash.nil? and !srchash[key].nil?
+      key
     end
     def process_message_vals(res)
          value=process_value_hash('value',res.first)
