@@ -19,10 +19,10 @@ module EstormLottoGem
       merge_data_perform(msg,src,{value: value, master: master})   
       
     end
-    def process_value_hash(key,srchash)
-      key=' '
-      key=srchash[key] if !srchash.nil? and !srchash[key].nil?
-      key
+    def process_value_hash(akey,srchash)
+      val=' '
+      val=srchash[akey] if !srchash.nil? and !srchash[akey].nil?
+      val
     end
     def process_message_vals(res)
          value=process_value_hash('value',res.first)
