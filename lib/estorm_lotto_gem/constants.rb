@@ -13,6 +13,9 @@ module EstormLottoGem
      list.each {|li| res << [li,li]}
      res
    end
+   def self.pinload_messages
+     build_array(['Haruka sms ELEC*no kontador*PIN ba 73631234','Send *122*PIN# to load your credit'])  
+  end
    def self.printer_types
      build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82'])
      
