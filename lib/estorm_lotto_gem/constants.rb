@@ -17,7 +17,7 @@ module EstormLottoGem
      build_array(['Haruka sms ELEC*no kontador*PIN ba 73631234','Send *122*PIN# to load your credit'])  
   end
    def self.printer_types
-     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82'])
+     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82','rtmobile'])
      
   end
   def self.telcos
