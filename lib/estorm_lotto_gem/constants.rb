@@ -36,7 +36,7 @@ module EstormLottoGem
   end
 
   def self.customer_status
-     build_array(['none','bronze','gold','platinum','diamond'])
+     build_array(['none','adrian','bronze','gold','platinum','diamond'])
   end
   
   def self.district_manager_teams

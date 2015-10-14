@@ -3,6 +3,7 @@ import Image, sys
 from datetime import datetime
 from escpos import *
 
+brandname="Lucky SMS"
 class Base_Printer(object):
     def __init__(self,usbid):
         # usbi id 0x0e03
