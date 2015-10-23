@@ -21,17 +21,15 @@ module EstormLottoGem
      
   end
   def self.telcos
-    build_array(['edtl','tt','telemor','telkomcel','scott','bwdi'])    
+    build_array(['edtl','tt','telemor','bwdi'])    
   end
   def self.pulsa_values
       build_array(['1','2','3','5','10','25'])
   end
   def self.pulsa_values_multiselect
-       [['3','1'],['5','1'],['10','1'],['2','2'],['5','2'],['10','2'],['5','3']]  
+       [['3','tt'],['5','tt'],['10','tt'],['2','edtl'],['5','edtl'],['10','edtl'],['5','bwdi'],['0','telemor']]  
   end
-  def self.telcos_multiselect
-    [['tt','1'],['edtl','2'],['bwdi','3']]  
-  end
+ 
   def self.game_types
     build_array(['4d','3d','2d','combo','combo10'])
   end
