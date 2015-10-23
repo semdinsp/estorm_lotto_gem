@@ -38,7 +38,7 @@ class EstormLottoGemTest <  Minitest::Test
     assert EstormLottoGem::Constants.sw_modules.inspect.to_s.include?('4d'), "should include  4d"
   end
   def test_telcos
-    assert EstormLottoGem::Constants.telcos.inspect.to_s.include?('telkomcel'), "should include telkomcel"
+    assert EstormLottoGem::Constants.telcos.inspect.to_s.include?('tt'), "should include tt"
   end
   def test_status
     assert EstormLottoGem::Constants.customer_status.inspect.to_s.include?('gold'), "should include gold"
