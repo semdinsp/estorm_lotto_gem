@@ -10,7 +10,7 @@ module EstormLottoGem
     end
    
     def initialize
-       @host= 'estorm-logger.herokuapp.com'
+       @host= 'estorm-event.herokuapp.com'
        @debug=false
     end
     def set_debug
