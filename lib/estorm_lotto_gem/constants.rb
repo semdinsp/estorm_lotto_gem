@@ -16,6 +16,14 @@ module EstormLottoGem
    def self.pinload_messages
      build_array(['Haruka sms ELEC*no kontador*PIN ba 73631234','Send *122*PIN# to load your credit','Marka/Enter 100+PIN press/liga send'])  
   end
+  def self.text_applications
+    build_array(['Textecho::Base','Textecho::Multimessage','WalletMiscellaneous','Textecho::Randgen','Textecho::Timecheck','Lotto4d',
+      'InstantWin','SmsCommands','WalletGetSession','WalletBalance','WalletReleaseCash','WalletDrawResults',
+       'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLotto4d','Lotto3d','WalletCheckPayout',
+       'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',
+      'WalletLotto3d','WalletTelcoTransfer','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
+       'Bible','Donation','WalletCashout','WalletSoldOut',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
+  end
    def self.printer_types
      build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82','rtmobile'])
      
