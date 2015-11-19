@@ -63,6 +63,21 @@ class TestLog < Thor
         res=load.available_pins(options[:source])
         puts res
        end
+       
+       desc "process_payment", "process payment msisdn, txid, game"
+       option :source, :required => true
+       option :host, :required => true
+       option :debug
+       option :msisdn
+       option :txid
+       option :game
+       def process_payment
+         load=EstormLottoGem::ZProcessPayment.new
+         load.set_host(options[:host])
+         load.set_debug if options[:debug]=='true'
+         res=load.process_payment(options[:source],options[:txid],options[:msisdn],options[:game])
+         puts res
+        end
     
       desc "reload_internal", "check pin and get value "
       option :source, :required => true

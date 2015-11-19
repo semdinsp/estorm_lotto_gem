@@ -118,7 +118,7 @@ module EstormLottoGem
   def perform(url,postdata={})
       @uri=URI.parse(url)
      # puts "url is #{url}"
-       res=JSON.generate([{'success'=>false,'error'=> "created before processing by Hurely"}])
+       res=JSON.generate([{'success'=>false,'error'=> "created before processing by Hurely [#{Time.now}] "}])
       
       begin
         timeout=45
@@ -131,12 +131,15 @@ module EstormLottoGem
             req.options.timeout = timeout
             #  puts "request is #{req}"
            end
-          
-         res=response.body if response.success?
-         res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if response.success? and response.body.include?('unknown app')
+         if response.success?
+           res=response.body    
+           res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if response.body.include?('unknown app')
+         else
+           res=JSON.generate([{'success'=>false,'error'=> "Server response [#{Time.now}] body #{response.body.to_s}"}]) if !response.body.nil?
+         end
          
        rescue Exception => e
-         emsg="Exception Error: #{e.message} #{e.inspect}"
+         emsg="Exception Error: #{e.message} #{e.inspect} [#{Time.now}]"
          puts emsg
          res=JSON.generate([{'success'=>false,'error'=> emsg }])
        end
