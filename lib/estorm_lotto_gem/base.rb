@@ -98,23 +98,17 @@ module EstormLottoGem
    @postdata=postdata.merge(options)
    self.perform(self.action_url,@postdata)
  end
- def old_perform(url,postdata={})
-     @uri=URI.parse(url)
-    # puts "url is #{url}"
-     res=''
-     begin
-       @clnt=self.build_client 
-       Timeout::timeout(60) do    
-         res=self.clnt.post_content(self.uri,JSON.generate(postdata),{'Content-Type' => 'application/json'}) 
-         puts "URI #{self.uri}" if @debug
-         res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if res.include?('unknown app')
-       end
-           res=JSON.generate([{'success'=>false,'error'=> "Error: #{e.message} #{e.inspect}"}])
-          # SHOULD SEND EMAIL HERE
-          puts "BAD RESPONSE #{e.inspect}"
-     end
-         JSON.parse(res)
-  end
+ def manage_response(response)
+   res=""
+   if response.success?
+     res=response.body    
+     res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if response.body.include?('unknown app')
+   else
+     res=JSON.generate([{'success'=>false,'error'=> "Server response [#{Time.now}] body #{response.body.to_s}"}]) if !response.body.nil?
+   end
+   res
+ end
+
   def perform(url,postdata={})
       @uri=URI.parse(url)
      # puts "url is #{url}"
@@ -131,19 +125,14 @@ module EstormLottoGem
             req.options.timeout = timeout
             #  puts "request is #{req}"
            end
-         if response.success?
-           res=response.body    
-           res=JSON.generate([{'success'=>false,'error'=> "Error: application not installed: #{postdata[:application]}"}]) if response.body.include?('unknown app')
-         else
-           res=JSON.generate([{'success'=>false,'error'=> "Server response [#{Time.now}] body #{response.body.to_s}"}]) if !response.body.nil?
-         end
+         res=manage_response(response)
          
        rescue Exception => e
          emsg="Exception Error: #{e.message} #{e.inspect} [#{Time.now}]"
          puts emsg
          res=JSON.generate([{'success'=>false,'error'=> emsg }])
        end
-          JSON.parse(res)
+      JSON.parse(res)
    end
    def print_msg(msg, printer_type='adafruit')
      puts "msg: #{msg} printer #{printer_type}"
