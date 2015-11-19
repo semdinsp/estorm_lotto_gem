@@ -11,24 +11,24 @@ module EstormLottoGem
 
  
   
-   def build_postdata(txid, src,params={})
-     @postdata={}
-     @postdata[:security_code]='12345'
-     @postdata[:timestamp]=Time.now.to_s
-     @postdata[:hardware_id]=Hwid.systemid
-    # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
-     @postdata[:auth_token]=self.auth_token
-     @postdata[:auth_email]=self.auth_email
-     @postdata[:source]=src
-     @postdata[:txid]=txid
-     @postdata.merge params
+ #  def build_postdata(txid, src,params={})
+#     @postdata={}
+ #    @postdata[:security_code]='12345'
+  #   @postdata[:timestamp]=Time.now.to_s
+  #   @postdata[:hardware_id]=Hwid.systemid
+  #  # @postdata[:auth_token]='EAc9S1JXBN5MXstisRC6'
+  #   @postdata[:auth_token]=self.auth_token
+  #   @postdata[:auth_email]=self.auth_email
+  #   @postdata[:source]=src
+  #   @postdata[:txid]=txid
+  #   @postdata.merge params
      #puts "postdata is #{@postdata}"
-     @postdata
-   end
+#   @postdata
+ #  end
   
    def client_received(src,txid,params={})
      build_postdata(txid, src)
-     res=merge_perform(self.postdata,params)
+     res=merge_perform(self.postdata,{txid: txid}.merge(params))
      puts "client received res is #{res}"
      res
    end
