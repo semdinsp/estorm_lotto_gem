@@ -238,12 +238,13 @@ class TestCli < Thor
     option :source, :required => true
     option :host, :required => true
     option :txid, :required => true
+    option :gamename, :required => true
     option :debug
     def santa_payout
       wb=EstormLottoGem::WbTelcoLoad.new
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
-      res=wb.santa_payout(options[:source],options[:txid])
+      res=wb.santa_payout(options[:source],options[:txid],options[:gamename])
       puts res
       res
     end

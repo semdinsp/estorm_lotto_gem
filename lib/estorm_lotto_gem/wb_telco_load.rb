@@ -13,8 +13,8 @@ module EstormLottoGem
     def telco_transfer(src,value,destination,msg='wallet_telco_transfer_telkomcel')
       merge_data_perform(msg,src,{message: msg,value: value,destination: destination})   
     end
-    def santa_payout(src,txid,msg='wallet_santa_payout')
-      merge_data_perform(msg,src,{message: msg,txid: txid})   
+    def santa_payout(src,txid,game,msg='wallet_santa_payout')
+      merge_data_perform(msg,src,{message: msg,txid: txid,gamename: game})   
     end
     
    
