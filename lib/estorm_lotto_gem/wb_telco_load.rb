@@ -50,7 +50,26 @@ module EstormLottoGem
                 pin='***********'
        }
          
-       respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}\nMessage: #{msg}".gsub("\n","</p></p>")
+       respstring="Sold #{value} Telco: #{telco}\ntxid: #{txid} serial #{serial} cost: #{cost}\nMessage: #{msg}".gsub("\n","</p><p>")
+       [respstring]
+        
+    end
+    
+    def print_santa_cashout(res,seller,printer_type='adafruit')
+      # "payout"=>{"customersrc"=>"67073512191", "prize"=>0.5, "created_at"=>"2015-11-22T01:54:41.516Z", "updated_at"=>"2015-11-24T10:55:14.122Z", "md5short"=>"0ffcb6ce98", "resp_extra_messages"=>
+       respstring=""
+       payout=res.first['payout']
+       txid=payout['md5short']
+       winner=payout['customersrc']
+       prize=payout["prize"]
+       prizetype="Pulsa"  #FIX
+       puts  "print santa payout load#{payout} class #{payout.class}"
+       ['Customer Copy','Merchant Copy'].each { |label|
+         system("/usr/bin/python","#{self.python_directory}/santa_cashout.py",
+                  winner,prize.to_s,printer_type,txid,prizetype,label) if printer_type!= "none"    
+       }
+         
+       respstring="Winner: #{winner} Prize: #{prize} Txid:  #{txid}\nPrizetype #{prizetype}".gsub("\n","</p><p>")
        [respstring]
         
     end
