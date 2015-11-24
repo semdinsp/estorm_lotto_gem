@@ -66,7 +66,7 @@ module EstormLottoGem
        puts  "print santa payout load#{payout} class #{payout.class}"
        ['Customer Copy','Merchant Copy'].each { |label|
          system("/usr/bin/python","#{self.python_directory}/santa_cashout.py",
-                  winner,prize.to_s,printer_type,txid,prizetype,label) if printer_type!= "none"    
+                  winner,prize.to_s,printer_type,txid,prizetype,label,seller) if printer_type!= "none"    
        }
          
        respstring="Winner: #{winner} Prize: #{prize} Txid:  #{txid}\nPrizetype #{prizetype}".gsub("\n","</p><p>")

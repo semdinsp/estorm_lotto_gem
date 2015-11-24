@@ -9,6 +9,7 @@ printer_type=sys.argv[3]
 txid=sys.argv[4]
 prizetype=sys.argv[5]
 label=sys.argv[6]
+seller=sys.argv[7]
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 pos_printer.println("Santa Cashout Ticket")
