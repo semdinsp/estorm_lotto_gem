@@ -15,6 +15,7 @@ class TestCli < Thor
       wb.set_host(options[:host])
        wb.set_debug if options[:debug]=='true'
       res=wb.get_balance(options[:source])
+      puts "balance: #{res}"
       res
     end
     
@@ -229,6 +230,20 @@ class TestCli < Thor
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
       res=wb.telco_load(options[:source],options[:telco],options[:value])
+      puts res
+      res
+    end
+    
+    desc "santa_payout", "santa payout testing"
+    option :source, :required => true
+    option :host, :required => true
+    option :txid, :required => true
+    option :debug
+    def santa_payout
+      wb=EstormLottoGem::WbTelcoLoad.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.santa_payout(options[:source],options[:txid])
       puts res
       res
     end
