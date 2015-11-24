@@ -54,6 +54,17 @@ module EstormLottoGem
        [respstring]
         
     end
+    def get_prizetype(prize)
+      prizehash={ 300.0=> {'odds'=> 5000,'name'=>'laptop','value'=>300}, 
+              100.0=>{'odds'=> 2000,'name'=>'Cash prize $100','value'=>100},
+              25.0=>{'odds'=> 1000,'name'=>'Pulsa $25','value'=>25},
+              15.0=>{'odds'=> 100,'name'=>'Handphone','value'=>15},
+              2.0=>{'odds'=> 200,'name'=>'Pulsa $1','value'=>2},
+              1.0=>{'odds'=> 20,'name'=>'Pulsa $1','value'=>1},
+              0.5=>{'odds'=> 3,'name'=>'Pulsa $0.5','value'=>0.5},
+              0.0=>{'odds'=> 3,'name'=>'Sorry not a winner','value'=>0}}
+     prizehash[prize.to_f]['name']
+    end
     
     def print_santa_cashout(res,seller,printer_type='adafruit')
       # "payout"=>{"customersrc"=>"67073512191", "prize"=>0.5, "created_at"=>"2015-11-22T01:54:41.516Z", "updated_at"=>"2015-11-24T10:55:14.122Z", "md5short"=>"0ffcb6ce98", "resp_extra_messages"=>
@@ -62,7 +73,7 @@ module EstormLottoGem
        txid=payout['md5short']
        winner=payout['customersrc']
        prize=payout["prize"]
-       prizetype="Pulsa"  #FIX
+       prizetype=get_prizetype(prize)  #FIX
        puts  "print santa payout load#{payout} class #{payout.class}"
        ['Customer Copy','Merchant Copy'].each { |label|
          system("/usr/bin/python","#{self.python_directory}/santa_cashout.py",
