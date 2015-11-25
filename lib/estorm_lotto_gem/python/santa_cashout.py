@@ -1,6 +1,6 @@
 from Adafruit_Thermal import *
 from Teds_Printer import *
-import Image, sys
+import Image, sys, os
 from datetime import datetime
 from escpos import *
 winner=sys.argv[1]
@@ -15,6 +15,8 @@ pos_printer.large()
 pos_printer.println("Santa Cashout Ticket")
 pos_printer.println(label)
 pos_printer.normal()
+pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
+pos_printer.space()
 pos_printer.println("Prize Value")
 pos_printer.println(prize)
 pos_printer.println(prizetype)
