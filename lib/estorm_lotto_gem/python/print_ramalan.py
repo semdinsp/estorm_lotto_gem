@@ -1,6 +1,6 @@
 from Adafruit_Thermal import *
 from Teds_Printer import *
-import Image, sys
+import Image, sys, os
 from datetime import datetime, date
 from escpos import *
 pastdraws=sys.argv[1]
@@ -35,9 +35,12 @@ pos_printer.println(tempstr)
 pos_printer.println(rama[4])
 pos_printer.normal()
 pos_printer.println("Awas Ekor/Awas Kapala")
+pos_printer.large()
 pos_printer.println(ekor + " / " + kapala)
 pos_printer.normal()
 pos_printer.print_prizes(drawtype)
+pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+shio+".jpeg")
+pos_printer.space()
 pos_printer.println("Shiolist")
 pos_printer.println(shiolist1)
 pos_printer.println(shiolist2)
