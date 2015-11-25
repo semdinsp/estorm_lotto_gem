@@ -6,7 +6,6 @@ from escpos import *
 brandname="Lucky SMS"
 class Base_Printer(object):
     def __init__(self,usbid):
-        # usbi id 0x0e03
         pass
     def println(self,atext):
         print(atext)
@@ -20,6 +19,9 @@ class Base_Printer(object):
         # do thonthing
         pass
     def closing(self):
+        # do thonthing
+        pass
+    def image(self,img):
         # do thonthing
         pass
     def security_code(self,code,label):
@@ -40,6 +42,9 @@ class Ada_Printer(Base_Printer):
         self.my_printer.setSize('S')
     def space(self):
         self.my_printer.feed(1)
+    def image(self,image):
+        pass
+        # FIX LATER self.my_printer.feed(1)
     def closing(self):
         now=str(datetime.now())
         self.my_printer.setSize('S')
@@ -71,6 +76,8 @@ class Epson_Printer(Base_Printer):
         self.my_printer.text("\n")
     def large(self):
         self.my_printer.set("CENTER","A","B",2,2)
+    def image(self,img):
+        self.my_printer.image(img)
     def normal(self):
         self.my_printer.set("CENTER","A","normal",1,1)
     def space(self):
@@ -99,6 +106,12 @@ class RTMobile_Printer(Epson_Printer):
     def __init__(self,usbid):
         # 0483:5840
         self.my_printer = printer.Usb(0x067b,usbid,0,0x82,0x02)
+        
+class DPR_Printer(Epson_Printer):
+    def __init__(self,usbid):
+        # 0483:5840
+        self.my_printer = printer.Usb(0x0fe6,usbid,0,0x82,0x02)
+
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
         # usbi id 0x0e03
@@ -119,6 +132,8 @@ class Teds_Printer(object):
             self.my_printer = Kiosk_Printer(0x5840)
         if printer_type == 'rtmobile':
             self.my_printer = RTMobile_Printer(0x2303)
+        if printer_type == 'dpr801':
+            self.my_printer = DPR_Printer(0x811e)
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':
@@ -131,6 +146,8 @@ class Teds_Printer(object):
         self.my_printer.large()
     def normal(self):
         self.my_printer.normal()
+    def image(self,img):
+        self.my_printer.image(img)
     def space(self):
         self.my_printer.space()
     def closing(self):     

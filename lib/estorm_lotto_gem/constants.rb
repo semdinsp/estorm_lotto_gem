@@ -25,14 +25,14 @@ module EstormLottoGem
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
    def self.printer_types
-     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82','rtmobile'])
+     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82','rtmobile','dpr801'])
      
   end
   def self.telcos
     build_array(['edtl','tt','telemor','bwdi'])    
   end
   def self.pulsa_values
-      build_array(['1','2','3','5','10','25'])
+      build_array(['1','0.5','2','3','5','10','25'])
   end
   def self.pulsa_values_multiselect
        [['3','tt'],['5','tt'],['10','tt'],['2','edtl'],['5','edtl'],['10','edtl'],['25','edtl'],['5','bwdi'],['0','telemor']]  

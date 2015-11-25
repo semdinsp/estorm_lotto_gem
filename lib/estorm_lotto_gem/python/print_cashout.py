@@ -1,6 +1,6 @@
 from Adafruit_Thermal import *
 from Teds_Printer import *
-import Image, sys
+import Image, sys, os
 from datetime import datetime
 from escpos import *
 seller=sys.argv[1]
@@ -14,6 +14,8 @@ pos_printer.large()
 pos_printer.println("Cashout Ticket")
 pos_printer.println(label)
 pos_printer.normal()
+pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
+pos_printer.space()
 pos_printer.println("Value")
 pos_printer.println(value)
 pos_printer.println("Master Wallet")
