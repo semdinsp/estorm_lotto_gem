@@ -98,10 +98,19 @@ class Epson_Printer(Base_Printer):
         code2=code+"\x00"
         self.my_printer.barcode(code2.upper(),"CODE39", 54, 2,"OFF","A")
         self.normal()
+
 class Kiosk_Printer(Epson_Printer):
     def __init__(self,usbid):
         # 0483:5840
         self.my_printer = printer.Usb(0x0483,usbid,0,0x81,0x03)
+
+class Kiosk_Imageless_Printer(Epson_Printer):
+    def __init__(self,usbid):
+        # 0483:5840
+        self.my_printer = printer.Usb(0x0483,usbid,0,0x81,0x03)
+    def image(self,img):
+        pass
+        
 class RTMobile_Printer(Epson_Printer):
     def __init__(self,usbid):
         # 0483:5840
@@ -130,6 +139,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e11)
         if printer_type == 'kiosk':
             self.my_printer = Kiosk_Printer(0x5840)
+        if printer_type == 'kiosk-noimage':
+            self.my_printer = Kiosk_Imageless_Printer(0x5840)
         if printer_type == 'rtmobile':
             self.my_printer = RTMobile_Printer(0x2303)
         if printer_type == 'dpr801':
