@@ -103,6 +103,9 @@ class Kiosk_Printer(Epson_Printer):
     def __init__(self,usbid):
         # 0483:5840
         self.my_printer = printer.Usb(0x0483,usbid,0,0x81,0x03)
+    def image(self,img):
+        self.my_printer.text("\n")
+        self.my_printer.image(img)
 
 class Kiosk_Imageless_Printer(Epson_Printer):
     def __init__(self,usbid):
