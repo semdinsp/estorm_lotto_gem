@@ -1,7 +1,8 @@
 module EstormLottoGem
   class WbRetail < EstormLottoGem::Base
     def retail_sale(src,sku,retailprice,custname="unknown",msg="wallet_retail_product")
-      merge_data_perform(msg,src,{message: msg,sku: sku,retailprice: retailprice, custname: custname})   
+      
+      merge_data_perform(msg,src,{message: msg,sku: sku,retailprice: retailprice.gsub('-',''), custname: custname})   
     end
    
     def print_sales_receipt(res,seller,printer_type='adafruit')
@@ -23,22 +24,22 @@ module EstormLottoGem
         
     end
     def process_invoice(src,value,invoice,msg="wallet_invoice")
-      merge_data_perform(msg,src,{message: msg,value: value,invoice: invoice})   
+      #remove negative signs  :)
+      merge_data_perform(msg,src,{message: msg,value: value.gsub('-',''),invoice: invoice})   
     end
    
     def print_invoice_receipt(res,seller,printer_type='adafruit')
        respstring=""
        value=res.first['value'] if res.first!=nil
-       sku=test
        invoice=res.first['invoice'] if res.first!=nil
        txid=res[1]['txid'] if res[1]!=nil
+       txid=txid[-10..txid.size] if txid !=nil
        puts  "print sales receipt #{res} class #{res.class}"
-       price=retailprice
-       ['MD Copy',"Delivery Copy"].each { |rtype|
-         system("/usr/bin/python","#{self.python_directory}/print_sales_receipt.py",
-                rtype,seller,value.to_s,invoice.to_s,printer_type,sku,txid) if printer_type!= "none"    
+       ['MD Copy',"TEDS Staff Copy"].each { |rtype|
+         system("/usr/bin/python","#{self.python_directory}/invoice_receipt.py",
+                rtype,seller,value.to_s,invoice.to_s,printer_type,txid) if printer_type!= "none"    
        }
-       respstring="Invoice value: #{value} Invice number: #{invoice} to #{custname} txid: #{txid}".gsub("\n","</p></p>")
+       respstring="Paid invoice value: #{value} invoice number: #{invoice} txid: #{txid}"
        [respstring]
         
     end
