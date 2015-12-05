@@ -20,7 +20,7 @@ module EstormLottoGem
     build_array(['Textecho::Base','Textecho::Multimessage','WalletMiscellaneous','Textecho::Randgen','Textecho::Timecheck','Lotto4d',
       'InstantWin','SmsCommands','WalletGetSession','WalletBalance','WalletReleaseCash','WalletDrawResults',
        'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLotto4d','Lotto3d','WalletCheckPayout',
-       'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',
+       'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",
       'WalletLotto3d','WalletTelcoTransfer','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end

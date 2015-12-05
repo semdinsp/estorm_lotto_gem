@@ -249,6 +249,21 @@ class TestCli < Thor
       res
     end
     
+    desc "process_invoice", "process invoice"
+    option :source, :required => true
+    option :host, :required => true
+    option :value, :required => true
+    option :invoice , :required => true
+    option :debug
+    def process_invoice
+      wb=EstormLottoGem::WbRetail.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      res=wb.process_invoice(options[:source],options[:value],options[:invoice])
+      puts res
+      res
+    end
+    
     
 end
 

@@ -1,5 +1,5 @@
 from Adafruit_Thermal import *
-import Image, sys
+import Image, sys, os
 from datetime import datetime
 from escpos import *
 
@@ -85,8 +85,9 @@ class Epson_Printer(Base_Printer):
     def closing(self):
         now=str(datetime.now())
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
+        self.my_printer.text(now+"\n")
+        self.image(os.path.dirname(os.path.realpath(__file__))+"/images/tedslogo.jpeg")
         self.my_printer.text("www.teds-timor.com\n")
-        self.my_printer.text(now)
         self.my_printer.cut()
         self.space()
     def security_code(self,code,label):
