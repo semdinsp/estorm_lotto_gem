@@ -122,6 +122,22 @@ class TestLog < Thor
           puts "RES is #{res}"
          end
         
+         desc "invoice", "invoice tracking "
+         option :source, :required => true
+         option :txid, :required => true
+         option :value, :required => true
+         option :invoice, :required => true
+         option :host, :required => true
+         option :debug
+         def invoice
+           load=EstormLottoGem::ZInvoice.new
+           load.set_host(options[:host])
+           load.set_debug if options[:debug]=='true'
+           res=load.invoice(options[:source],options[:value],options[:invoice],options[:txid])
+           puts "RES is #{res}"
+          end
+        
+        
         desc "cashout", "cashout and transfer "
         option :source, :required => true
         option :master, :required => true

@@ -32,7 +32,7 @@ module EstormLottoGem
        respstring=""
        value=res.first['value'] if res.first!=nil
        invoice=res.first['invoice'] if res.first!=nil
-       txid=res[1]['txid'] if res[1]!=nil
+       txid=res.first['txid'] if res.first!=nil
        txid=txid[-10..txid.size] if txid !=nil
        puts  "print sales receipt #{res} class #{res.class}"
        ['MD Copy',"TEDS Staff Copy"].each { |rtype|
