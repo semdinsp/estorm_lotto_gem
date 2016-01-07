@@ -35,7 +35,7 @@ module EstormLottoGem
       build_array(['1','0.5','2','3','5','10','25'])
   end
   def self.pulsa_values_multiselect
-       [['3','tt'],['5','tt'],['10','tt'],['2','edtl'],['5','edtl'],['10','edtl'],['25','edtl'],['5','bwdi'],['0','telemor']]  
+       [['1','tt'],['2','tt'],['3','tt'],['5','tt'],['10','tt'],['2','edtl'],['5','edtl'],['10','edtl'],['25','edtl'],['5','bwdi'],['0','telemor']]  
   end
  
   def self.game_types
