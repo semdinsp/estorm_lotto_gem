@@ -25,7 +25,7 @@ module EstormLottoGem
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
    def self.printer_types
-     build_array(['espon','epson2','none','adafruit','epsont81','kiosk','epsont82','rtmobile','dpr801','kiosk-noimage'])
+     build_array(['espon','epson2','none','adafruit','epsont81','epsont81-noimage','kiosk','epsont82','rtmobile','dpr801','kiosk-noimage'])
      
   end
   def self.telcos

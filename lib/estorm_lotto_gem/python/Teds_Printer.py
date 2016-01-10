@@ -115,6 +115,10 @@ class Kiosk_Imageless_Printer(Epson_Printer):
     def image(self,img):
         pass
         
+class Epson_Imageless_Printer(Epson_Printer):
+    def image(self,img):
+        pass
+        
 class RTMobile_Printer(Epson_Printer):
     def __init__(self,usbid):
         # 0483:5840
@@ -139,6 +143,8 @@ class Teds_Printer(object):
             self.my_printer = Epson_Printer(0x0e15)
         if printer_type == 'epsont81':
             self.my_printer = Epson_Printer(0x0202)
+        if printer_type == 'epsont81-noimage':
+            self.my_printer = Epson_Imageless_Printer(0x0202)
         if printer_type == 'epsont82':
             self.my_printer = Epson_Printer(0x0e11)
         if printer_type == 'kiosk':
