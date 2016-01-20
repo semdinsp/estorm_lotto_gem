@@ -20,7 +20,7 @@ module EstormLottoGem
     build_array(['Textecho::Base','Textecho::Multimessage','WalletMiscellaneous','Textecho::Randgen','Textecho::Timecheck','Lotto4d',
       'InstantWin','SmsCommands','WalletGetSession','WalletBalance','WalletReleaseCash','WalletDrawResults',
        'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLotto4d','Lotto3d','WalletCheckPayout',
-       'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",
+       'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",'WalletLottosing',
       'WalletLotto3d','WalletTelcoTransfer','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
@@ -39,7 +39,7 @@ module EstormLottoGem
   end
  
   def self.game_types
-    build_array(['4d','3d','2d','combo','combo10'])
+    build_array(['4d','3d','2d','combo','combo10','sing'])
   end
   
   def self.upgrade_types

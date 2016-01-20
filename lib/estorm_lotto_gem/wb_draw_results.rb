@@ -48,11 +48,20 @@ module EstormLottoGem
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        [respstring]
     end
+    def build_result_string(draw)
+      rstring=""
+      rstring << "#{draw['drawdate']}: #{draw['digits']}\n" 
+      rstring << "second: #{draw['second']}: third: #{draw['third']}\n" if !draw['second'].nil?
+      ptypes=['starter','consolation']
+      ptypes.each { |prizetype|   rstring << "#{prizetype}: #{draw[prizetype]}\n" if !draw[prizetype].nil?  }
+      rstring
+    end
     
     def print_results(res,seller,drawtype,printer_type='adafruit')
        respstring=""
        puts  "rpint results #{res} class #{res.class}"
-       res['draws'].each { |r| respstring <<  "#{r['drawdate']}: #{r['digits']}\n"   }
+       res['draws'].each { |r| respstring <<  build_result_string(r)
+          }
        puts "respstring: #{respstring}  printer #{printer_type}"
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        EstormLottoTools::Sound.playsound('kidscheering.wav')
@@ -63,7 +72,7 @@ module EstormLottoGem
     
     def wbp_adjust_year(drawtype)
       yday=Time.now.yday()
-      adj={'4d'=>0,'2d'=>6,'3d'=>3,'combo'=>9,'combo10'=>13}
+      adj={'4d'=>0,'2d'=>6,'3d'=>3,'combo'=>9,'combo10'=>13, 'sing' => 5}
       yday = yday + adj[drawtype]
       yday =yday-364 if yday > 365
       yday

@@ -195,6 +195,8 @@ class Teds_Printer(object):
             return ["4D  ------> $690", "3D -------> $90", "2D -------> $10", "Reverse ---> $50"]
         if drawtype=='combo10':
             return ["4D  ------> $200", "3D -------> $5", "2D -------> $1","Reverse ---> $20" ]
+        if drawtype=='sing':
+            return ["4D  ------> $2000", "Second -------> $1000", "Third -------> $490","Starter ---> $250","Consolation ---> $60"  ]
         if drawtype=='3d':
             return [ "3D -----> $200"]
         if drawtype=='2d':
