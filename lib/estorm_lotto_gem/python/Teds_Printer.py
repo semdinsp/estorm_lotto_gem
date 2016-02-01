@@ -190,13 +190,13 @@ class Teds_Printer(object):
         self.my_printer.security_code(code,"Security Code") 
     def get_prizes(self,drawtype):
         if drawtype=='4d':
-            return ["4D  ------> $3000", "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200"]
+            return ["4D  ------> $3000", "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200", "Consolation -> $50"]
         if drawtype=='combo':
             return ["4D  ------> $690", "3D -------> $90", "2D -------> $10", "Reverse ---> $50"]
         if drawtype=='combo10':
             return ["4D  ------> $200", "3D -------> $5", "2D -------> $1","Reverse ---> $20" ]
         if drawtype=='sing':
-            return ["4D  ------> $2000", "Second -------> $1000", "Third -------> $490","Starter ---> $250","Consolation ---> $60"  ]
+            return ["4D  ------> $3000",  "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200" ]
         if drawtype=='3d':
             return [ "3D -----> $200"]
         if drawtype=='2d':

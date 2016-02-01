@@ -53,7 +53,8 @@ module EstormLottoGem
       rstring << "#{draw['drawdate']}: #{draw['digits']}\n" 
       rstring << "second: #{draw['second']}: third: #{draw['third']}\n" if !draw['second'].nil?
       ptypes=['starter','consolation']
-      ptypes.each { |prizetype|   rstring << "#{prizetype}: #{draw[prizetype]}\n" if !draw[prizetype].nil?  }
+      ptypes.each { |prizetype|   rstring << "#{prizetype.camelcase}: #{draw[prizetype]}\n" if !draw[prizetype].nil?  }
+      rstring << "\n"
       rstring
     end
     
