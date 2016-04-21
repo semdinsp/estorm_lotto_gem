@@ -55,13 +55,14 @@ module EstormLottoGem
         
     end
     def get_prizetype(prize)
-      prizehash={ 300.0=> {'odds'=> 5000,'name'=>'laptop','value'=>300}, 
+      
+      prizehash={ 500.0=> {'odds'=> 5000,'name'=>'Bali Trip','value'=>300}, 
               100.0=>{'odds'=> 2000,'name'=>'Cash prize $100','value'=>100},
-              25.0=>{'odds'=> 1000,'name'=>'Pulsa $25','value'=>25},
-              15.0=>{'odds'=> 100,'name'=>'Handphone','value'=>15},
-              2.0=>{'odds'=> 200,'name'=>'Pulsa $2','value'=>2},
-              1.0=>{'odds'=> 20,'name'=>'Pulsa $1','value'=>1},
-              0.5=>{'odds'=> 3,'name'=>'Pulsa $0.5','value'=>0.5},
+              25.0=>{'odds'=> 5000,'name'=>'Cash $25','value'=>25},
+              15.0=>{'odds'=> 1000,'name'=>'Handphone','value'=>15},
+              2.0=>{'odds'=> 200,'name'=>'Price C','value'=>2},
+              1.0=>{'odds'=> 100,'name'=>'Prize B','value'=>1},
+              0.5=>{'odds'=> 3,'name'=>'Prize A','value'=>0.5},
               0.0=>{'odds'=> 3,'name'=>'Sorry not a winner','value'=>0}}
      prizehash[prize.to_f]['name']
     end

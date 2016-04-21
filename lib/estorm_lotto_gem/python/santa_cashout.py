@@ -12,10 +12,10 @@ label=sys.argv[6]
 seller=sys.argv[7]
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
-pos_printer.println("Santa Cashout Ticket")
+pos_printer.println("Promo Hadiah Ticket")
 pos_printer.println(label)
 pos_printer.normal()
-pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
+#pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
 pos_printer.space()
 pos_printer.println("Prize Value")
 pos_printer.println(prize)
