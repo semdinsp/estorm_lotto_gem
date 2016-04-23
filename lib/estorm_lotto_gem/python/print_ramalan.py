@@ -1,6 +1,6 @@
 from Adafruit_Thermal import *
 from Teds_Printer import *
-import Image, sys, os
+import Image, sys, os, random
 from datetime import datetime, date
 from escpos import *
 pastdraws=sys.argv[1]
@@ -18,7 +18,7 @@ year=date.today().year
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
-pos_printer.println("Lucky SMS Ramalan")
+pos_printer.println("Lucky Ramalan")
 pos_printer.normal()
 pos_printer.println("Prediksi Tahun Kuda " + str(year))
 pos_printer.println(drawtype)
@@ -41,6 +41,13 @@ pos_printer.normal()
 pos_printer.print_prizes(drawtype)
 pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+shio+".jpeg")
 pos_printer.space()
+pos_printer.println("Your Pairs")
+for x in range(0, 4):
+    pair='| {} | {} |'.format(random.randint(0, 9), random.randint(0, 9))
+    pos_printer.println(pair)
+pos_printer.space()
+randimage=random.sample(['houseline', 'ducattiline', 'grandmaline', 'carline','roseline'],  1)
+pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+randimage[0]+".jpeg")
 pos_printer.println("Shiolist")
 pos_printer.println(shiolist1)
 pos_printer.println(shiolist2)

@@ -159,6 +159,8 @@ class Teds_Printer(object):
             self.my_printer = Kiosk_Imageless_Printer(0x5840)
         if printer_type == 'rtmobile':
             self.my_printer = RTMobile_Printer(0x2303)
+        if printer_type == 'pp02-50mm':
+            self.my_printer = RTMobile_Printer(0x2303)
         if printer_type == 'rpp300-bluetooth':
             self.my_printer = RPP300_BlueToothPrinter()
         if printer_type == 'dpr801':
