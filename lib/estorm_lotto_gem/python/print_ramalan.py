@@ -46,7 +46,7 @@ for x in range(0, 4):
     pair='| {} | {} |'.format(random.randint(0, 9), random.randint(0, 9))
     pos_printer.println(pair)
 pos_printer.space()
-randimage=random.sample(['houseline', 'ducattiline', 'grandmaline', 'carline','roseline'],  1)
+randimage=random.sample(['houseline', 'ducattiline', 'carline','roseline'],  1)
 pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+randimage[0]+".jpeg")
 pos_printer.println("Shiolist")
 pos_printer.println(shiolist1)

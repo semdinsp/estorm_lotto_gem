@@ -163,6 +163,8 @@ class Teds_Printer(object):
             self.my_printer = RTMobile_Printer(0x2303)
         if printer_type == 'rpp300-bluetooth':
             self.my_printer = RPP300_BlueToothPrinter()
+        if printer_type == 'pp02-bluetooth':
+            self.my_printer = RPP300_BlueToothPrinter()
         if printer_type == 'dpr801':
             self.my_printer = DPR_Printer(0x811e)
         if printer_type == 'sgsprinter':
