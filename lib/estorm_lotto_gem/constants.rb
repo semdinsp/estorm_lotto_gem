@@ -21,7 +21,7 @@ module EstormLottoGem
       'InstantWin','SmsCommands','WalletGetSession','WalletBalance','WalletReleaseCash','WalletDrawResults',
        'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLotto4d','Lotto3d','WalletCheckPayout',
        'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",'WalletLottosing',
-      'WalletLotto3d','WalletTelcoTransfer','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
+      'WalletLotto3d','WalletTelcoTransfer','Heineken','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
    def self.printer_types
