@@ -253,18 +253,23 @@ class TestCli < Thor
     end
     
     desc "send_sms", "sms notificaiton testing"
+    option :source, :required => true
     option :destination, :required => true
     option :value, :required => true
+    option :host, :required => true
     option :debug
     def send_sms
       postdata={}
       postdata[:destination]=options[:destination]
       postdata[:drawtype]='4d'
       postdata[:shortcode]='3032'
-      postdata[:auth_token]='sZFnavH9NvAggJNuFwAo'
+      postdata[:source]=options[:source]
       postdata[:message]='http_remote.recent_draws'
       postdata[:value]=options[:value]
-      resp = EstormLottoGem::SmsNotification.send_sms_msg(postdata)
+      sm= EstormLottoGem::SmsNotification.new
+      sm.set_host(options[:host])
+      sm.set_debug if options[:debug]=='true'
+      resp = sm.send_sms_msg(postdata)
       resp
     end
     
