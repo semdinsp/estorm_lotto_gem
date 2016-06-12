@@ -30,13 +30,16 @@ module EstormLottoGem
     @debug=true
     # @@host= 'localhost:8083'
   end
+  
   def set_host(ht)
     @host= ht
   end
+  
   def set_credentials(account,passwd)
       @account=account
       @password=passwd    
   end
+  
   def build_client
     if @clnt==nil then
     # @clnt=HTTPClient.new 
@@ -52,6 +55,7 @@ module EstormLottoGem
   def auth_email
     'api@estormtech.com'
   end
+  
   def auth_token
     at='stxpgBdjcrWt9iAZUAyZ'
     at='EAc9S1JXBN5MXstisRC6' if @debug
@@ -66,7 +70,9 @@ module EstormLottoGem
      url="#{self.get_transport}://#{@host}/#{self.get_path}"
      url
    end
+   
    @@config=nil
+   
    def get_config
      if @@config==nil then
        @@config =  EstormLottoTools::BasicConfig.new(nil,nil) if ENV['TRAVIS']!='true' 
@@ -152,12 +158,12 @@ module EstormLottoGem
    def self.sw_modules
     EstormLottoGem::Constants.modules
   end
- def self.product_types
+  def self.product_types
       EstormLottoGem::Constants.product_types 
   end
   def self.printer_types
     EstormLottoGem::Constants.printer_types
- end
+  end
  
 
 

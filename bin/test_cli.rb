@@ -131,6 +131,7 @@ class TestCli < Thor
       puts "marking as printed"
       sleep 20  # wait for thread to finish
     end
+    
     desc "get_draw_results", "get draw results for a draw"
     option :source, :required => true
     option :host, :required => true
@@ -144,6 +145,7 @@ class TestCli < Thor
       puts "result is #{res.inspect.to_s}"
       res
     end
+    
     desc "teds_simple_reporting", "get simple reporting"
     option :source, :required => true
     option :host, :required => true
@@ -159,6 +161,7 @@ class TestCli < Thor
       puts res
       res
     end
+    
     desc "sold_out", "get sold_out entries"
     option :source, :required => true
     option :host, :required => true
@@ -247,6 +250,22 @@ class TestCli < Thor
       res=wb.santa_payout(options[:source],options[:txid],options[:gamename])
       puts res
       res
+    end
+    
+    desc "send_sms", "sms notificaiton testing"
+    option :destination, :required => true
+    option :value, :required => true
+    option :debug
+    def send_sms
+      postdata={}
+      postdata[:destination]=options[:destination]
+      postdata[:drawtype]='4d'
+      postdata[:shortcode]='3032'
+      postdata[:auth_token]='sZFnavH9NvAggJNuFwAo'
+      postdata[:message]='http_remote.recent_draws'
+      postdata[:value]=options[:value]
+      resp = EstormLottoGem::SmsNotification.send_sms_msg(postdata)
+      resp
     end
     
     desc "process_invoice", "process invoice"
