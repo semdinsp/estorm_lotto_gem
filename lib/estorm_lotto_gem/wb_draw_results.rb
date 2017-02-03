@@ -73,7 +73,7 @@ module EstormLottoGem
     
     def wbp_adjust_year(drawtype)
       yday=Time.now.yday()
-      adj={'4d'=>0,'2d'=>6,'3d'=>3,'combo'=>9,'combo10'=>13, 'sing' => 5}
+      adj={'4d'=>0,'2d'=>6,'3d'=>3,'combo'=>9,'combo10'=>13, 'sing' => 5, 'jogu' => 7}
       yday = yday + adj[drawtype]
       yday =yday-364 if yday > 365
       yday
