@@ -1,7 +1,7 @@
 module EstormLottoGem
   class Constants
     def self.sw_modules
-      build_array(['4d','3d','2d','sport','combo','product','combo10'])
+      build_array(['4d','3d','2d','sport','combo','product','combo10','jogu'])
       
    end
   def self.product_types
@@ -19,7 +19,7 @@ module EstormLottoGem
   def self.text_applications
     build_array(['Textecho::Base','Textecho::Multimessage','WalletMiscellaneous','Textecho::Randgen','Textecho::Timecheck','Lotto4d',
       'InstantWin','SmsCommands','WalletGetSession','WalletBalance','WalletReleaseCash','WalletDrawResults',
-       'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLotto4d','Lotto3d','WalletCheckPayout',
+       'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLottojogu','WalletLotto4d','Lotto3d','WalletCheckPayout',
        'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",'WalletLottosing',
       'WalletLotto3d','WalletTelcoTransfer','Heineken','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
        'Bible','Donation','WalletCashout','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
