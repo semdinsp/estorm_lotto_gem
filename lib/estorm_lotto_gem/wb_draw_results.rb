@@ -81,8 +81,9 @@ module EstormLottoGem
     def wbp_get_yest(draws)
       r0=draws[0]
       r1=draws[1]
-      yest=r0['digits']
-      older=r1['digits']
+      yest=older='1234'
+      yest=r0['digits'] if !r0['digits'].nil?
+      older=r1['digits'] if !r1['digits'].nil?
       return yest,older,r0,r1
     end
     def wbp_ekor_kapala(res)
