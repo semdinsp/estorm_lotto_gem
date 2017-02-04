@@ -96,7 +96,7 @@ module EstormLottoGem
    
     def print_ramalan(res,seller,drawtype,printer_type='adafruit')
        respstring=""
-       puts  "rpint ramalan #{res} class #{res.class}"
+       puts  "print ramalan #{res} class #{res.class}"
        shiolist=[ "kambing" ,"kuda", "ular", "naga","kelinci","macan","sapi","tikus","monyet","babi","anjing","ayam" ]
        yday=wbp_adjust_year(drawtype)
        shio=shiolist[yday % shiolist.size]
@@ -106,7 +106,7 @@ module EstormLottoGem
        EstormLottoTools::Sound.playsound('kidscheering.wav')
    #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        system("/usr/bin/python","#{self.python_directory}/print_ramalan.py",pastdraws,shio,"#{ekor.abs}","#{kapala.abs}",printer_type,seller,drawtype,rama) if printer_type!= "none"
-       ["#{shio} pastdraows: #{pastdraws}"]
+       ["#{shio} pastdraws: #{pastdraws}"]
     end
     
   end # clase

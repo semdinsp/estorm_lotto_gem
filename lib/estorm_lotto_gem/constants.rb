@@ -40,7 +40,8 @@ module EstormLottoGem
   end
  
   def self.game_types
-    build_array(['4d','3d','2d','combo','combo10','sing'])
+    #build_array(['4d','3d','2d','combo','combo10','jogu','sing'])
+    build_array(['4d','3d','2d','combo','combo10','jogu'])
   end
   
   def self.upgrade_types
