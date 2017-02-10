@@ -18,7 +18,12 @@ count=len(numbers)
 pos_printer=Teds_Printer(printer_type)
 pos_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
-pos_printer.println(brandname + " Combo Ticket")
+if drawtype=="combojogu":
+  pos_printer.println(brandname + " Jogu Ticket")
+  tval=count*0.25
+  pos_printer.println("Ticket Value: "+tval)
+else:
+  pos_printer.println(brandname + " Combo Ticket")
 pos_printer.draw_info(drawtype,drawdate)
 pos_printer.space()
 pos_printer.println("Entries")
