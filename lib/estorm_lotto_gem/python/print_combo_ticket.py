@@ -21,7 +21,7 @@ pos_printer.large()
 if drawtype=="combojogu":
   pos_printer.println(brandname + " Jogu Ticket")
   tval=count*0.25
-  pos_printer.println("Ticket Value: "+tval)
+  pos_printer.println("Ticket Value: $"+ str(tval) )
 else:
   pos_printer.println(brandname + " Combo Ticket")
 pos_printer.draw_info(drawtype,drawdate)
