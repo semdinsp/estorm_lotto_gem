@@ -190,6 +190,13 @@ class Teds_Printer(object):
         self.normal()
         self.println("Draw Date")
         self.println(drawdate)
+    def secure_end_ticket(self,title,seller,drawtype,drawdate):
+        tcode = seller[-4:]+drawtype+drawdate[2:]
+        tcode=tcode.replace("-","")
+        tcode=tcode.replace("lotto","l")
+        tcode=tcode.replace("combo","c")
+        self.md5_code(tcode,'Ticket security:')
+        self.end_ticket(title,seller)
     def end_ticket(self,title,seller):
         self.normal()
         self.println(title+" "+seller)

@@ -27,7 +27,7 @@ pos_printer.security_code(sec_code)
 if extra_msg!="none":
   pos_printer.println("Extra messages")
   pos_printer.println(extra_msg)
-pos_printer.end_ticket("Sold by:",seller)
+pos_printer.secure_end_ticket("Sold by:",seller,drawtype,drawdate)
 
 
 

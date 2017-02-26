@@ -47,7 +47,7 @@ for i in range(0,count):
 if extra_msg!="none":
   pos_printer.println("Extra messages")
   pos_printer.println(extra_msg)
-pos_printer.end_ticket("Sold by:",seller)
+pos_printer.secure_end_ticket("Sold by:",seller,drawtype,drawdate)
 
 
 
