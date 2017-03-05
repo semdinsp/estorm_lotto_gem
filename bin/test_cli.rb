@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'thor'
 require 'estorm_lotto_gem'
-require 'I18n'
+# require 'I18n'   --done by scott
 # needs upgrade to thor
 # test_cli.rb get_balance --host=Scotts-MacBook-Pro.local:8080 --source=6590683565
 class TestCli < Thor
@@ -272,6 +272,14 @@ class TestCli < Thor
       resp = sm.send_sms_msg(postdata)
       resp
     end
+    
+    desc "python_directory", "get python dir "  
+    def python_directory
+      wb=EstormLottoGem::Base.new
+      res=wb.python_directory
+      puts res
+    end
+    
     
     desc "process_invoice", "process invoice"
     option :source, :required => true

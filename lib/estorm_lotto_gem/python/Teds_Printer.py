@@ -229,4 +229,13 @@ class Teds_Printer(object):
         for item in prizelist:          
             self.my_printer.println(item)
         self.my_printer.println('-------------------------')
+    def print_message(self,msg,title):
+        self.large()
+        #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
+        self.println(title)
+        self.normal()
+        self.space()
+        self.println(msg)
+        self.space()
+        self.closing()
         

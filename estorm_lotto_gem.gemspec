@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'httpclient', '~> 2'
   s.add_runtime_dependency 'thor', '~> 0.19'
   s.add_runtime_dependency 'hwid','~> 0.1'
+  s.add_runtime_dependency 'mqtt','~> 0.1'
   #s.add_runtime_dependency 'bcrypt'
   s.add_runtime_dependency 'hurley', '~> 0.1'
   s.add_runtime_dependency 'estorm_lotto_tools', '~> 0.3'
