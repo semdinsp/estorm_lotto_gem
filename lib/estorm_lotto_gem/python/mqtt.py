@@ -21,6 +21,7 @@ import logging
 import time
 import getopt
 import Teds_Printer
+import json
 from Teds_Printer import *
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
@@ -30,7 +31,9 @@ def customCallback(client, userdata, message):
   print(message.topic)
   print("--------------\n\n")
   pos_printer=Teds_Printer(printerType)
-  pos_printer.print_message(message.payload,'MQTT  Message')
+  #pos_printer.print_message(message.payload,'MQTT  Message')
+  logger.debug("about to call TEDS PRINTER HANDLE MQTT: " + message.payload + " on topic: "+message.topic + " printer type: " + printerType)  
+  pos_printer.handle_mqtt_message(message.topic,json.loads(message.payload),logger)
   logger.debug("received: " + message.payload + " on topic: "+message.topic + " printer type: " + printerType)
 
 # Usage
@@ -130,10 +133,10 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(15)  # 5 sec
 # Connect and subscribe to AWS IoT
 myAWSIoTMQTTClient.connect()
 logger.debug("MQTT TEDS Client startup: identity: "+identity+" printer: "+str(printerType))
-printertopic="terminal/"+identity+"/#"
+printertopic="terminal/"+identity+"/print/#"
 myAWSIoTMQTTClient.subscribe(printertopic, 1, customCallback)
 logger.debug("subscribed to:" + printertopic +" and all subtopics")
-time.sleep(2)
+time.sleep(1)
 
 # Publish to the same topic in a loop forever
 loopCount = 0

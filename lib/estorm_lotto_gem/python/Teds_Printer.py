@@ -229,13 +229,28 @@ class Teds_Printer(object):
         for item in prizelist:          
             self.my_printer.println(item)
         self.my_printer.println('-------------------------')
-    def print_message(self,msg,title):
+    def print_title(self,title):
         self.large()
         #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
         self.println(title)
         self.normal()
         self.space()
+    def print_message(self,msg,title):
+        self.print_title(title)
         self.println(msg)
         self.space()
         self.closing()
+    def mqtt_message(self,topic,msg):
+        self.print_message(msg,"MQTT Message")
+    def mqtt_balance(self,topic,msg):
+        self.print_title("Terminal Balance")
+        self.print_title(msg['balance'])
+        self.closing()
+    def handle_mqtt_message(self,topic,msg,logger):
+        topickey=topic.rsplit('/',1)
+        method_name = 'mqtt_' + str(topickey[-1])
+        method_to_call = getattr(self, method_name)
+        logger.debug("TEDSPRINTER OBJECT: handle mqtt mesage: " + method_name + " on topic: "+topic )
+        method_to_call(topic,msg)
+        
         

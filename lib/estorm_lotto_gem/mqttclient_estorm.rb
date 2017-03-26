@@ -28,6 +28,8 @@ module EstormLottoGem
     def wait_uuid(config,client,topic,uuid,timeout=40)
       ntopic="#{topic}/#{uuid}"
       topic,response= self.read_message(config,client,ntopic,timoeout=40)
+      puts "wait_uuid: topic: #{topic} response: #{response}"
+      return [topic,JSON.parse(response)]
     end
    
     def send_uuid(config,client,topic,src,uuid,payload={})
@@ -54,28 +56,32 @@ module EstormLottoGem
        topic,payload =mq.send_uuid(config,client,"terminal/#{dest}",uuid,payload)
        
     end
-    def self.mqtt_send_balance_message_old(env='production')
-       wb=EstormLottoTools::ConfigMgr.new
-       src=wb.read_config()['identity']
-       mq,config,client=MqttclientEstorm.create(src,env)
-       topic,payload =mq.send_mqtt(config,client,"sms3/#{env}/balance",{})
-       puts "payload was: #{payload}"
-       readtopic,response =mq.wait_uuid(config,client,"terminal/#{src}",payload[:uuid],40)
-       response
+    def self.mqtt_common_setup(env)
+      wb=EstormLottoTools::ConfigMgr.new
+      src=wb.read_config()['identity']
+      mq,config,client=MqttclientEstorm.create(src,env)
+      return [mq,config,client,src]
     end
+    
+  #  def self.mqtt_send_balance_message(env='production')
+  #     mq,config,client,src=self.mqtt_common_setup(env)
+  #     topic="sms3/#{env}/balance"
+  #     readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
+  #     client.disconnect
+  #     response
+  #  end
+    
+    
     def self.mqtt_send_balance_message(env='production')
-       wb=EstormLottoTools::ConfigMgr.new
-       src=wb.read_config()['identity']
-       mq,config,client=MqttclientEstorm.create(src,env)
+       mq,config,client,src=self.mqtt_common_setup(env)
        topic="sms3/#{env}/balance"
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
+       client.disconnect
        response
     end
     
     def self.mqtt_send_edtl_meter(payload,env='production')
-       wb=EstormLottoTools::ConfigMgr.new
-       src=wb.read_config()['identity']
-       mq,config,client=MqttclientEstorm.create(src,env)
+       mq,config,client,src=self.mqtt_common_setup(env)
        topic,payload =mq.send_mqtt(config,client,"edtl/#{env}/meter",payload)
        
     end
