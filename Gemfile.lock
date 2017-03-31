@@ -17,7 +17,7 @@ GEM
     codeclimate-test-reporter (1.0.5)
       simplecov
     docile (1.1.5)
-    estorm_lotto_tools (0.4.7)
+    estorm_lotto_tools (0.4.9)
       hurley (~> 0.1)
       hwid (~> 0.2)
       parseconfig (~> 1.0)
