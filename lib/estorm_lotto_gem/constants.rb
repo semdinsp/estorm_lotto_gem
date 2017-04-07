@@ -22,7 +22,8 @@ module EstormLottoGem
        'WalletProcessPayout','WalletUpdatePin','TedsSimpleReporting','WalletLottojogu','WalletLotto4d','Lotto3d','WalletCheckPayout',
        'WalletReload',  'WalletTransfer','WalletInstantLocal','SmsProperties',"WalletInvoice",'WalletLottosing',
       'WalletLotto3d','WalletTelcoTransfer','Heineken','WalletLotto2d','Cockfighting','SantaSms','SantaWallet','LearningChannel',
-       'Bible','Donation','WalletCashout','MqttBase','WalletSoldOut','WalletSantaPayout',  'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
+       'Bible','Donation','WalletPromotion','WalletCashout','MqttBase','WalletSoldOut','WalletSantaPayout',  
+       'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
    def self.printer_types
      build_array(['espon','epson2','none','adafruit','epsont81','epsont81-noimage',

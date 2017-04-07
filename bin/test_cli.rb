@@ -108,15 +108,36 @@ class TestCli < Thor
     option :host, :required => true
     option :debug
     option :message, :required => false
+    option :ticket_count, :required => false
     option :drawtype, :required => true
     def get_lotto4d_ticket
       wb=EstormLottoGem::WbLotto4d.new
       wb.set_host(options[:host])
       wb.set_debug if options[:debug]=='true'
-      res=wb.get_ticket(options[:source],options[:message],options[:drawtype])
+      ctick = 1
+      ctick = options[:ticket_count] if !options[:ticket_count].nil? 
+      res=wb.get_ticket(options[:source],options[:message],options[:drawtype],ctick)
       puts "result is #{res.inspect.to_s}"
       res
     end
+    
+    desc "promotion", "get promo ticket"
+    option :source, :required => true
+    option :host, :required => true
+    option :debug
+    option :message, :required => true
+    option :ticket_count, :required => false
+    def promotion
+      wb=EstormLottoGem::WbLotto4d.new
+      wb.set_host(options[:host])
+      wb.set_debug if options[:debug]=='true'
+      ctick = 1
+      ctick = options[:ticket_count] if !options[:ticket_count].nil? 
+      res=wb.get_promotion(options[:source],options[:message],options[:drawtype],ctick)
+      puts "result is #{res.inspect.to_s}"
+      res
+    end
+    
     desc "client_received", "mark transaction as received"
     option :source, :required => true
     option :host, :required => true

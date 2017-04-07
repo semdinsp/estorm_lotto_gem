@@ -244,7 +244,7 @@ class Teds_Printer(object):
         self.print_message(msg,"MQTT Message")
     def mqtt_balance(self,topic,msg):
         self.print_title("Terminal Balance")
-        self.print_title(msg['balance'])
+        self.print_title(str(msg['balance']))
         self.closing()
     def handle_mqtt_message(self,topic,msg,logger):
         topickey=topic.rsplit('/',1)

@@ -1,10 +1,17 @@
 module EstormLottoGem
   class WbLotto4d < EstormLottoGem::Base
-    def get_ticket(src,msg="4d",drawtype='4d')
+    def get_ticket(src,msg="4d",drawtype='4d',ticket_count=1)
       build_postdata("wallet_lotto#{drawtype}", src)
-      res=merge_perform(self.postdata,{message: msg})
+      res=merge_perform(self.postdata,{message: msg,ticket_count: ticket_count})
       res
     end
+    
+    def get_promotion(src,msg,drawtype='multi',ticket_count=1)
+      build_postdata("wallet_promotion", src)
+      res=merge_perform(self.postdata,{message: msg,ticket_count: ticket_count})
+      res
+    end
+    
     def get_digits(drawtype,resp)
       digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
       digits="#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}" if drawtype=='3d'
