@@ -10,6 +10,7 @@ extra_msg=sys.argv[4]
 printer_type=sys.argv[5]
 seller=sys.argv[6]
 drawtype=sys.argv[7]
+entrycount=sys.argv[8]
 
 
 pos_printer=Teds_Printer(printer_type)
@@ -23,6 +24,9 @@ pos_printer.println("Entry")
 pos_printer.large()
 pos_printer.println(number)
 pos_printer.space()
+if entrycount>1:
+  pos_printer.println("Count: "+str(entrycount))
+  pos_printer.space()
 pos_printer.security_code(sec_code)
 if extra_msg!="none":
   pos_printer.println("Extra messages")

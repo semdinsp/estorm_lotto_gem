@@ -25,11 +25,13 @@ module EstormLottoGem
        src=resp['customersrc']
        code=resp['md5short']
        exmsgs=resp['resp_extra_messages'] 
+       ticketcount="1"
+       ticketcount=resp['ticket_count']  if !resp['ticket_count'].nil?
        exmsgs = "none" if exmsgs==nil or exmsgs==""
        txid=""
        EstormLottoTools::Sound.playsound('swiss_be.wav')
        puts "digits #{digits} dd #{drawdate} src #{src} code #{code} msgs #{exmsgs} resp: #{resp} printer #{printer_type}"
-       system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller,drawtype) if printer_type!= "none"
+       system("/usr/bin/python","#{self.python_directory}/print_ticket.py",digits,drawdate,code,exmsgs,printer_type,seller,drawtype,ticketcount.to_s) if printer_type!= "none"
        
        [digits,drawdate,src,code,exmsgs,txid]
     end
