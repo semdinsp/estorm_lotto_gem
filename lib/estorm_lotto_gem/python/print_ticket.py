@@ -24,8 +24,8 @@ pos_printer.println("Entry")
 pos_printer.large()
 pos_printer.println(number)
 pos_printer.space()
-if entrycount>1:
-  pos_printer.println("Count: "+str(entrycount))
+if entrycount > "1":
+  pos_printer.println("Prize Multiply: "+str(entrycount))
   pos_printer.space()
 pos_printer.security_code(sec_code)
 if extra_msg!="none":
