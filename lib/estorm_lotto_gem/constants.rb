@@ -42,8 +42,18 @@ module EstormLottoGem
  
   def self.game_types
     #build_array(['4d','3d','2d','combo','combo10','jogu','sing'])
-    build_array(['4d','3d','2d','combo','combo10','jogu'])
+    build_array(['4d','3d','2d','combo','combo10','jogu','shio'])
   end
+  
+  def self.shio_list
+    [['01','Avestruz (Ostrich)'],['02','Águia (Eagle)'],['03','Burro (Donkey)'],['04','Borboleta (Butterfly)'],
+    ['05','Anjing-Cachorro (Dog)'],['06','Cabra (Goat)'],
+    ['07','Carneiro (Ram)'],['08','Camelo (Camel)'],['09','Naga-Cobra (Snake)'],['10','Coelho (Rabbit)'],['11','Cavalo (Horse)'],
+    ['12','Elefante (Elephant)'],['13','Galo (Rooster)'],['14','Gato (Cat)'],['15','Jacaré (Caiman)'],['16','Leão (Lion)'],
+    ['17','Monyet-Macaco (Monkey)'],['18','Porco (Pig)'],['19','Pavão (Peacock)'],['20','Peru (Turkey)'],['21','Touro (Bull)'],
+    ['22','Tigre (Tiger)'],['23','Urso (Bear)'],['24','Veado (Deer)'],['25','Vaca (Cow)']]
+  end
+  
   
   def self.upgrade_types
     build_array(['gems','system','sound','script','views'])

@@ -12,15 +12,23 @@ module EstormLottoGem
       res
     end
     
+    def get_animal(digits)
+      list=EstormLottoGem::Constants.shio_list
+      animal='unknown'
+      list.each {|li|  animal=li[1] if digits.to_s==li[0]}
+      animal
+    end
+    
     def get_digits(drawtype,resp)
       digits="#{resp['digit1']}#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}"
       digits="#{resp['digit2']}#{resp['digit3']}#{resp['digit4']}" if drawtype=='3d'
-      digits="#{resp['digit3']}#{resp['digit4']}" if drawtype=='2d'
+      digits="#{resp['digit3']}#{resp['digit4']}" if ['2d','shio'].include?(drawtype) 
       digits
     end
     def print_ticket(res,seller,drawtype,printer_type='adafruit')
        resp=res['ticket']
        digits=get_digits(drawtype,resp)
+       digits=get_animal(digits) if drawtype=='shio'
        drawdate=resp['drawdate']
        src=resp['customersrc']
        code=resp['md5short']
