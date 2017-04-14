@@ -46,11 +46,13 @@ module EstormLottoGem
   end
   
   def self.shio_list
-    [['01','Avestruz (Ostrich)'],['02','Águia (Eagle)'],['03','Burro (Donkey)'],['04','Borboleta (Butterfly)'],
+    [['01','Avestruz (Ostrich)'],['02','Aguia (Eagle)'],['03','Burro (Donkey)'],['04','Borboleta (Butterfly)'],
     ['05','Anjing-Cachorro (Dog)'],['06','Cabra (Goat)'],
-    ['07','Carneiro (Ram)'],['08','Camelo (Camel)'],['09','Naga-Cobra (Snake)'],['10','Coelho (Rabbit)'],['11','Cavalo (Horse)'],
-    ['12','Elefante (Elephant)'],['13','Galo (Rooster)'],['14','Gato (Cat)'],['15','Jacaré (Caiman)'],['16','Leão (Lion)'],
-    ['17','Monyet-Macaco (Monkey)'],['18','Porco (Pig)'],['19','Pavão (Peacock)'],['20','Peru (Turkey)'],['21','Touro (Bull)'],
+    ['07','Carneiro (Ram)'],['08','Camelo (Camel)'],['09','Naga-Cobra (Snake)'],
+    ['10','Coelho (Rabbit)'],['11','Cavalo (Horse)'],
+    ['12','Elefante (Elephant)'],['13','Galo (Rooster)'],['14','Gato (Cat)'],['15','Jacare (Caiman)'],
+    ['16','Leao (Lion)'], ['17','Monyet-Macaco (Monkey)'],['18','Porco (Pig)'],
+    ['19','Pavao (Peacock)'],['20','Peru (Turkey)'],['21','Touro (Bull)'],
     ['22','Tigre (Tiger)'],['23','Urso (Bear)'],['24','Veado (Deer)'],['25','Vaca (Cow)']]
   end
   
@@ -75,5 +77,14 @@ module EstormLottoGem
     ['a','b','c','d','e']
   end
     
+  def self.get_animal(digits)
+    list=EstormLottoGem::Constants.shio_list
+    idigits = digits.to_i rescue 0
+    key = idigits % 25 + 1
+    puts "get animal: digits #{digits} idigis #{idigits} key: #{key}"
+    animal='unknown'
+    list.each {|li|  animal=li[1] if key==li[0].to_i}
+    animal
+  end
   end
 end

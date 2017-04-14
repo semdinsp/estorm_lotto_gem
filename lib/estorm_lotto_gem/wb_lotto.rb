@@ -13,9 +13,8 @@ module EstormLottoGem
     end
     
     def get_animal(digits)
-      list=EstormLottoGem::Constants.shio_list
-      animal='unknown'
-      list.each {|li|  animal=li[1] if digits.to_s==li[0]}
+      #EstormLottoGem::Constants.get_animal(digits)
+      animal=EstormLottoGem::Constants.get_animal(digits)
       animal
     end
     

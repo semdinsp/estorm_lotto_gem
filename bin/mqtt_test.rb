@@ -20,7 +20,8 @@ class MqttTest < Thor
       id=options[:source]
       config=mq.setup(id,env )
       client=mq.start(config)
-      mq.send_mqtt(config,client,"sms3/#{env}/balance",{:source=>id, :uuid => SecureRandom.uuid})
+      res=mq.send_mqtt(config,client,"sms3/#{env}/balance",{:source=>id, :uuid => SecureRandom.uuid})
+      puts res
     end
     
     desc "balance", "simple balance on production system"

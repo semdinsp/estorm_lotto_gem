@@ -48,9 +48,15 @@ module EstormLottoGem
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
        [respstring]
     end
-    def build_result_string(draw)
+  
+    def build_result_string(draw,drawtype)
       rstring=""
-      rstring << "#{draw['drawdate']}: #{draw['digits']}\n" 
+      if drawtype=='shio'
+         animal=EstormLottoGem::Constants.get_animal(draw['digits'])
+         rstring << "#{draw['drawdate']}: #{animal}\n" 
+       else
+         rstring << "#{draw['drawdate']}: #{draw['digits']}\n" 
+      end   # drawtype
       rstring << "second: #{draw['second']}: third: #{draw['third']}\n" if !draw['second'].nil?
       ptypes=['starter','consolation']
       ptypes.each { |prizetype|   rstring << "#{prizetype.camelcase}: #{draw[prizetype]}\n" if !draw[prizetype].nil?  }
@@ -61,7 +67,7 @@ module EstormLottoGem
     def print_results(res,seller,drawtype,printer_type='adafruit')
        respstring=""
        puts  "rpint results #{res} class #{res.class}"
-       res['draws'].each { |r| respstring <<  build_result_string(r)
+       res['draws'].each { |r| respstring <<  build_result_string(r,drawtype)
           }
        puts "respstring: #{respstring}  printer #{printer_type}"
        #system("/usr/bin/python","/home/pi/Python-Thermal-Printer/print_ticket.py",digits,drawdate,code,exmsgs,printer_type) if printer_type!= "none"
