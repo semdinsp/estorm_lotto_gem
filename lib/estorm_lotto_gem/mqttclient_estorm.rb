@@ -4,7 +4,8 @@ module EstormLottoGem
   class MqttclientEstorm  < Mqttclient
     
     def self.create(identity,env="production",  host = "a36q3zlv5b6zdr.iot.ap-southeast-1.amazonaws.com" )
-      mq=EstormLottoGem::MqttclientEstorm.new
+      # mq=EstormLottoGem::MqttclientEstorm.new
+      mq=self.new
       config=mq.setup(identity,env,host )
       client=mq.start(config)
       return [mq,config,client]
