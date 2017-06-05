@@ -5,6 +5,7 @@ require 'thor'
 gem 'mqtt'
 require 'mqtt'
 require 'estorm_lotto_gem'
+require 'json'
 
 
 class MqttTest < Thor
@@ -21,6 +22,37 @@ class MqttTest < Thor
       config=mq.setup(id,env )
       client=mq.start(config)
       res=mq.send_mqtt(config,client,"sms3/#{env}/balance",{:source=>id, :uuid => SecureRandom.uuid})
+      puts res
+    end
+    
+    desc "validate", "validate a list of virn serial numbers"
+    option :debug
+    option :app, :required => true
+    option :game, :required => true
+    option :list, :required => true
+    def validate
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      list =JSON.parse(options[:list])
+      res=EstormLottoGem::MqttclientTms.mqtt_send_validation_message(options[:app],options[:game],list,env)
+      puts res
+    end
+    
+    # bin/mqtt_test.rb winnerimport --game=test --debug=true --app=test --vendor=bzp --list='[{"VIRN":"123456","value":"K5000","prizeValue":"5000"}]'
+
+    desc "winnerimport", "import list VIRN, prize, prizeValue"
+    option :debug
+    option :app, :required => true
+    option :game, :required => true
+    option :vendor, :required => true
+    option :list, :required => true
+    def winnerimport
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      list =JSON.parse(options[:list])
+      res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,options[:vendor],env)
       puts res
     end
     

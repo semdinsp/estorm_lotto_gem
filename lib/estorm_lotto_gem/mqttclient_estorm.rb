@@ -40,7 +40,6 @@ module EstormLottoGem
     end
     
     def send_message_wait_confirmation(config,client,topic,payload={})
-      payload={}
       uuid=SecureRandom.uuid
       payload[:uuid]=uuid
       src=config[:source]
