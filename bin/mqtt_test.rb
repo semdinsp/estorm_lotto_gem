@@ -45,6 +45,7 @@ class MqttTest < Thor
     option :debug
     option :app, :required => true
     option :game, :required => true
+    option :order, :required => true
     option :vendor, :required => true
     option :list, :required => true
     def winnerimport
@@ -52,7 +53,7 @@ class MqttTest < Thor
       env="development" if options[:debug]=='true'
       puts "options are #{options.inspect}"
       list =JSON.parse(options[:list])
-      res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,options[:vendor],env)
+      res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,options[:vendor],options[:order],env)
       puts res
     end
     

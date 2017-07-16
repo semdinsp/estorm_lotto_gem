@@ -30,14 +30,22 @@ module EstormLottoGem
     
    def self.mqtt_send_validation_message(appname,game,list,env='production')
        topic="tms/#{env}/#{appname}/validate"  # is appname correct?
-       payload={:game => game, :list => list}
+       payload={:game => game, :params => list}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
-   def self.mqtt_send_winnerimport_message(appname,game,list,vendor,env='production')
+   def self.mqtt_send_winnerimport_message(appname,game,list,vendor,order,env='production')
        topic="tms/#{env}/#{appname}/winnerimport"
-       payload={:game => game, :list => list, :vendor => vendor}
+       payload={:game => game, :list => list, :vendor => vendor,:order => order}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
+   end
+   
+   def self.tms_print(msg, seller,printer_type="rongta")
+     basegem=EstormLottoGem::Base.new
+     hashmsg=eval(msg)  # FIX THIS
+     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total']} if !hashmsg['validation'].nil?
+     puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json) if printer_type!= "none"  
    end
     
     

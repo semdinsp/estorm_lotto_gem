@@ -26,7 +26,7 @@ module EstormLottoGem
        'WalletLottocombo','WalletRetailProduct','WalletTelcoLoad'])
   end
    def self.printer_types
-     build_array(['espon','epson2','none','adafruit','epsont81','epsont81-noimage',
+     build_array(['espon','epson2','none','adafruit','epsont81','epsont81-noimage','rongta',
              'pp02-50mm','pp02-bluetooth','kiosk','epsont82','rtmobile','rpp300-bluetooth','dpr801','kiosk-noimage'])
      
   end
@@ -58,7 +58,7 @@ module EstormLottoGem
   
   
   def self.upgrade_types
-    build_array(['gems','system','sound','script','views'])
+    build_array(['gems','system','sound','script','views','bundle'])
   end
 
   def self.customer_status

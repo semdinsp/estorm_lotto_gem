@@ -11,10 +11,11 @@ require 'csv'
 
 class ScratchImportFile < Thor
   
-  desc "bzpimportwinner", " bzp import file VIRN, prize, prizeValue"
+  desc "bzpimportwinner", " bzp import file VIRN, prize, prizeValue order"
   option :debug
   option :app, :required => true
   option :game, :required => true
+  option :order, :required => true
   option :filename, :required => true
   def bzpimportwinner
     env="production"
@@ -34,14 +35,14 @@ class ScratchImportFile < Thor
        count=count+1
        if list.size == max
          puts "sending block of #{max} count #{count} list size #{list.size}"
-          res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,env)
+          res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,options[:order],env)
           puts res
           list=[]
         end
      end 
      }
      puts "FINAL: sending block of #{max} count #{count} list size #{list.size}"
-     res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,env)
+     res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,options[:order],env)
      
      puts "FAILCOUNT #{res['failcount']} should be zero respone: #{res.inspect}"
    

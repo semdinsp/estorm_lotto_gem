@@ -82,14 +82,18 @@ class Epson_Printer(Base_Printer):
         self.my_printer.set("CENTER","A","normal",1,1)
     def space(self):
         self.my_printer.text("\n")
-    def closing(self):
+    def private_closing(self,urlname,imagename):
         now=str(datetime.now())
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
         self.my_printer.text(now+"\n")
-        self.image(os.path.dirname(os.path.realpath(__file__))+"/images/tedslogo.jpeg")
-        self.my_printer.text("www.teds-timor.com\n")
+        self.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+imagename)
+        self.my_printer.text(urlname+"\n")
         self.my_printer.cut()
         self.space()
+    def closing(self):
+        self.private_closing("www.teds-timor.com","tedslogo.jpeg")
+    def tms_closing(self):
+        self.private_closing("www.tms.com","tedslogo.jpeg")
     def security_code(self,code,label):
         self.normal()
         self.println(label)
@@ -97,6 +101,7 @@ class Epson_Printer(Base_Printer):
         self.println(code)
         self.normal()
         code2=code+"\x00"
+        # qr(self, text):
         self.my_printer.barcode(code2.upper(),"CODE39", 54, 2,"OFF","A")
         self.normal()
 
@@ -167,6 +172,8 @@ class Teds_Printer(object):
             self.my_printer = RPP300_BlueToothPrinter()
         if printer_type == 'dpr801':
             self.my_printer = DPR_Printer(0x811e)
+        if printer_type == 'rongta':
+            self.my_printer = DPR_Printer(0x811e)
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':
@@ -185,6 +192,8 @@ class Teds_Printer(object):
         self.my_printer.space()
     def closing(self):     
         self.my_printer.closing()
+    def tms_closing(self):     
+        self.my_printer.tms_closing()
     def draw_info(self,drawtype,drawdate):
         self.println(drawtype)
         self.normal()
@@ -201,6 +210,10 @@ class Teds_Printer(object):
         self.normal()
         self.println(title+" "+seller)
         self.closing()
+    def tms_end_ticket(self,title,seller):
+        self.normal()
+        self.println(title+" "+seller)
+        self.tms_closing()
     def md5_code(self,code,label):     
         self.my_printer.security_code(code,label)
     def txid_code(self,code):     
@@ -253,4 +266,9 @@ class Teds_Printer(object):
         logger.debug("TEDSPRINTER OBJECT: handle mqtt mesage: " + method_name + " on topic: "+topic )
         method_to_call(topic,msg)
         
-        
+
+class TMS_Printer(Teds_Printer):   
+    def tms_message(self,msg):
+        self.print_title("TMS Details")
+        self.println(msg)
+        self.space
