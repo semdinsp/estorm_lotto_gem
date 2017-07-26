@@ -18,12 +18,19 @@ module EstormLottoGem
            
        finalpayload= finalpayload.merge payload
        finalpayload[:uuid]=SecureRandom.uuid  if finalpayload[:uuid].nil?
-       puts "final payload is: #{finalpayload.to_json}"
+       pretty_print_payload(finalpayload)
        finalpayload
      end
     
     def send_mqtt(config,client,topic,payload={})
         super(config,client,topic,self.build_estorm_payload(config[:source],payload))
+    end
+    
+    def pretty_print_payload(payload,debug=false)
+       payloadsize=payload.to_json.size
+       puts "payload entrie count #{payload.size} payload size bytes: #{payloadsize} "
+       puts "payload is: #{payload.to_json}" if payloadsize < 200 or debug
+       # puts "payload first 100 is: #{payload.to_json.to_s[1..100]}" if payloadsize > 100
     end
     
     def wait_uuid(config,client,topic,uuid,timeout=40)
@@ -45,7 +52,7 @@ module EstormLottoGem
       src=config[:source]
       rcvtopic="terminal/#{src}/#{uuid}"
       client.subscribe(rcvtopic)
-      puts "sending: #{payload}"
+      puts "sending payload entries: #{payload.size}"
       topic,payload= self.send_mqtt(config,client,topic,payload)
       puts "waiting #{rcvtopic}"
       self.wait_uuid(config,client,"terminal/#{src}",uuid,40)

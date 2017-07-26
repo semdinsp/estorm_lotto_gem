@@ -24,7 +24,8 @@ module EstormLottoGem
         :rootca => rootCAPath,
         :certpath => certificatePath,
         :keypath => privateKeyPath,
-        :source => identity
+        :source => identity,
+        :keep_alive => 30
       }
       puts "Configuration is: #{config} cert path #{certdir}"
       config
@@ -38,12 +39,14 @@ module EstormLottoGem
       client.cert_file = config[:certpath]
       client.key_file  = config[:keypath]
       client.ca_file   = config[:rootca]
+      client.keep_alive =25    # default keep alive
+      client.keep_alive = config[:keep_alive]  if !config[:keep_alive].nil? # scott checking keep alive
       puts "mqtt connecting"
       client.connect()
       client
     end
     
-    def read_message(config,client,topic,timeout=40)
+    def read_message(config,client,topic,timeout=100)
        message={:success => false}
        puts "mqtt subscribed to topic: #{topic}"
          begin  
@@ -60,7 +63,7 @@ module EstormLottoGem
     end
     
     def send_mqtt(config,client,topic,payload)
-        puts "mqtt sending topic #{topic} payload #{payload}"
+        puts "mqtt sending topic #{topic} payload size #{payload.to_json.size}"
         client.publish(topic, payload.to_json.to_s)
         return [topic, payload]
     end

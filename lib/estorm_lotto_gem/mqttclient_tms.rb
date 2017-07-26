@@ -12,7 +12,7 @@ module EstormLottoGem
            
        finalpayload= finalpayload.merge payload
        finalpayload[:uuid]=SecureRandom.uuid  if finalpayload[:uuid].nil?
-       puts "final payload is: #{finalpayload.to_json}"
+       pretty_print_payload(finalpayload)
        finalpayload
      end
     
@@ -40,12 +40,12 @@ module EstormLottoGem
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
-   def self.tms_print(msg, seller,printer_type="rongta")
+   def self.tms_print(msg, seller,title,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
      options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total']} if !hashmsg['validation'].nil?
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
-     system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json) if printer_type!= "none"  
+     system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title) if printer_type!= "none"  
    end
     
     
