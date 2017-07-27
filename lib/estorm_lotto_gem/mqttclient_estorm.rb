@@ -28,7 +28,7 @@ module EstormLottoGem
     
     def pretty_print_payload(payload,debug=false)
        payloadsize=payload.to_json.size
-       puts "payload entrie count #{payload.size} payload size bytes: #{payloadsize} "
+       puts "payload hash key count #{payload.size} payload size bytes: #{payloadsize} "
        puts "payload is: #{payload.to_json}" if payloadsize < 200 or debug
        # puts "payload first 100 is: #{payload.to_json.to_s[1..100]}" if payloadsize > 100
     end

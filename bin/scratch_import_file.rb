@@ -52,7 +52,7 @@ class ScratchImportFile < Thor
        end
        count=count+1
        if list.size == max
-         puts "sending block of #{max} count #{count} list size #{list.size}"
+          puts "sending block of #{max} count #{count} list size #{list.size}"
           res=publish_to_api(list,options,vendor,env)
           puts res
           list=[]

@@ -8,7 +8,7 @@ module EstormLottoGem
      def build_tms_payload(src,payload)
 
        finalpayload={"version"=>"1", :hardware_id => Hwid.systemid, :timestamp => Time.now.to_s,
-           :source=>  src, }
+           :source=>  src }
            
        finalpayload= finalpayload.merge payload
        finalpayload[:uuid]=SecureRandom.uuid  if finalpayload[:uuid].nil?

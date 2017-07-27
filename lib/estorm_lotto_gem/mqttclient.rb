@@ -27,7 +27,7 @@ module EstormLottoGem
         :source => identity,
         :keep_alive => 30
       }
-      puts "Configuration is: #{config} cert path #{certdir}"
+     # puts "Configuration is: #{config} cert path #{certdir}"
       config
     end
     
@@ -41,7 +41,7 @@ module EstormLottoGem
       client.ca_file   = config[:rootca]
       client.keep_alive =25    # default keep alive
       client.keep_alive = config[:keep_alive]  if !config[:keep_alive].nil? # scott checking keep alive
-      puts "mqtt connecting"
+      puts "mqtt src: #{config[:source]}: connecting #{client.host}:#{client.port}"
       client.connect()
       client
     end
@@ -53,17 +53,18 @@ module EstormLottoGem
            Timeout::timeout(timeout) {  topic,message = client.get(topic)  }
              #topic,message = client.get(topic) 
          rescue Exception => e
-           msg= "Exception with #{topic} errrr #{e.inspect} "
+           
+           msg= "Exception with #{topic} error #{e.inspect} "
            puts msg
+           puts "config is #{config.inspect}"
            puts e.backtrace
-           # msg= "Wrong ASCII Coding Problem sending #{resp.id} #{resp.inspect} msg1: #{msg1} msg2: #{msg2}"
          end
          client.unsubscribe(topic)
         return  [ topic, message]
     end
     
     def send_mqtt(config,client,topic,payload)
-        puts "mqtt sending topic #{topic} payload size #{payload.to_json.size}"
+        puts "mqtt sending topic #{topic} payload size #{payload.to_json.size} [#{Time.now}]"
         client.publish(topic, payload.to_json.to_s)
         return [topic, payload]
     end

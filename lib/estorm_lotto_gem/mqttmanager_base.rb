@@ -12,7 +12,9 @@ module EstormLottoGem
       client.cert_file = config[:certpath]
       client.key_file  = config[:keypath]
       client.ca_file   = config[:rootca]
-      puts "mqtt connecting"
+      client.keep_alive =25    # default keep alive
+      client.keep_alive = config[:keep_alive]  if !config[:keep_alive].nil?
+      puts "mqtt mqttmanager base connecting"
       client.connect()
       client
     end
@@ -24,7 +26,9 @@ module EstormLottoGem
     def read_messages(client,config)
       mytopic=config[:topic]
       client.subscribe(mytopic)
-      puts "mqtt subscribed to topic: #{mytopic} and all subtopics"
+      puts "mqttmanagerbase subscribed to topic: #{mytopic} and all subtopics about to loop for messages"
+      STDOUT.flush
+      
       client.get do |topic,payload|
         # Block is executed for every message received
         begin
