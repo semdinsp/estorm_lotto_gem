@@ -13,7 +13,7 @@ class ScratchImportFile < Thor
   no_commands {
     def publish_to_api(list,options,vendor,env)
       tries ||= 3
-      res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,options[:order],env)
+      res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,options[:order],options,env)
       
     rescue Exception => e
       puts "Exception is #{e.inspect}"
@@ -29,19 +29,21 @@ class ScratchImportFile < Thor
     end
     
   }
-  desc "bzpimportwinner", " bzp import file VIRN, prize, prizeValue order"
+  desc "bzpimportwinner", " bzp import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
   option :app, :required => true
   option :game, :required => true
   option :order, :required => true
   option :filename, :required => true
+  option :validate
+  option :blocksize, :default => "2000"
   def bzpimportwinner
     env="production"
     env="development" if options[:debug]=='true'
     puts "options are #{options.inspect}"
     vendor='bzp'
     list=[]
-    max=2500
+    max=options[:blocksize].to_i
     count=0
     CSV.foreach(open(options["filename"])) { |row|
      begin
@@ -52,7 +54,10 @@ class ScratchImportFile < Thor
        end
        count=count+1
        if list.size == max
+          puts "\nCOUNT: [#{count}]"
+          puts " -------"
           puts "sending block of #{max} count #{count} list size #{list.size}"
+          STDOUT.flush
           res=publish_to_api(list,options,vendor,env)
           puts res
           list=[]
