@@ -57,6 +57,18 @@ class MqttTest < Thor
       puts res
     end
     
+    desc "terminal_lookup", "lookup terminal"
+    option :debug
+    option :app, :required => true
+  
+    def terminal_lookup
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      res=EstormLottoGem::MqttclientTms.mqtt_send_terminallookup_message(options[:app],options,env)
+      puts res
+    end
+    
     desc "balance", "simple balance on production system"
     option :debug
     def balance

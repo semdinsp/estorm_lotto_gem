@@ -41,6 +41,12 @@ module EstormLottoGem
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
+   def self.mqtt_send_terminallookup_message(appname,options,env='production')
+       topic="tms/#{env}/#{appname}/terminal_lookup"
+       payload={time: Time.now}
+       MqttclientTms.mqtt_send_base_message(payload,env,topic) 
+   end
+   
    def self.tms_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
