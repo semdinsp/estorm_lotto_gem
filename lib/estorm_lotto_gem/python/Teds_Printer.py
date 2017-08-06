@@ -2,6 +2,7 @@ from Adafruit_Thermal import *
 import Image, sys, os
 from datetime import datetime
 from escpos import *
+global brandlogo,brandurl
 
 brandname="Lucky SMS"
 class Base_Printer(object):
@@ -93,7 +94,7 @@ class Epson_Printer(Base_Printer):
     def closing(self):
         self.private_closing("www.teds-timor.com","tedslogo.jpeg")
     def tms_closing(self):
-        self.private_closing("www.tms.com","tedslogo.jpeg")
+        self.private_closing(brandurl,brandlogo)
     def security_code(self,code,label):
         self.normal()
         self.println(label)
@@ -248,6 +249,14 @@ class Teds_Printer(object):
         self.println(title)
         self.normal()
         self.space()
+    def set_logo(self,newlogo):
+        global brandlogo
+        global brandurl
+        brandlogo=newlogo+".jpg"
+        if newlogo=="timorscratch":
+            brandurl="www.timor-scratch.com"
+        else:
+            brandurl="www.scratchcardlao.com"
     def print_message(self,msg,title):
         self.print_title(title)
         self.println(msg)

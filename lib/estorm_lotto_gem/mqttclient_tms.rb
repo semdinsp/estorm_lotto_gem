@@ -41,12 +41,18 @@ module EstormLottoGem
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
-   def self.tms_print(msg, seller,title,printer_type="rongta")
+   def self.tms_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
-     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total']} if !hashmsg['validation'].nil?
+     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],
+            'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
-     system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title) if printer_type!= "none"  
+     system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+   end
+   
+   def self.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
+     basegem=EstormLottoGem::Base.new
+     system("/usr/bin/python","#{basegem.python_directory}/tms_generic_message.py", msg, printer_type,seller,title,logo) if printer_type!= "none"  
    end
     
     
