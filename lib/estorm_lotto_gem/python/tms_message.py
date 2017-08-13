@@ -31,7 +31,8 @@ tms_printer.println("Win count: " + str(options['wincount']))
 tms_printer.normal()
 tms_printer.println("Fail count: " + str(options['failedcount']))
 tms_printer.normal()
-tms_printer.tms_message(msg)
+tms_printer.println("Winlist:\n " + str(options['winlist']))
+#tms_printer.tms_message(msg)
 tms_printer.tms_end_ticket("Processed by:",seller)
 
 

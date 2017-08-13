@@ -53,9 +53,12 @@ module EstormLottoGem
      options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],
             'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     winlist=""
+     hashmsg['winners'].each { |w| winlist << "#{w['virn']} P: #{prize_value} G: #{game_id}\n" }
+     options['winlist']=winlist
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
-   
+   # MqttclientTms.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
    def self.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      system("/usr/bin/python","#{basegem.python_directory}/tms_generic_message.py", msg, printer_type,seller,title,logo) if printer_type!= "none"  
