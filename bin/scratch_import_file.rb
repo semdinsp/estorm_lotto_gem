@@ -29,6 +29,9 @@ class ScratchImportFile < Thor
     end
     
   }
+  # EXAMPLE
+  # scratch_import_file.rb bzpimportwinner --app=scratchlao --game=cat --order=006 --fiilename=catall.uniq.csv
+  # end example
   desc "bzpimportwinner", " bzp import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
   option :app, :required => true

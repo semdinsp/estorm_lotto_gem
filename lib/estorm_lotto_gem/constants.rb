@@ -59,7 +59,12 @@ module EstormLottoGem
     ['22','Tigre (Tiger)'],['23','Urso (Bear)'],['24','Veado (Deer)'],['25','Vaca (Cow)']]
   end
   
-  
+  def self.locales
+    build_array(['en','la','tet'])
+  end
+  def self.timezones
+    build_array(['Asia/Dili','Asia/Vientiane','Asia/Singapore'])
+  end
   def self.upgrade_types
     build_array(['gems','system','sound','script','views','bundle'])
   end

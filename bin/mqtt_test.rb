@@ -69,6 +69,19 @@ class MqttTest < Thor
       puts res
     end
     
+    desc "check_winner", "check winner via virn"
+    option :debug
+    option :app, :required => true
+    option :virn, :required => true
+  
+    def check_winner
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      res=EstormLottoGem::MqttclientTms.mqtt_send_checkwinner_message(options[:app],options[:virn],options,env)
+      puts res
+    end
+    
     desc "balance", "simple balance on production system"
     option :debug
     def balance

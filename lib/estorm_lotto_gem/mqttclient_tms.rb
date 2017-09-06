@@ -28,22 +28,33 @@ module EstormLottoGem
       
     end
     
+    def self.mqtt_load_balance_topic(app)
+      #"loadbalancer"+['1','2'].sample
+      "loadbalancer"+['1'].sample
+    end
+    
    def self.mqtt_send_validation_message(appname,game,list,env='production')
-       topic="tms/#{env}/#{appname}/validate"  # is appname correct?
+       topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/validate"  # is appname correct?
        payload={:game => game, :params => list}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
    def self.mqtt_send_winnerimport_message(appname,game,list,vendor,order,options,env='production')
-       topic="tms/#{env}/#{appname}/winnerimport"
+       topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/winnerimport"
        payload={:game => game, :list => list, :vendor => vendor,:order => order}
        payload[:validate]="true" if options[:validate]=='true'
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
    def self.mqtt_send_terminallookup_message(appname,options,env='production')
-       topic="tms/#{env}/#{appname}/terminal_lookup"
+       topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/terminal_lookup"
        payload={time: Time.now}
+       MqttclientTms.mqtt_send_base_message(payload,env,topic) 
+   end
+   
+   def self.mqtt_send_checkwinner_message(appname,virn,options,env='production')
+       topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/check_winner"
+       payload={time: Time.now, virn: virn}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
@@ -58,6 +69,7 @@ module EstormLottoGem
      options['winlist']=winlist
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
+   
    # MqttclientTms.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
    def self.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
