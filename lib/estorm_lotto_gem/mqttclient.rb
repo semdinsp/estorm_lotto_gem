@@ -56,7 +56,7 @@ module EstormLottoGem
            
            msg= "Exception with #{topic} error #{e.inspect} "
            puts msg
-           puts "config is #{config.inspect}"
+           puts "config is #{config.inspect} timeout: #{timeout}"
            puts e.backtrace
          end
          client.unsubscribe(topic)

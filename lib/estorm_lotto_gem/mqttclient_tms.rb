@@ -70,6 +70,16 @@ module EstormLottoGem
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
+   def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
+     basegem=EstormLottoGem::Base.new
+     hashmsg=eval(msg)  # FIX THIS
+     options={"prize"=> hashmsg['prize'],'prize_value'=> hashmsg['prize_value'],
+            'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
+     puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     options['winner']=hashmsg['winner']
+     system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+   end
+   
    # MqttclientTms.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
    def self.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new

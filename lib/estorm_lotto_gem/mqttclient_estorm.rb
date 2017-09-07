@@ -33,10 +33,10 @@ module EstormLottoGem
        # puts "payload first 100 is: #{payload.to_json.to_s[1..100]}" if payloadsize > 100
     end
     
-    def wait_uuid(config,client,topic,uuid,timeout=40)
+    def wait_uuid(config,client,topic,uuid,timeout=60)
       ntopic="#{topic}/#{uuid}"
-      topic,response= self.read_message(config,client,ntopic,timoeout=40)
-      puts "wait_uuid: topic: #{topic} response: #{response}"
+      topic,response= self.read_message(config,client,ntopic,timeout)
+      puts "wait_uuid: topic: #{topic} response: #{response} timeout: #{timeout}"
       return [topic,JSON.parse(response)]
     end
    
