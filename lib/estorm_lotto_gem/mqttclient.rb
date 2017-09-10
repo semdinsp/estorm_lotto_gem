@@ -25,7 +25,7 @@ module EstormLottoGem
         :certpath => certificatePath,
         :keypath => privateKeyPath,
         :source => identity,
-        :keep_alive => 30
+        :keep_alive => 40
       }
      # puts "Configuration is: #{config} cert path #{certdir}"
       config
@@ -39,7 +39,7 @@ module EstormLottoGem
       client.cert_file = config[:certpath]
       client.key_file  = config[:keypath]
       client.ca_file   = config[:rootca]
-      client.keep_alive =25    # default keep alive
+      client.keep_alive =35    # default keep alive
       client.keep_alive = config[:keep_alive]  if !config[:keep_alive].nil? # scott checking keep alive
       puts "mqtt src: #{config[:source]}: connecting #{client.host}:#{client.port}"
       client.connect()
@@ -54,7 +54,8 @@ module EstormLottoGem
              #topic,message = client.get(topic) 
          rescue Exception => e
            
-           msg= "Exception with #{topic} error #{e.inspect} "
+           msg= "Exception with #{topic} error #{e.message} "
+           message={:success => false, :msg => msg }.to_json
            puts msg
            puts "config is #{config.inspect} timeout: #{timeout}"
            puts e.backtrace

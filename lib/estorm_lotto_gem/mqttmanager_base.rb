@@ -37,7 +37,6 @@ module EstormLottoGem
            msg= "Exception with #{topic} #{payload} error is: #{e.inspect} "
            puts msg
            puts e.backtrace
-           # msg= "Wrong ASCII Coding Problem sending #{resp.id} #{resp.inspect} msg1: #{msg1} msg2: #{msg2}"
          end
       end
     
