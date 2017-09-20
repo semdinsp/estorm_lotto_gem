@@ -77,7 +77,7 @@ module EstormLottoGem
            'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "TMS PRINT FAILED: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
      faillist="\n"
-     hashmsg['failed'].each { |f| faillist << "#{f['virn']} Count:#{f['count']} \n" } if !hashmsg['failed'].nil?
+     hashmsg['failed'].each { |f| faillist << "#{f['virn']} Position:#{f['position']} \n" } if !hashmsg['failed'].nil?
      options['faillist']=faillist
      system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
