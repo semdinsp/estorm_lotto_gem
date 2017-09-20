@@ -61,19 +61,31 @@ module EstormLottoGem
    def self.tms_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
-     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],
+     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],"email"=> hashmsg['email'],
             'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
-     puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     puts "TMS Print:options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
      winlist="\n"
      hashmsg['winners'].each { |w| winlist << "#{w['virn']} Prize:#{w['prize_value']} Game:#{w['game_id']}\n" }
      options['winlist']=winlist
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
+   def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta")
+     basegem=EstormLottoGem::Base.new
+     hashmsg=eval(msg)  # FIX THIS
+     options={"id"=> hashmsg['validation']['id'],"email"=> hashmsg['email'],
+           'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
+     puts "TMS PRINT FAILED: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     faillist="\n"
+     hashmsg['failed'].each { |f| faillist << "#{f['virn']} Count:#{f['count']} \n" } if !hashmsg['failed'].nil?
+     options['faillist']=faillist
+     system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+   end
+   
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
-     options={"prize"=> hashmsg['prize'],'prize_value'=> hashmsg['prize_value'],
+     options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
             'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
      options['winner']=hashmsg['winner']
