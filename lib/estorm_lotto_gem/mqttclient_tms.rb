@@ -90,6 +90,19 @@ module EstormLottoGem
      system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
+   def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta")
+     basegem=EstormLottoGem::Base.new
+     hashmsg=eval(msg)  # FIX THIS
+     options={}
+     options={"id"=> hashmsg['id'],"email"=> hashmsg['email'],
+           'total'=> hashmsg['total']} if !hashmsg['validation'].nil?
+     puts "TMS PRINT CREDIT NOTE: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     vals="\n"
+     hashmsg['validations'].each { |v| vals << "#{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
+     options['vals']=vals
+     system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+   end
+   
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
