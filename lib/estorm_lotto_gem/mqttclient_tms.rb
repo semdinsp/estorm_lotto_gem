@@ -64,10 +64,15 @@ module EstormLottoGem
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
-   def self.tms_print(msg, seller,title,logo,printer_type="rongta")
+   def self.common_tasks(msg)
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
      options={}
+     [basegem,hashmsg,options]
+   end
+   
+   def self.tms_print(msg, seller,title,logo,printer_type="rongta")
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],"email"=> hashmsg['email'],
             'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "TMS Print:options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
@@ -78,9 +83,7 @@ module EstormLottoGem
    end
    
    def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta")
-     basegem=EstormLottoGem::Base.new
-     hashmsg=eval(msg)  # FIX THIS
-     options={}
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options={"id"=> hashmsg['validation']['id'],"email"=> hashmsg['email'],
            'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "TMS PRINT FAILED: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
@@ -91,9 +94,7 @@ module EstormLottoGem
    end
    
    def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta")
-     basegem=EstormLottoGem::Base.new
-     hashmsg=eval(msg)  # FIX THIS
-     options={}
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options={"id"=> hashmsg['id'],"email"=> hashmsg['email'],
            'total'=> hashmsg['total']} if !hashmsg['validation'].nil?
      puts "TMS PRINT CREDIT NOTE: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
@@ -104,8 +105,7 @@ module EstormLottoGem
    end
    
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
-     basegem=EstormLottoGem::Base.new
-     hashmsg=eval(msg)  # FIX THIS
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
             'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
@@ -115,7 +115,8 @@ module EstormLottoGem
    
    # MqttclientTms.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
    def self.tms_print_generic(msg, seller,title,logo,printer_type="rongta")
-     basegem=EstormLottoGem::Base.new
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
+    # basegem=EstormLottoGem::Base.new
      system("/usr/bin/python","#{basegem.python_directory}/tms_generic_message.py", msg, printer_type,seller,title,logo) if printer_type!= "none"  
    end
     

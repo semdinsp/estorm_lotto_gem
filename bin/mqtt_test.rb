@@ -44,13 +44,13 @@ class MqttTest < Thor
     option :ticket_count, :required => true
     option :game, :required => true
     option :entries, :required => true
-    def validate
+    def lottery
       env="production"
       env="development" if options[:debug]=='true'
       puts "options are #{options.inspect}"
       e=options[:entries].split(',')
   #    mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
-      res=EstormLottoGem::MqttclientTms.mqtt_lottery_entry_message(options[:game],options[:ticket_count],e[1],e[2],e[3],e[4],e[5],e[6],{},env)
+      res=EstormLottoGem::MqttclientV2lottery.mqtt_lottery_entry_message(options[:game],options[:ticket_count],e[1],e[2],e[3],e[4],e[5],e[6],{},env)
       puts res
     end
     

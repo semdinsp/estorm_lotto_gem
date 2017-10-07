@@ -1,7 +1,5 @@
-
-
 module EstormLottoGem
-  class MqttclientLottery  < MqttclientTms
+  class MqttclientV2lottery  <  MqttclientTms
     
    
      
@@ -10,7 +8,7 @@ module EstormLottoGem
     
 
    def self.mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
-       topic="lottery/#{env}/#{appname}/#{MqttclientLottery.mqtt_load_balance_topic(appname)}/entry"
+       topic="lottery/#{env}/#{appname}/#{self.mqtt_load_balance_topic(appname)}/entry"
        digits = [d1,d2,d3,d4,d5,d6].sort
        payload={ ticket_count: ticket_count, digits: digits}.merge(options)
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
@@ -20,8 +18,8 @@ module EstormLottoGem
    
   
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
-     basegem=EstormLottoGem::Base.new
-     hashmsg=eval(msg)  # FIX THIS
+     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
+     
      options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
             'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
      puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
