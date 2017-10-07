@@ -20,13 +20,13 @@ module EstormLottoGem
         super(config,client,topic,self.build_tms_payload(config[:source],payload))
     end
     
-    def self.mqtt_send_base_message(payload,env,topic) 
-       mq,config,client,src=self.mqtt_common_setup(env)
-       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
-       client.disconnect
-       response
+#    def self.mqtt_send_base_message(payload,env,topic) 
+#       mq,config,client,src=self.mqtt_common_setup(env)
+#       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+#       client.disconnect
+#       response
       
-    end
+ #   end
     
     def self.mqtt_load_balance_topic(app)
       #"loadbalancer"+['1','2'].sample
@@ -52,6 +52,12 @@ module EstormLottoGem
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
+   def self.mqtt_send_creditnote_message(appname,memo,options,env='production')
+       topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/credit_note"
+       payload={time: Time.now, memo: memo}
+       MqttclientTms.mqtt_send_base_message(payload,env,topic) 
+   end
+   
    def self.mqtt_send_checkwinner_message(appname,virn,options,env='production')
        topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/check_winner"
        payload={time: Time.now, virn: virn}
@@ -61,11 +67,12 @@ module EstormLottoGem
    def self.tms_print(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
+     options={}
      options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],"email"=> hashmsg['email'],
             'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "TMS Print:options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
      winlist="\n"
-     hashmsg['winners'].each { |w| winlist << "#{w['virn']} Prize:#{w['prize_value']} Game:#{w['game_id']}\n" }
+     hashmsg['winners'].each { |w| winlist << "#{w['virn']} Prize:#{w['prize_value']} Game:#{w['game_id']}\n" } if !hashmsg['winners'].nil?
      options['winlist']=winlist
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
@@ -73,6 +80,7 @@ module EstormLottoGem
    def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta")
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
+     options={}
      options={"id"=> hashmsg['validation']['id'],"email"=> hashmsg['email'],
            'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
      puts "TMS PRINT FAILED: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"

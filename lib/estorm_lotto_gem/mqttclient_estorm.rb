@@ -63,6 +63,15 @@ module EstormLottoGem
        topic,payload =mq.send_uuid(config,client,"terminal/#{dest}",uuid,payload)
        
     end
+    
+    def self.mqtt_send_base_message(payload,env,topic) 
+       mq,config,client,src=self.mqtt_common_setup(env)
+       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+       client.disconnect
+       response
+      
+    end
+    
     def self.mqtt_common_setup(env)
       wb=EstormLottoTools::ConfigMgr.new
       src=wb.read_config()['identity']
