@@ -1,31 +1,12 @@
 
 
 module EstormLottoGem
-  class MqttclientLottery  < MqttclientEstorm
+  class MqttclientLottery  < MqttclientTms
     
    
      
-     def build_lottery_payload(src,payload)
-
-       finalpayload={"version"=>"1", :hardware_id => Hwid.systemid, :timestamp => Time.now.to_s,
-           :source=>  src }
-           
-       finalpayload= finalpayload.merge payload
-       finalpayload[:uuid]=SecureRandom.uuid  if finalpayload[:uuid].nil?
-       pretty_print_payload(finalpayload)
-       finalpayload
-     end
     
-    def send_mqtt(config,client,topic,payload={})
-        super(config,client,topic,self.build_lottery_payload(config[:source],payload))
-    end
-    
-
-    
-    def self.mqtt_load_balance_topic(app)
-      #"loadbalancer"+['1','2'].sample
-      "loadbalancer"+['1'].sample
-    end
+  
     
 
    def self.mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')

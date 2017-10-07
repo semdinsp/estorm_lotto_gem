@@ -5,7 +5,7 @@ module EstormLottoGem
     
    
      
-     def build_tms_payload(src,payload)
+     def build_my_payload(src,payload)
 
        finalpayload={"version"=>"1", :hardware_id => Hwid.systemid, :timestamp => Time.now.to_s,
            :source=>  src }
@@ -17,7 +17,7 @@ module EstormLottoGem
      end
     
     def send_mqtt(config,client,topic,payload={})
-        super(config,client,topic,self.build_tms_payload(config[:source],payload))
+        super(config,client,topic,self.build_my_payload(config[:source],payload))
     end
     
 #    def self.mqtt_send_base_message(payload,env,topic) 
