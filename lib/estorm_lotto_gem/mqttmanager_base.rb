@@ -21,6 +21,17 @@ module EstormLottoGem
 
     # ruby-smpp delegate methods
 
+    def build_cert_paths(certdir,appName)
+        puts "#{Time.now}: Starting MQTT Gateway."
+        env=Rails.env
+        rootCAPath = certdir+"/root-CA.crt"
+        identity="/"+ appName
+        certificatePath = certdir+identity+".cert.pem"
+        privateKeyPath = certdir+identity+".private.key"
+        puts "#{Time.now}: Paths: #{certificatePath}."
+        STDOUT.flush 
+        [env, certificatePath, privateKeyPath,rootCAPath]
+    end
 
   
     def read_messages(client,config)
