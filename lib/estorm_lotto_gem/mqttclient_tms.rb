@@ -96,12 +96,12 @@ module EstormLottoGem
    def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options={"id"=> hashmsg['id'],"email"=> hashmsg['email'],
-           'total'=> hashmsg['total']} if !hashmsg['validation'].nil?
+           'total'=> hashmsg['total']} 
      puts "TMS PRINT CREDIT NOTE: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
      vals="\n"
-     hashmsg['validations'].each { |v| vals << "#{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
+     hashmsg['validations'].each { |v| vals << "Val id: #{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
      options['vals']=vals
-     system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+     system("/usr/bin/python","#{basegem.python_directory}/tms_credit_note.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
