@@ -67,15 +67,24 @@ module EstormLottoGem
    def self.common_tasks(msg)
      basegem=EstormLottoGem::Base.new
      hashmsg=eval(msg)  # FIX THIS
-     options={}
+     options={} 
      [basegem,hashmsg,options]
+   end
+   
+   def self.common_options(id='not set',email="unknown",total=0)
+     options={"id"=> id,"email"=> email,"total"=> total} 
+     options
+   end
+   
+   def self.pretty_print_options(options)
+     puts "TMS Pretty Print:options: #{options.inspect} "
    end
    
    def self.tms_print(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
-     options={"id"=> hashmsg['validation']['id'],'total'=> hashmsg['validation']['total'],"email"=> hashmsg['email'],
-            'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
-     puts "TMS Print:options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     options=MqttclientTms::common_options(hashmsg['validation']['id'],hashmsg['email'],hashmsg['validation']['total']) if !hashmsg['validation'].nil?
+     options=options.merge({'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']}) 
+     self.pretty_print_options(options)
      winlist="\n"
      hashmsg['winners'].each { |w| winlist << "#{w['virn']} Prize:#{w['prize_value']} Game:#{w['game_id']}\n" } if !hashmsg['winners'].nil?
      options['winlist']=winlist
@@ -84,9 +93,10 @@ module EstormLottoGem
    
    def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
-     options={"id"=> hashmsg['validation']['id'],"email"=> hashmsg['email'],
-           'failedcount'=> hashmsg['failedcount']} if !hashmsg['validation'].nil?
-     puts "TMS PRINT FAILED: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     options=MqttclientTms::common_options(hashmsg['validation']['id'],hashmsg['email']) if !hashmsg['validation'].nil?
+     options=options.merge({'failedcount'=> hashmsg['failedcount']}) 
+     self.pretty_print_options(options)
+           
      faillist="\n"
      hashmsg['failed'].each { |f| faillist << "#{f['virn']} Position:#{f['position']} \n" } if !hashmsg['failed'].nil?
      options['faillist']=faillist
@@ -95,9 +105,8 @@ module EstormLottoGem
    
    def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
-     options={"id"=> hashmsg['id'],"email"=> hashmsg['email'],
-           'total'=> hashmsg['total']} 
-     puts "TMS PRINT CREDIT NOTE: options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     options=MqttclientTms::common_options(hashmsg['id'],hashmsg['email'],hashmsg['total'])
+     self.pretty_print_options(options)
      vals="\n"
      hashmsg['validations'].each { |v| vals << "Val id: #{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
      options['vals']=vals
@@ -106,10 +115,11 @@ module EstormLottoGem
    
    def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
-     options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
-            'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
-     puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+     options=MqttclientTms::common_options(hashmsg['id'],hashmsg['email'],0)
+     options=options.merge({"prize"=> hashmsg['prize'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
+            'terminal'=> hashmsg['terminal'], 'msg'=> hashmsg['msg'], 'game'=> hashmsg['game']} )
      options['winner']=hashmsg['winner']
+     self.pretty_print_options(options)
      system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    

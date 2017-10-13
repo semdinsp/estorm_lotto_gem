@@ -39,6 +39,7 @@ class MqttTest < Thor
       puts res
     end
     
+    #bin/mqtt_test.rb lottery --ticket_count=1 --game=632 --entries=1,2,3,4,5,6 --debug=true
     desc "lottery", "lottery ticket"
     option :debug
     option :ticket_count, :required => true
