@@ -28,10 +28,11 @@ module EstormLottoGem
       
  #   end
     
-    def self.mqtt_load_balance_topic(app)
+ #SCOTT CHECK THIS
+ #   def self.mqtt_load_balance_topic(app)
       #"loadbalancer"+['1','2'].sample
-      "loadbalancer"+['1'].sample
-    end
+ #     "loadbalancer"+['1'].sample
+#    end
     
    def self.mqtt_send_validation_message(appname,game,list,env='production')
        topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/validate"  # is appname correct?

@@ -72,6 +72,11 @@ module EstormLottoGem
       
     end
     
+    def self.mqtt_load_balance_topic(app='dummy')
+      #"loadbalancer"+['1','2'].sample
+      "loadbalancer"+['1'].sample
+    end
+    
     def self.mqtt_common_setup(env)
       wb=EstormLottoTools::ConfigMgr.new
       src=wb.read_config()['identity']
@@ -90,7 +95,7 @@ module EstormLottoGem
     
     def self.mqtt_send_balance_message(env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
-       topic="sms3/#{env}/balance"
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic()}/balance"
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
        client.disconnect
        response
