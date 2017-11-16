@@ -56,6 +56,22 @@ class MqttTest < Thor
       puts res
     end
     
+    desc "sms3lottery", "lottery ticket"
+    option :debug
+    option :ticket_count, :required => true
+    option :game, :required => true
+    option :entries, :required => true
+    def sms3lottery
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      e=options[:entries].split(',')
+      puts "entries are #{e.inspect}"
+  #    mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
+      res=EstormLottoGem::MqttclientEstorm.mqtt_send_lottery_message(options[:game],options[:entries],options[:ticket_count],env)
+      puts res
+    end
+    
     # bin/mqtt_test.rb winnerimport --game=test --debug=true --app=test --vendor=bzp --list='[{"VIRN":"123456","value":"K5000","prizeValue":"5000"}]'
 
     desc "winnerimport", "import list VIRN, prize, prizeValue"

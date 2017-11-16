@@ -101,6 +101,15 @@ module EstormLottoGem
        response
     end
     
+    def self.mqtt_send_lottery_message(game,entries,tc=1,env='production')
+       mq,config,client,src=self.mqtt_common_setup(env)
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic()}/lottery"
+       payload={game: game,entries: entries, ticket_count: tc}
+       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+       client.disconnect
+       response
+    end
+    
     def self.mqtt_send_edtl_meter(payload,env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
        topic,payload =mq.send_mqtt(config,client,"edtl/#{env}/meter",payload)
