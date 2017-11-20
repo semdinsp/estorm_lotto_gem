@@ -11,9 +11,13 @@ require 'timeout'
 
 module EstormLottoGem
   class Mqttclient
+    def get_certdir_root
+      '/boot/config/certs'  
+    end
+    
     
     def setup(identity,env="production",  host = "a36q3zlv5b6zdr.iot.ap-southeast-1.amazonaws.com" )
-      certdir='/boot/config/certs'
+      certdir=get_certdir_root
       rootCAPath = certdir+"/root-CA.crt"
       certificatePath = certdir+"/"+identity+".cert.pem"
       privateKeyPath = certdir+"/"+identity+".private.key"

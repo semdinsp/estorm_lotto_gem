@@ -3,7 +3,9 @@ module EstormLottoGem
     
    
      
-    
+    def get_certdir_root
+      '/app/config/certs'  
+    end
   
     
 
