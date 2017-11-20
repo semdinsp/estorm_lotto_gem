@@ -12,7 +12,9 @@ module EstormLottoGem
    def self.mqtt_lottery_entry_message(appname,ticket_count,d1="",d2="",d3="",d4="",d5="",d6="",options={},env='production')
        topic="lottery/#{env}/6d/#{appname}/#{self.mqtt_load_balance_topic(appname)}/entry"
        puts "digits are [#{d1} #{d2} #{d3} #{d4} #{d5} #{d6}]"
-       digits = [d1,d2,d3,d4,d5,d6].sort
+       digits =[]
+       [d1,d2,d3,d4,d5,d6].each { |d|  digits << d if !d.nil? }
+       digits = digits.sort
        payload={ ticket_count: ticket_count, digits: digits}.merge(options)
        self.mqtt_send_base_message(payload,env,topic) 
    end
