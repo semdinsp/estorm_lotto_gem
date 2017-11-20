@@ -105,6 +105,12 @@ class Epson_Printer(Base_Printer):
         # qr(self, text):
         self.my_printer.barcode(code2.upper(),"CODE39", 54, 2,"OFF","A")
         self.normal()
+    def lotto_qr_code(self,code,label):
+        self.normal()
+        self.println(label)
+        self.large()
+        self.my_printer.qr(code)
+        self.normal()
 
 class Kiosk_Printer(Epson_Printer):
     def __init__(self,usbid):
@@ -257,6 +263,8 @@ class Teds_Printer(object):
             brandurl="www.timor-scratch.com"
         else:
             brandurl="www.scratchcardlao.com"
+    def lotto_qr_coode(self,code,label):
+        self.my_printer.lotto_qr_code(code,label)
     def print_message(self,msg,title):
         self.print_title(title)
         self.println(msg)
