@@ -14,10 +14,15 @@ module EstormLottoGem
        payload={ ticket_count: ticket_count, digits: digits}.merge(options)
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
-   
+  
+   def self.mqtt_common_setup(env)
+     src='sms-app'
+     mq,config,client=MqttclientEstorm.create(src,env)
+     return [mq,config,client,src]
+   end 
   
    
-  
+   # CAN DELETE I THINK
    def self.mqtt_lottery_print(msg, seller,title,logo,printer_type="rongta")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      
