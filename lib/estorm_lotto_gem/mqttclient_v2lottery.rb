@@ -17,7 +17,7 @@ module EstormLottoGem
   
    def self.mqtt_common_setup(env)
      src='sms-app'
-     mq,config,client=MqttclientEstorm.create(src,env)
+     mq,config,client=self.create(src,env)
      return [mq,config,client,src]
    end 
   

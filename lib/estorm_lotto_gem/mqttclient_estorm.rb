@@ -59,7 +59,7 @@ module EstormLottoGem
     end
     
     def self.uuid_confirmatin(dest,confirm,uuid,src="myapp",payload={}, env='production')
-       mq,config,client=MqttclientEstorm.create(src,env)
+       mq,config,client=self.create(src,env)
        topic,payload =mq.send_uuid(config,client,"terminal/#{dest}",uuid,payload)
        
     end
@@ -80,7 +80,7 @@ module EstormLottoGem
     def self.mqtt_common_setup(env)
       wb=EstormLottoTools::ConfigMgr.new
       src=wb.read_config()['identity']
-      mq,config,client=MqttclientEstorm.create(src,env)
+      mq,config,client=self.create(src,env)
       return [mq,config,client,src]
     end
     
