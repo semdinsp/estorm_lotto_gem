@@ -12,7 +12,7 @@ module EstormLottoGem
        puts "digits are [#{d1} #{d2} #{d3} #{d4} #{d5} #{d6}]"
        digits = [d1,d2,d3,d4,d5,d6].sort
        payload={ ticket_count: ticket_count, digits: digits}.merge(options)
-       MqttclientTms.mqtt_send_base_message(payload,env,topic) 
+       self.mqtt_send_base_message(payload,env,topic) 
    end
   
    def self.mqtt_common_setup(env)
