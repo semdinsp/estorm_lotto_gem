@@ -21,10 +21,12 @@ tms_printer.set_logo(logo)
 # pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
 tms_printer.space()
 tms_printer.println(title)
-tms_printer.println("Game: " + str(options['game']))
+tms_printer.println("Game: " + str(options['game_title']))
+tms_printer.println("Digits: " + str(options['digits']))
 tms_printer.normal()
+tms_printer.println("Ticket Count" + str(options['ticket_count']))
+tms_printer.lotto_qr_code(options['qrcode'],"Ticket/Security Codes")
 tms_printer.tms_end_ticket("Processed by:",seller)
-tms_printer.lotto_qr_code(msg,"QR Code")
 
 
 
