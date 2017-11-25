@@ -50,29 +50,30 @@ module EstormLottoGem
   
   def self.shio_list
 [["1","Dog-Asu"],
-["2","Rat -Laho"],["3","Pig -Fahi"],["4","Cat -Busa"],["5","Frog-Manduku"],["6","Sheep-Bibi"],["7","Rooster-Manu aman"],
-["8","Horse-Kuda"],["9","Dragon-Naga"],["10","Snake -Samea"],["11","Tiger-Tigri"],
+["2","Rat-Laho"],["3","Pig-Fahi"],["4","Cat-Busa"],["5","Frog-Manduku"],["6","Sheep-Bibi"],["7","Rooster-Manu_aman"],
+["8","Horse-Kuda"],["9","Dragon-Naga"],["10","Snake-Samea"],["11","Tiger-Tigri"],
 ["12","Buterfly-Borboleta"],["13","Crocodile-Lafaek"],
-["14","Crab-kadiuk"],["15","Monkey-Lekirauk"],["16","Scorpion-Sakunar"],["17","Duck -Manurade"],["18","Rabbit-Coelho"],["19","Fish-Ikan"],
-["20","Cow-Karau"],["21","Owl-Manu kakuuk"],["22","Goat-Bibi Malae"],["23","Eagle-Makikit"],
-["24","Weasel-Laku"],["25","Deer-Bibi rusa"]]
+["14","Crab-kadiuk"],["15","Monkey-Lekirauk"],["16","Scorpion-Sakunar"],["17","Duck-Manurade"],["18","Rabbit-Coelho"],["19","Fish-Ikan"],
+["20","Cow-Karau"],["21","Owl-Manu_kakuuk"],["22","Goat-Bibi_Malae"],["23","Eagle-Makikit"],
+["24","Weasel-Laku"],["25","Deer-Bibi_rusa"]]
   end
   
   def  self.get_shio_name(num)
     shiolist=self.shio_list
-    shiolist[num.to_i-1][1]
+    index=num.to_i-1  
+    "#{shiolist[index][0]}:#{shiolist[index][1]}"
   end
   
-  def self.shio_list_old
-    [['01','Avestruz (Ostrich)'],['02','Aguia (Eagle)'],['03','Burro (Donkey)'],['04','Borboleta (Butterfly)'],
-    ['05','Anjing-Cachorro (Dog)'],['06','Cabra (Goat)'],
-    ['07','Carneiro (Ram)'],['08','Camelo (Camel)'],['09','Naga-Cobra (Snake)'],
-    ['10','Coelho (Rabbit)'],['11','Cavalo (Horse)'],
-    ['12','Elefante (Elephant)'],['13','Galo (Rooster)'],['14','Gato (Cat)'],['15','Jacare (Caiman)'],
-    ['16','Leao (Lion)'], ['17','Monyet-Macaco (Monkey)'],['18','Porco (Pig)'],
-    ['19','Pavao (Peacock)'],['20','Peru (Turkey)'],['21','Touro (Bull)'],
-    ['22','Tigre (Tiger)'],['23','Urso (Bear)'],['24','Veado (Deer)'],['25','Vaca (Cow)']]
-  end
+  # def self.shio_list_old
+   # [['01','Avestruz (Ostrich)'],['02','Aguia (Eagle)'],['03','Burro (Donkey)'],['04','Borboleta (Butterfly)'],
+  #  ['05','Anjing-Cachorro (Dog)'],['06','Cabra (Goat)'],
+  #  ['07','Carneiro (Ram)'],['08','Camelo (Camel)'],['09','Naga-Cobra (Snake)'],
+  #  ['10','Coelho (Rabbit)'],['11','Cavalo (Horse)'],
+  #  ['12','Elefante (Elephant)'],['13','Galo (Rooster)'],['14','Gato (Cat)'],['15','Jacare (Caiman)'],
+  #  ['16','Leao (Lion)'], ['17','Monyet-Macaco (Monkey)'],['18','Porco (Pig)'],
+  #  ['19','Pavao (Peacock)'],['20','Peru (Turkey)'],['21','Touro (Bull)'],
+  #  ['22','Tigre (Tiger)'],['23','Urso (Bear)'],['24','Veado (Deer)'],['25','Vaca (Cow)']]
+  #end
   
   def self.locales
     build_array(['en','la','tet'])

@@ -52,7 +52,7 @@ class MqttTest < Thor
       e=options[:entries].split(',')
       puts "entries are #{e.inspect}"
   #    mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
-      res=EstormLottoGem::MqttclientV2lottery.mqtt_lottery_entry_message(options[:game],options[:ticket_count],e[0],e[1],e[2],e[3],e[4],e[5],{},env)
+      res=EstormLottoGem::MqttclientV2lottery.mqtt_lottery_entry_message(options[:game],options[:ticket_count],e[0],e[1],e[2],e[3],e[4],e[5],'srctest',{},env)
       puts res
     end
     
