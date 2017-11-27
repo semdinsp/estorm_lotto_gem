@@ -34,7 +34,7 @@ module EstormLottoGem
     build_array(['edtl','tt','telemor','bwdi'])    
   end
   def self.scratch_logos
-    build_array(['estormcrm','timorscratch','scratchlao'])    
+    build_array(['estormcrm','timorscratch','scratchlao','timortoto'])    
   end
   def self.pulsa_values
       build_array(['1','0.5','2','3','5','10','25'])
