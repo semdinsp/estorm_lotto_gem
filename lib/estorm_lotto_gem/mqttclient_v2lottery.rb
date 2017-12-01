@@ -25,6 +25,8 @@ module EstormLottoGem
        payload={ ticket_count: ticket_count, digits: digits, customersrc: csrc }.merge(options)
        self.mqtt_send_base_message(payload,env,topic) 
    end
+   
+   
   
    def self.mqtt_common_setup(env)
      src='sms3-app'
@@ -35,15 +37,15 @@ module EstormLottoGem
   
    
    # CAN DELETE I THINK
-   def self.DELETE_mqtt_lottery_print(msg, seller,title,logo,printer_type="rongta")
-     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
+ #  def self.DELETE_mqtt_lottery_print(msg, seller,title,logo,printer_type="rongta")
+#     basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      
-     options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
-            'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
-     puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
-     options['winner']=hashmsg['winner']
-     system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
-   end
+ #    options={"prize"=> hashmsg['prize'],"email"=> hashmsg['email'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
+  #          'terminal'=> hashmsg['terminal'],'msg'=> hashmsg['msg'],'game'=> hashmsg['game']} 
+   #  puts "options: #{options.inspect} message is class #{msg.class}  : #{msg.inspect}"
+  #   options['winner']=hashmsg['winner']
+   #  system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
+   # end
    
  
     

@@ -56,6 +56,21 @@ class MqttTest < Thor
       puts res
     end
     
+    #bin/mqtt_test.rb check_lottery_winner --md5code=1 --game=632  --debug=true
+    
+    desc "check_lottery_winner", "lottery check winner"
+    option :debug
+    option :md5code, :required => true
+    option :game, :required => true
+    def check_lottery_winner
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+  
+      res=EstormLottoGem::MqttclientEstorm.mqtt_check_lottery_winner_message(options[:game],options[:md5code],{},env)
+      puts res
+    end
+    
     desc "sms3lottery", "lottery ticket"
     option :debug
     option :ticket_count, :required => true
