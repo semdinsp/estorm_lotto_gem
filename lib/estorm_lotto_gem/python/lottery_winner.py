@@ -5,6 +5,8 @@ from datetime import datetime
 from escpos import *
 import json
 
+# SCOTT I THINK THIS IS NOT USED
+
 msg=sys.argv[1]
 printer_type=sys.argv[2]
 seller=sys.argv[3]
