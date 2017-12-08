@@ -86,6 +86,21 @@ class MqttTest < Thor
       res=EstormLottoGem::MqttclientEstorm.mqtt_send_lottery_message(options[:game],options[:entries],options[:ticket_count],env)
       puts res
     end
+     
+    #  bin/mqtt_test.rb  statistics --game=625 --msg_type=draw_results --debug=true
+
+    desc "statistics_lottery", "lottery statistics"
+    option :debug
+    option :game, :required => true
+    option :msg_type, :required => true
+    def statistics_lottery
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+      params={}
+      res=EstormLottoGem::MqttclientEstorm.mqtt_send_lottery_statistics_message(options[:game],options[:msg_type],params,env)
+      puts res
+    end
     
     # bin/mqtt_test.rb winnerimport --game=test --debug=true --app=test --vendor=bzp --list='[{"VIRN":"123456","value":"K5000","prizeValue":"5000"}]'
 
