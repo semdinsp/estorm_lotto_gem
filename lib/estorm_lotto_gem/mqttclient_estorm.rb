@@ -101,10 +101,10 @@ module EstormLottoGem
        response
     end
     
-    def self.mqtt_check_lottery_winner_message(appname,md5code,options={},env='production')
-        topic="lottery/#{env}/6d/#{appname}/#{self.mqtt_load_balance_topic(appname)}/check_winner"
+    def self.mqtt_check_lottery_winner_message(appname,md5code,topicname,options={},env='production')
+        topic="lottery/#{env}/6d/#{appname}/#{self.mqtt_load_balance_topic(appname)}/#{topicname}_winner"
         csrc='test'
-        payload={ ticket_md5: md5code,  customersrc: csrc }.merge(options)
+        payload={ ticket_md5: md5code,  customersrc: csrc, checktype: topicname }.merge(options)
         self.mqtt_send_base_message(payload,env,topic) 
     end
     
