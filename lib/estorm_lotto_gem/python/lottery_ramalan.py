@@ -59,7 +59,7 @@ tms_printer.print_prizes(drawtype)
 tms_printer.space()
 tms_printer.println("Your Pairs")
 for x in range(0, 4):
-    pair='| {} | {} |'.format(random.randint(0, 9), random.randint(0, 9))
+    pair='| {} | {} |'.format(random.randint(1, 25), random.randint(1,25))
     tms_printer.println(pair)
 tms_printer.space()
 randimage=random.sample(['houseline', 'ducattiline', 'carline','roseline'],  1)

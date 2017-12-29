@@ -35,7 +35,7 @@ module EstormLottoGem
       yest,older,r0,r1= wbp_get_yest(draws)
       ekor= 120 - yest[-2].to_i*10 - yest[-1].to_i
       kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i + older[1].to_i
-      return ekor.abs,kapala.abs,r0,r1
+      return ekor.abs % 25 ,kapala.abs % 25 ,r0,r1
     end
     
     def build_hash(res)
