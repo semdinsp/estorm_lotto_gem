@@ -28,9 +28,14 @@ ekor=options['ekor']
 kapala=options['kapala']
 drawtype=options['game_title']
 rama=options['rama']
-shiolist1="Kambing 10,22,34,46,58,70,82,94\nNaga 01,12,25,37,49,61,73,85\nKelinci 02,14,26,38,50,62,74,86\nMacan 03,15,27,39,51,63,75,87,99\nSapi 04,16,28,40,52,64,6,88,00"
-shiolist2="Tikus 05,17,29,41,53,65,77,89\nBabi 06,18,30,42,54,66,78,90\nAnjing 07,19,31,43,55,67,79,91\nAyam 08,20,32,44,56,68,80,92"
-shiolist3="Monyet 09,21,33,45,57,69,81,93\nKuda 11,23,35,47,59,71,83,95\nUlar 12,24,36,48,60,72,84,96"
+shiolist1="1:Dog-Asu 2:Rat-Laho 3:Pig-Fahi\n4:Cat-Busa 5:Frog-Manduku 6:Sheep-Bibi\n7:Rooster-Manu_aman 8:Horse-Kuda 9:Dragon-Naga"
+shiolist2="10:Snake-Samea 11:Tiger-Tigri\n12:Buterfly-Borboleta 13:Crocodile-Lafaek\n14:Crab-kadiuk 15:Monkey-Lekirauk\n16:Scorpion-Sakunar 17:Duck-Manurade\n18:Rabbit-Coelho 19:Fish-Ikan"
+shiolist3="20:Cow-Karau 21:Owl-Manu_kakuuk\n22:Goat-Bibi_Malae 23:Eagle-Makikit\n24:Weasel-Laku 25:Deer-Bibi_rusa " 
+#shiolist1="1:Dog-Asu 2:Rat-Laho 3:Pig-Fahi 4:Cat-Busa 5:Frog-Manduku 6:Sheep-Bibi 7:Rooster-Manu_aman 8:Horse-Kuda 9:Dragon-Naga 10:Snake-Samea 11:Tiger-Tigri 12:Buterfly-Borboleta 13:Crocodile-Lafaek 14:Crab-kadiuk 15:Monkey-Lekirauk 16:Scorpion-Sakunar 17:Duck-Manurade 18:Rabbit-Coelho 19:Fish-Ikan 20:Cow-Karau 21:Owl-Manu_kakuuk 22:Goat-Bibi_Malae 23:Eagle-Makikit 24:Weasel-Laku 25:Deer-Bibi_rusa " 
+
+#shiolist1="Kambing 10,22,34,46,58,70,82,94\nNaga 01,12,25,37,49,61,73,85\nKelinci 02,14,26,38,50,62,74,86\nMacan 03,15,27,39,51,63,75,87,99\nSapi 04,16,28,40,52,64,6,88,00"
+#shiolist2="Tikus 05,17,29,41,53,65,77,89\nBabi 06,18,30,42,54,66,78,90\nAnjing 07,19,31,43,55,67,79,91\nAyam 08,20,32,44,56,68,80,92"
+#shiolist3="Monyet 09,21,33,45,57,69,81,93\nKuda 11,23,35,47,59,71,83,95\nUlar 12,24,36,48,60,72,84,96"
 year=date.today().year
 tms_printer.large()
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
