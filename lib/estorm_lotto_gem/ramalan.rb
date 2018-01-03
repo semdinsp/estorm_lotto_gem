@@ -12,8 +12,9 @@ module EstormLottoGem
     end
     
     def wbp_get_yest(draws)
-      r0=draws[0]
-      r1=draws[1]
+      r0=r1={'digits' => "1,2,3,4,5,6"}
+      r0=draws[0] if !draws[0].nil?
+      r1=draws[1] if !draws[1].nil?
       yest=older='1234'
       yest=r0['digits'].split(',') if !r0['digits'].nil?
       older=r1['digits'].split(',') if !r1['digits'].nil?
