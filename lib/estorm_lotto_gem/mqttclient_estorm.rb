@@ -74,7 +74,9 @@ module EstormLottoGem
     
     def self.mqtt_load_balance_topic(app='dummy')
       #"loadbalancer"+['1','2'].sample
-      "loadbalancer"+['1'].sample
+      list=['1']
+      list=['1','2'] if app=='sms3'
+      "loadbalancer"+list.sample
     end
     
     def self.mqtt_common_setup(env)
@@ -95,7 +97,7 @@ module EstormLottoGem
     
     def self.mqtt_send_balance_message(env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
-       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic()}/balance"
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/balance"
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
        client.disconnect
        response
@@ -110,7 +112,7 @@ module EstormLottoGem
     
     def self.mqtt_send_lottery_message(game,entries,tc=1,env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
-       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic()}/lottery"
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/lottery"
        payload={game: game,entries: entries, ticket_count: tc}
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
        client.disconnect
