@@ -76,7 +76,7 @@ module EstormLottoGem
       #"loadbalancer"+['1','2'].sample
       list=['1']
       list=['1','2','3'] if app=='sms3'
-      list=['1'] if ['225','625','632'].include?(app)
+      list=['1','2'] if ['225','625','632'].include?(app)
       "loadbalancer"+list.sample
     end
     
