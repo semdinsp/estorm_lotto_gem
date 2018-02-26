@@ -75,7 +75,8 @@ module EstormLottoGem
     def self.mqtt_load_balance_topic(app='dummy')
       #"loadbalancer"+['1','2'].sample
       list=['1']
-      list=['1','2'] if app=='sms3'
+      list=['1','2','3'] if app=='sms3'
+      list=['1'] if ['225','625','632'].include?(app)
       "loadbalancer"+list.sample
     end
     
