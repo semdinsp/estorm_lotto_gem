@@ -35,6 +35,7 @@ tms_printer.println("Ticket Count: " + str(options['ticket_count']))
 tms_printer.println("Ticket Price: " + str(options['txfee']))
 tms_printer.space()
 tms_printer.lotto_qr_code(options['qrcode'],str(options['md5code']))
+tms_printer.println("Wallet Source: " + str(options['wallet_identity']))
 tms_printer.tms_end_ticket("Processed by:",seller)
 
 
