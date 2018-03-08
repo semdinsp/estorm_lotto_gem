@@ -86,6 +86,19 @@ class MqttTest < Thor
       res=EstormLottoGem::MqttclientEstorm.mqtt_send_lottery_message(options[:game],options[:entries],options[:ticket_count],env)
       puts res
     end
+    
+    desc "transfer", "transfer destination value"
+    option :debug
+    option :destination, :required => true
+    option :value, :required => true
+    def transfer
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+  #    mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
+      res=EstormLottoGem::MqttclientEstorm.mqtt_send_transfer_message(options[:destination],options[:value],env)
+      puts res
+    end
      
     #  bin/mqtt_test.rb  statistics --game=625 --msg_type=draw_results --debug=true
 

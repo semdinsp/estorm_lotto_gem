@@ -129,6 +129,15 @@ module EstormLottoGem
        response
     end
     
+    def self.mqtt_send_transfer_message(destination,value,options={},env='production')
+       mq,config,client,src=self.mqtt_common_setup(env)
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/transfer"
+       payload={destination: destination,value: value}
+       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+       client.disconnect
+       response
+    end
+    
     def self.mqtt_send_lottery_statistics_message(appname,msgtype,params={},env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
        topic="lottery/#{env}/6d/#{appname}/#{self.mqtt_load_balance_topic(appname)}/statistics"
