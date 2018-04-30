@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (3.1.52)
+    estorm_lotto_gem (3.1.54)
       estorm_lotto_tools (~> 0.3)
       httpclient (~> 2)
       hurley (~> 0.1)
@@ -18,7 +18,7 @@ GEM
       simplecov (<= 0.13)
     concurrent-ruby (1.0.5)
     docile (1.1.5)
-    estorm_lotto_tools (0.4.9)
+    estorm_lotto_tools (0.5.1)
       hurley (~> 0.1)
       hwid (~> 0.2)
       parseconfig (~> 1.0)

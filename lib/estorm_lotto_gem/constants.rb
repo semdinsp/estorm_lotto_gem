@@ -50,11 +50,11 @@ module EstormLottoGem
   
   def self.shio_list
 [["1","Dog-Asu"],
-["2","Rat-Laho"],["3","Pig-Fahi"],["4","Cat-Busa"],["5","Frog-Manduku"],["6","Sheep-Bibi"],["7","Rooster-Manu_aman"],
+["2","Rat-Laho"],["3","Pig-Fahi"],["4","Cat-Busa"],["5","Frog-Manduku"],["6","Goat-Bibi"],["7","Rooster-Manu_aman"],
 ["8","Horse-Kuda"],["9","Dragon-Naga"],["10","Snake-Samea"],["11","Tiger-Tigri"],
 ["12","Buterfly-Borboleta"],["13","Crocodile-Lafaek"],
 ["14","Crab-kadiuk"],["15","Monkey-Lekirauk"],["16","Scorpion-Sakunar"],["17","Duck-Manurade"],["18","Rabbit-Coelho"],["19","Fish-Ikan"],
-["20","Cow-Karau"],["21","Owl-Manu_kakuuk"],["22","Goat-Bibi_Malae"],["23","Eagle-Makikit"],
+["20","Cow-Karau"],["21","Owl-Manu_kakuuk"],["22","Sheep-Bibi_Malae"],["23","Eagle-Makikit"],
 ["24","Weasel-Laku"],["25","Deer-Bibi_rusa"]]
   end
   
