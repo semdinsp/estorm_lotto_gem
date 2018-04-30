@@ -268,7 +268,7 @@ class Teds_Printer(object):
         if newlogo=="timorscratch":
             brandurl="www.timor-scratch.com"
         elif newlogo=="timortoto":
-            brandurl="www.timor-toto.com"
+            brandurl="www.timor-lotto.com"
         else:
             brandurl="www.scratchcardlao.com"
     def lotto_qr_code(self,code,label):
