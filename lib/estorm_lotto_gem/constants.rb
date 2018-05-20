@@ -31,7 +31,7 @@ module EstormLottoGem
      
   end
   def self.telcos
-    build_array(['edtl','tt','telemor','bwdi'])    
+    build_array(['edtl','tt','telemor','bwdi','heineken'])    
   end
   def self.scratch_logos
     build_array(['estormcrm','timorscratch','scratchlao','timortoto'])    

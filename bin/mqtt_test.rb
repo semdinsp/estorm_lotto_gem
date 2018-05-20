@@ -56,6 +56,20 @@ class MqttTest < Thor
       puts res
     end
     
+    desc "heineken", "heineken ticket"
+    option :debug
+    option :appname, :required => true
+    option :mo, :required => true
+    option :code, :required => true
+    def heineken
+      env="production"
+      env="development" if options[:debug]=='true'
+      puts "options are #{options.inspect}"
+  #    mqtt_lottery_entry_message(appname,ticket_count,d1,d2,d3,d4,d5,d6,options={},env='production')
+      res=EstormLottoGem::MqttclientV2lottery.mqtt_entrylogger_message(options[:appname],options[:mo],options[:code],"sms-app",{},env)
+      puts res
+    end
+    
     #bin/mqtt_test.rb check_lottery_winner --md5code=1 --game=632  --debug=true
     
     desc "check_lottery_winner", "lottery check winner"

@@ -21,8 +21,16 @@ module EstormLottoGem
        puts "digits are [#{d1} #{d2} #{d3} #{d4} #{d5} #{d6}] src: #{csrc}"
        digits =[]
        [d1,d2,d3,d4,d5,d6].each { |d|  digits << d if !d.nil? }
-       digits = digits.sort
+      # digits = digits.sort
        payload={ ticket_count: ticket_count, digits: digits, customersrc: csrc }.merge(options)
+       self.mqtt_send_base_message(payload,env,topic) 
+   end
+   
+   def self.mqtt_entrylogger_message(appname,mo,code,csrc="sms-app",options={},env='production')
+       topic="entrylogger/#{env}/#{self.mqtt_load_balance_topic(appname)}/#{appname}"
+       puts "mo #{mo} code: #{code} src: #{csrc}"
+       
+       payload={ code: code,mo: mo, customersrc: csrc }.merge(options)
        self.mqtt_send_base_message(payload,env,topic) 
    end
    
