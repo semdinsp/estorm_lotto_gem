@@ -89,8 +89,9 @@ class Epson_Printer(Base_Printer):
         self.my_printer.text(now+"\n")
         self.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+imagename)
         self.my_printer.text(urlname+"\n")
-        self.my_printer.cut()
         self.space()
+        self.my_printer.hw("RESET")
+        self.my_printer.cut()
     def closing(self):
         self.private_closing("www.teds-timor.com","tedslogo.jpeg")
     def tms_closing(self):
@@ -147,6 +148,12 @@ class DPR_Printer(Epson_Printer):
         # 0483:5840
         self.my_printer = printer.Usb(0x0fe6,usbid,0,0x82,0x02)
 
+class RT_50mm(Epson_Printer):
+    def __init__(self,usbid):
+        self.my_printer = printer.Usb(0x0fe6,usbid,0,0x82,0x02)
+    def cut(self):
+        pass
+
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):
         # usbi id 0x0e03
@@ -181,6 +188,8 @@ class Teds_Printer(object):
             self.my_printer = DPR_Printer(0x811e)
         if printer_type == 'rongta':
             self.my_printer = DPR_Printer(0x811e)
+        if printer_type == 'rongta50mm':
+            self.my_printer = RT_50mm(0x811e)
         if printer_type == 'sgsprinter':
             self.my_printer = Sgs_Printer(0x811e)
         if printer_type == 'adafruit':

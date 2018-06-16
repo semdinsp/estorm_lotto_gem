@@ -156,6 +156,7 @@ module EstormLottoGem
     def self.estorm_lottery_print(jsonmsg, seller,title,logo,printer_type="rongta",filename="lottery_ticket")
       basegem=EstormLottoGem::Base.new
       system("/usr/bin/python","#{basegem.python_directory}/#{filename}.py", jsonmsg.to_json, printer_type,seller,jsonmsg.to_json,title,logo) if printer_type!= "none"  
+      
     end
     
     
