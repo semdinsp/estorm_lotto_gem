@@ -90,7 +90,7 @@ class Epson_Printer(Base_Printer):
         self.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+imagename)
         self.my_printer.text(urlname+"\n")
         self.space()
-        self.my_printer.hw("RESET")
+        # self.my_printer.hw("RESET")
         self.my_printer.cut()
     def closing(self):
         self.private_closing("www.teds-timor.com","tedslogo.jpeg")

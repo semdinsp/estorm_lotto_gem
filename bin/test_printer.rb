@@ -17,6 +17,21 @@ class PrinterTest < Thor
     puts "res is #{res.inspect}"  
   end
   
+  desc "testprinter", "test printer code "  
+  option :testprinter  
+  option :printer, required: true
+  def testprinter
+    exitcode=0
+    exitcode=options[:exitcode] if !options[:exitcode].nil?
+    basegem=EstormLottoGem::Base.new
+    jsonmsg={newprinter: options[:printer],success: true, hwid: Hwid.systemid,
+             hostname: Socket.gethostname, ip: 'test'}
+    res=EstormLottoGem::MqttclientTms.tms_print_generic(jsonmsg.to_json.to_s, Hwid.systemid,"Printer Test",'timorscratch',options[:printertype])
+     
+ 
+    puts "res is #{res.inspect}"  
+  end
+  
 end
 
 PrinterTest.start(ARGV)
