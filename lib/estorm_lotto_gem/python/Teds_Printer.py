@@ -83,6 +83,8 @@ class Epson_Printer(Base_Printer):
         self.my_printer.set("CENTER","A","normal",1,1)
     def space(self):
         self.my_printer.text("\n")
+    def cut(self):
+        self.my_printer.cut()
     def private_closing(self,urlname,imagename):
         now=str(datetime.now())
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
@@ -91,7 +93,7 @@ class Epson_Printer(Base_Printer):
         self.my_printer.text(urlname+"\n")
         self.space()
         # self.my_printer.hw("RESET")
-        self.my_printer.cut()
+        self.cut()
     def closing(self):
         self.private_closing("www.teds-timor.com","tedslogo.jpeg")
     def tms_closing(self):
@@ -152,7 +154,9 @@ class RT_50mm(Epson_Printer):
     def __init__(self,usbid):
         self.my_printer = printer.Usb(0x0fe6,usbid,0,0x82,0x02)
     def cut(self):
-        pass
+        self.println("")
+        self.println("---------")
+        self.println("")
 
 class Sgs_Printer(Epson_Printer):
     def __init__(self,usbid):

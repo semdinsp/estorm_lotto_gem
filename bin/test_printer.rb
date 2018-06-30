@@ -26,7 +26,7 @@ class PrinterTest < Thor
     basegem=EstormLottoGem::Base.new
     jsonmsg={newprinter: options[:printer],success: true, hwid: Hwid.systemid,
              hostname: Socket.gethostname, ip: 'test'}
-    res=EstormLottoGem::MqttclientTms.tms_print_generic(jsonmsg.to_json.to_s, Hwid.systemid,"Printer Test",'timorscratch',options[:printertype])
+    res=EstormLottoGem::MqttclientTms.tms_print_generic(jsonmsg.to_json.to_s, Hwid.systemid,"Printer Test",'timorscratch',options[:printer])
      
  
     puts "res is #{res.inspect}"  
