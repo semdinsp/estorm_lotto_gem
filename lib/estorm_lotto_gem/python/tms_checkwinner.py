@@ -26,9 +26,14 @@ tms_printer.println(title)
 if options['validated']:
   tms_printer.println("ALREADY PAID ")
   tms_printer.space()
-tms_printer.println("Prize: " + str(options['prize']))
+
+if str(options['prize'])=="1250":
+    tms_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/motorcyle.jpg")
+else:
+    tms_printer.println("Prize: " + str(options['prize']))
+    tms_printer.normal()
+    tms_printer.println("Prize Value: " + str(options['prize_value']))
 tms_printer.normal()
-tms_printer.println("Prize Value: " + str(options['prize_value']))
 tms_printer.println("Game: " + str(options['game']))
 tms_printer.normal()
 tms_printer.println("Terminal: " + str(options['terminal']))

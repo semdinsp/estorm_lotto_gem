@@ -26,7 +26,10 @@ tms_printer.set_logo(logo)
 tms_printer.space()
 tms_printer.println(title)
 tms_printer.println("Date: " + str(options['drawdate']))
-tms_printer.println("Prize: " + str(options['payout']))
+if str(options['payout'])=="1250.00":
+    tms_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/motorcyle.jpg")
+else:
+    tms_printer.println("Prize: " + str(options['payout']))
 tms_printer.space()
 if str(options['game_title'])=="powerball":
     tms_printer.println("Digits: " + str(options['digits']))
