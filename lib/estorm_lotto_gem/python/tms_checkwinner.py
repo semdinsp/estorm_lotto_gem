@@ -28,7 +28,7 @@ if options['validated']:
   tms_printer.space()
 
 if str(options['prize'])=="1250":
-    tms_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/motorcyle.jpg")
+    tms_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/motorcycle.jpg")
 else:
     tms_printer.println("Prize: " + str(options['prize']))
     tms_printer.normal()
