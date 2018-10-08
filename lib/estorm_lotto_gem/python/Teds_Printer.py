@@ -210,6 +210,8 @@ class Teds_Printer(object):
         self.my_printer.image(img)
     def space(self):
         self.my_printer.space()
+    def cut(self):
+        self.my_printer.cut()
     def closing(self):     
         self.my_printer.closing()
     def tms_closing(self):     

@@ -4,6 +4,8 @@ import Image, sys, os
 from datetime import datetime
 from escpos import *
 import json
+from time import sleep
+
 
 msg=sys.argv[1]
 printer_type=sys.argv[2]
@@ -45,6 +47,20 @@ tms_printer.space()
 tms_printer.lotto_qr_code(options['qrcode'],str(options['md5code']))
 tms_printer.println("Wallet Source: " + str(options['wallet_identity']))
 tms_printer.tms_end_ticket("Processed by:",seller)
+time.sleep(1)
+if str(options['manual_coupon'])=="true":
+    #tms_printer2=TMS_Printer(printer_type)
+    tms_printer.large()
+    tms_printer.println(str(options['game_title']))
+    tms_printer.normal()
+    tms_printer.println(str(options['drawdate']))
+    tms_printer.println(str(options['digits']))
+    tms_printer.println(str(options['md5code']))
+    tms_printer.println(" ")
+    tms_printer.cut()
+    
+    
+    
 
 
 
