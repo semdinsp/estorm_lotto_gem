@@ -90,7 +90,7 @@ module EstormLottoGem
   end
   
   def self.district_manager_teams
-    build_array(['unassigned','None','Cancio','Zeferino','Hermenio','Mgmt'])
+    build_array(['unassigned','None','Cancio','Zeferino','Hermenio','Mgmt','scott'])
   end
   
   def self.report_types
