@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (3.1.70)
+    estorm_lotto_gem (3.1.71)
       estorm_lotto_tools (~> 0.3)
       httpclient (~> 2)
       hurley (~> 0.1)
@@ -16,7 +16,7 @@ GEM
     bcrypt (3.1.12)
     codeclimate-test-reporter (1.0.8)
       simplecov (<= 0.13)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.4)
     docile (1.1.5)
     estorm_lotto_tools (0.5.1)
       hurley (~> 0.1)
@@ -26,7 +26,7 @@ GEM
     httpclient (2.8.3)
     hurley (0.2)
     hwid (0.2.6)
-    i18n (1.0.1)
+    i18n (1.4.0)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
     minitest (5.11.3)
@@ -49,7 +49,7 @@ GEM
       tilt (~> 2.0)
     sinatra-support (1.2.2)
       sinatra (>= 1.0)
-    thor (0.20.0)
+    thor (0.20.3)
     tilt (2.0.8)
 
 PLATFORMS
