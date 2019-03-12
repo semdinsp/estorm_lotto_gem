@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (3.1.73)
+    estorm_lotto_gem (3.1.74)
       estorm_lotto_tools (~> 0.3)
       httpclient (~> 2)
       hurley (~> 0.1)

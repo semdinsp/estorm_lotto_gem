@@ -22,7 +22,7 @@ tms_printer.large()
 tms_printer.set_logo(logo)
 tms_printer.set_locale(options['locale'])
 translations = {
-    'la':{"title": u'ກວດສອບຜຸ້ຖືກລາງວັນ', "ap":"Already Paid","pv":"Prize Value","prize":u"ລາງວັນ ","game":u"ເກມ "},
+    'la':{"title": u'ກວດສອບຜຸ້ຖືກລາງວັນ', "ap":u"ຈ່າຍແລ້ວ ","pv":"Prize Value","prize":u"ລາງວັນ ","game":u"ເກມ "},
     'en': {"title":"Check Winner", "ap":"Already Paid","pv":"Prize Value","prize":"Prize ","game":"Game "}
 }
 
@@ -33,7 +33,7 @@ tms_printer.space()
 tms_printer.println(title)
 tms_printer.translated_println(translations[options["locale"]]["title"])
 if options['validated']:
-  tms_printer.println("ALREADY PAID ")
+  #tms_printer.println("ALREADY PAID ")
   tms_printer.translated_println(translations[options["locale"]]["ap"])
   tms_printer.space()
 
