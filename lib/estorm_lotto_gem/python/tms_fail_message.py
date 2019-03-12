@@ -18,6 +18,8 @@ logo=sys.argv[6]
 tms_printer=TMS_Printer(printer_type)
 tms_printer.large()
 tms_printer.set_logo(logo)
+tms_printer.set_locale(options['locale'])
+
 
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 # pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")

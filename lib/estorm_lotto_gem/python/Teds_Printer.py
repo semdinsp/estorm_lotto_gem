@@ -1,5 +1,6 @@
 from Adafruit_Thermal import *
-import Image, sys, os
+import sys, os
+from PIL import Image, ImageFont, ImageOps, ImageDraw
 from datetime import datetime
 from escpos import *
 global brandlogo,brandurl
@@ -202,6 +203,19 @@ class Teds_Printer(object):
             self.my_printer = Base_Printer('test')
     def println(self,atext):
         self.my_printer.println(atext)
+    def set_locale(self,loc):
+        self.locale=loc
+    def translated_println(self,atext):
+        if self.locale == "la":
+            font = ImageFont.truetype('Phetsarath OT.ttf', 36)
+            box = font.getsize(atext)         # work out size of text
+            image = Image.new('RGB', (box[0], 2 * box[1]))
+            draw = ImageDraw.Draw(image)
+            draw.text((0, 0), atext, font=font)
+            image = ImageOps.invert(image)   # invert image to black on white
+            self.my_printer.image(image)
+        else:
+            self.my_printer.println(atext)
     def large(self):
         self.my_printer.large()
     def normal(self):

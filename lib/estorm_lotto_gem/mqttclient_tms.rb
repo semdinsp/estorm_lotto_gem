@@ -87,7 +87,7 @@ module EstormLottoGem
    end
    
    def self.common_options(id='not set',email="unknown",total=0)
-     options={"id"=> id,"email"=> email,"total"=> total} 
+     options={"id"=> id,"email"=> email,"total"=> total, "locale"=>'en'} 
      options
    end
    
@@ -95,10 +95,10 @@ module EstormLottoGem
      puts "TMS Pretty Print:options: #{options.inspect} "
    end
    
-   def self.tms_print(msg, seller,title,logo,printer_type="rongta")
+   def self.tms_print(msg, seller,title,logo,printer_type="rongta",locale="en")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options=MqttclientTms::common_options(hashmsg['validation']['id'],hashmsg['email'],hashmsg['validation']['total']) if !hashmsg['validation'].nil?
-     options=options.merge({'wincount'=> hashmsg['wincount'],'failedcount'=> hashmsg['failedcount']}) 
+     options=options.merge({'wincount'=> hashmsg['wincount'],'locale'=> locale,'failedcount'=> hashmsg['failedcount']}) 
      self.pretty_print_options(options)
      winlist="\n"
      hashmsg['winners'].each { |w| winlist << "#{w['virn']} Prize:#{w['prize_value']} Game:#{w['game_id']}\n" } if !hashmsg['winners'].nil?
@@ -106,10 +106,10 @@ module EstormLottoGem
      system("/usr/bin/python","#{basegem.python_directory}/tms_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
-   def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta")
+   def self.tms_print_failed(msg, seller,title,logo,printer_type="rongta",locale="en")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options=MqttclientTms::common_options(hashmsg['validation']['id'],hashmsg['email']) if !hashmsg['validation'].nil?
-     options=options.merge({'failedcount'=> hashmsg['failedcount']}) 
+     options=options.merge({'failedcount'=> hashmsg['failedcount'],'locale'=> locale }) 
      self.pretty_print_options(options)
            
      faillist="\n"
@@ -118,21 +118,22 @@ module EstormLottoGem
      system("/usr/bin/python","#{basegem.python_directory}/tms_fail_message.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
-   def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta")
+   def self.tms_print_credit_note(msg, seller,title,logo,printer_type="rongta",locale='en')
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options=MqttclientTms::common_options(hashmsg['id'],hashmsg['email'],hashmsg['total'])
      self.pretty_print_options(options)
      vals="\n"
      hashmsg['validations'].each { |v| vals << "Val id: #{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
      options['vals']=vals
+     options['locale']=locale
      system("/usr/bin/python","#{basegem.python_directory}/tms_credit_note.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
-   def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta")
+   def self.tms_checkwin_print(msg, seller,title,logo,printer_type="rongta", locale="en")
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options=MqttclientTms::common_options(hashmsg['id'],hashmsg['email'],0)
      options=options.merge({"prize"=> hashmsg['prize'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
-            'terminal'=> hashmsg['terminal'], 'msg'=> hashmsg['msg'], 'game'=> hashmsg['game']} )
+            'terminal'=> hashmsg['terminal'],'locale'=> locale, 'msg'=> hashmsg['msg'], 'game'=> hashmsg['game']} )
      options['winner']=hashmsg['winner']
      self.pretty_print_options(options)
      system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  

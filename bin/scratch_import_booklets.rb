@@ -52,7 +52,7 @@ class ScratchImportBooklets  < Thor
             STDOUT.flush
             # self.mqtt_send_bookletimport_message(appname,game,list,order,options,env='production')
             
-            res=publish_to_api(func,list,options,env)
+            res=publish_to_api(func,list,options,vendor,env)
             puts res
             list=[]
           end
@@ -67,7 +67,7 @@ class ScratchImportBooklets  < Thor
     
   }
   # EXAMPLE
-  # scratch_import_file.rb bzpimportwinner --app=scratchlao --game=cat --order=006 --filename=catall.uniq.csv
+  # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv
   # end example
   desc "bzpimportbooklets", " bzp import file booklets and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
@@ -76,8 +76,8 @@ class ScratchImportBooklets  < Thor
   option :order, :required => true
   option :filename, :required => true
   option :validate
-  option :blocksize, :default => "1000"
-  def bzpimportwinner
+  option :blocksize, :default => "100"
+  def bzpimportbooklets
     env="production"
     env="development" if options[:debug]=='true'
     puts "options are #{options.inspect}"
@@ -98,4 +98,4 @@ class ScratchImportBooklets  < Thor
   
 end
 
- ScratchImportBooklet.start(ARGV)
+ ScratchImportBooklets.start(ARGV)

@@ -36,6 +36,21 @@ class PrinterTest < Thor
     puts "res is #{res.inspect}"  
   end
   
+  desc "laotest", "test lao printer code "  
+  option :printer, required: true
+  option :locale, required: true
+  option :msg
+  def laotest
+    exitcode=0
+    exitcode=options[:exitcode] if !options[:exitcode].nil?
+    basegem=EstormLottoGem::Base.new
+    message= options[:msg]  || "no input"
+    noptions={"prize"=> '1','email'=>'fredemail', 'id'=> 'id', 'prize_value'=> 3, 'validated'=> true,
+           'terminal'=> 'terminal', 'msg'=> message, 'game'=> 'game' , 'locale' => options[:locale]} 
+    puts noptions.inspect
+    system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", message, options[:printer],'seller',noptions.to_json,'title','scratchlao') 
+  end
+  
 end
 
 PrinterTest.start(ARGV)

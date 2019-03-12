@@ -11,6 +11,10 @@ seller=sys.argv[3]
 options=json.loads(sys.argv[4])
 title=sys.argv[5]
 logo=sys.argv[6]
+translations = {
+    'la':{"title": u'ຣັຖບານລາວ', "total":"Total","pv":"Prize Value"},
+    'en': {"title":"Check winner", "total":"Total","pv":"Prize Value"}
+}
 
 
 
@@ -18,15 +22,22 @@ logo=sys.argv[6]
 tms_printer=TMS_Printer(printer_type)
 tms_printer.large()
 tms_printer.set_logo(logo)
+tms_printer.set_locale(options['locale'])
+
 
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 # pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
 tms_printer.space()
 tms_printer.println(title)
+tms_printer.translated_println(title)
+
 tms_printer.normal()
 tms_printer.println("Txid: " + str(options['id']))
 tms_printer.normal()
-tms_printer.println("Total: " + str(options['total']))
+tms_printer.translated_println(translations[options["locale"]]["total"])
+#tms_printer.println("Total: " + str(options['total']))
+tms_printer.println(str(options['total']))
+
 tms_printer.normal()
 tms_printer.println("Validation List:\n " + str(options['vals']))
 #tms_printer.tms_message(msg)
