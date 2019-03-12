@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from Adafruit_Thermal import *
 from Teds_Printer import *
 import Image, sys, os
