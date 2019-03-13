@@ -22,8 +22,8 @@ tms_printer.large()
 tms_printer.set_logo(logo)
 tms_printer.set_locale(options['locale'])
 translations = {
-    'la':{"title": u'ກວດສອບຜຸ້ຖືກລາງວັນ', "prize":u"ລາງວັນ ","game":u"ເກມ ", "total":u"ຍອດລວມ","txid": u"ລະຫັດການເຄືອນໄຫວ ", "win": u"ຢັ້ງຢືນການນັບຜູ້ຖືກລາງວັນ ", "fail": u"ການນັບໃບຫວຍຜິດຜາດ"},
-    'en': {"title":"Check Winner", "prize":"Prize ","game":"Game ", "total":"Total ", "txid": "Tx ID: ","win": "Win Count ","fail": "Failed Count "}
+    'la':{"title": u'ໃບຮັບລາງວັນ', "prize":u"ລາງວັນ ","game":u"ເກມ ", "total":u"ຍອດລວມ","txid": u"ລະຫັດການເຄືອນໄຫວ ", "win": u"ຢັ້ງຢືນການນັບຜູ້ຖືກລາງວັນ ", "fail": u"ການນັບໃບຫວຍຜິດຜາດ"},
+    'en': {"title":"Winning Ticket Receipt", "prize":"Prize ","game":"Game ", "total":"Total ", "txid": "Tx ID: ","win": "Win Count ","fail": "Failed Count "}
 }
 
 
