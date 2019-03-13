@@ -14,8 +14,8 @@ options=json.loads(sys.argv[4])
 title=sys.argv[5]
 logo=sys.argv[6]
 translations = {
-    'la':{"title": u'ບັນທືກ ', "total":u"ຍອດລວມ ","pv":"Prize Value","vals": "Validations "},
-    'en': {"title":"Credit Note", "total":"Total ","pv":"Prize Value","vals": "Validation List "}
+    'la':{"title": u'ບັນທືກ ', "total":u"ຍອດລວມ ","pv":"Prize Value","vals": "Validations ","txid": u"ລະຫັດການເຄືອນໄຫວ "},
+    'en': {"title":"Credit Note", "total":"Total ","pv":"Prize Value","vals": "Validation List ","txid": "TX ID: "}
 }
 
 
@@ -29,12 +29,13 @@ tms_printer.set_locale(options['locale'])
 
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 # pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
-tms_printer.space()
+if tms_printer.locale=="la":
+    #print lao first
+    tms_printer.translated_println(translations[options["locale"]]["title"]) 
 tms_printer.println(title)
-tms_printer.translated_println(title)
-tms_printer.translated_println(translations[options["locale"]]["title"])
+tms_printer.space()
 tms_printer.normal()
-tms_printer.println("Txid: " + str(options['id']))
+tms_printer.translated_println(translations[options["locale"]]["txid"]+ str(options['id']))
 tms_printer.normal()
 tms_printer.translated_println(translations[options["locale"]]["total"]+str(options['total']))
 #tms_printer.println("Total: " + str(options['total']))
