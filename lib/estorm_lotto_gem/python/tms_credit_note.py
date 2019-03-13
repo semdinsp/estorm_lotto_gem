@@ -32,7 +32,7 @@ tms_printer.set_locale(options['locale'])
 if tms_printer.locale=="la":
     #print lao first
     tms_printer.translated_println(translations[options["locale"]]["title"]) 
-tms_printer.println(title)
+tms_printer.translated_println(title)
 tms_printer.space()
 tms_printer.normal()
 tms_printer.translated_println(translations[options["locale"]]["txid"]+ str(options['id']))
