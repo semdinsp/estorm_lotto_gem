@@ -34,7 +34,6 @@ if tms_printer.locale=="la":
     tms_printer.translated_println(translations[options["locale"]]["title"]) 
 tms_printer.println(title)
 
-tms_printer.println(title)
 tms_printer.normal()
 #tms_printer.println("Txid: " + str(options['id']))
 tms_printer.translated_println(translations[options["locale"]]["txid"]+ str(options['id']))
