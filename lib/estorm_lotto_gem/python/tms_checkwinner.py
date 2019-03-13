@@ -29,9 +29,10 @@ translations = {
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 # pos_printer.image(os.path.dirname(os.path.realpath(__file__))+"/images/santa.jpeg")
 tms_printer.space()
-
+if tms_printer.locale=="la":
+    #print lao first
+    tms_printer.translated_println(translations[options["locale"]]["title"]) 
 tms_printer.println(title)
-tms_printer.translated_println(translations[options["locale"]]["title"])
 if options['validated']:
   #tms_printer.println("ALREADY PAID ")
   tms_printer.translated_println(translations[options["locale"]]["ap"])
