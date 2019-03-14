@@ -14,7 +14,7 @@ options=json.loads(sys.argv[4])
 title=sys.argv[5]
 logo=sys.argv[6]
 translations = {
-    'la':{"title": u'ບັນທືກ ', "total":u"ຍອດລວມ ","pv":"Prize Value","vals": "Validations ","txid": u"ລະຫັດການເຄືອນໄຫວ "},
+    'la':{"title": u'ໃບລົບໜີ້ ', "total":u"ຍອດລວມ ","pv":"Prize Value","vals": "Validations ","txid": u"ລະຫັດການເຄືອນໄຫວ "},
     'en': {"title":"Credit Note", "total":"Total ","pv":"Prize Value","vals": "Validation List ","txid": "TX ID: "}
 }
 
@@ -47,6 +47,7 @@ tms_printer.println(str(options['vals']))
 #tms_printer.tms_message(msg)
 tms_printer.println("\n")
 tms_printer.println("Term email: " + str(options['email']))
+tms_printer.println("Memo: " + str(options['memo']))
 tms_printer.tms_end_ticket("Processed by:",seller)
 
 
