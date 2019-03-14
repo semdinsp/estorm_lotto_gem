@@ -126,6 +126,7 @@ module EstormLottoGem
      hashmsg['validations'].each { |v| vals << "Val id: #{v['id']} Total:#{v['total']} \n" } if !hashmsg['validations'].nil?
      options['vals']=vals
      options['locale']=locale
+     options['memo']=hashmsg['memo']
      system("/usr/bin/python","#{basegem.python_directory}/tms_credit_note.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
    end
    
