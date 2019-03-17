@@ -48,6 +48,11 @@ else:
     tms_printer.println( str(options['prize_value']))
 tms_printer.normal()
 tms_printer.translated_println(translations[options["locale"]]["game"]+str(options['game']))
+
+tms_printer.println("Booklet: " )
+tms_printer.println("Owner: " + str(options['bookletowner']))
+tms_printer.println("Location: " + str(options['location']))
+
 #tms_printer.println("Game: " + str(options['game']))
 tms_printer.normal()
 tms_printer.println("Terminal: " + str(options['terminal']))

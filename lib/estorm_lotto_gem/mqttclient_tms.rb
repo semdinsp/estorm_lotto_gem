@@ -75,7 +75,7 @@ module EstormLottoGem
    
    def self.mqtt_send_checkwinner_message(appname,virn,options,env='production')
        topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/check_winner"
-       payload={time: Time.now, virn: virn}
+       payload={time: Time.now, virn: virn, serial: options[:serial]}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
