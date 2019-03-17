@@ -134,7 +134,8 @@ module EstormLottoGem
      basegem,hashmsg,options=MqttclientTms::common_tasks(msg)
      options=MqttclientTms::common_options(hashmsg['id'],hashmsg['email'],0)
      options=options.merge({"prize"=> hashmsg['prize'], 'prize_value'=> hashmsg['prize_value'], 'validated'=> hashmsg['validated'],
-            'terminal'=> hashmsg['terminal'],'locale'=> locale, 'msg'=> hashmsg['msg'], 'game'=> hashmsg['game']} )
+            'terminal'=> hashmsg['terminal'],'locale'=> locale, 'msg'=> hashmsg['msg'], 'game'=> hashmsg['game'],
+            'location'=> hashmsg['location'], 'bookletowner'=> hashmsg['bookletowner']} )
      options['winner']=hashmsg['winner']
      self.pretty_print_options(options)
      system("/usr/bin/python","#{basegem.python_directory}/tms_checkwinner.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
