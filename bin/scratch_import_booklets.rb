@@ -67,7 +67,7 @@ class ScratchImportBooklets  < Thor
     
   }
   # EXAMPLE
-  # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv
+  # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv --blocksize=200
   # end example
   desc "bzpimportbooklets", " bzp import file booklets and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug

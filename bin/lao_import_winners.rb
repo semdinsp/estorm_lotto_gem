@@ -138,6 +138,64 @@ class LaoImportWinners < Thor
    
   end
   
+  # lao_import_winners.rb  loaduserids --debug=true --filename=userids.csv 
+  desc "loaduserids", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
+  option :debug
+  #option :game, :required => true
+  option :filename, :required => true
+  def loaduserids
+    env="production"
+    env="development" if options[:debug]=='true'
+    puts "options are #{options.inspect}"
+    require File.expand_path('./config/environment', "./") 
+    
+    
+    
+    CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+     begin
+       puts "row is #{row.inspect}"   
+       
+       if !row.empty?
+         CreateDistributor.new({email: row['proposedemail'],name: row['proposedname'],oldid: row['oldid'],  password: row['password']}).perform
+         
+        end
+           
+     end 
+     }
+  
+   
+  end
+  
+  #lao_import_winners.rb  loadbookletdata --debug=true --filename=booklet.csv 
+  desc "loadbookletdata", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
+  option :debug
+  #option :game, :required => true
+  option :filename, :required => true
+  def loadbookletdata
+    env="production"
+    env="development" if options[:debug]=='true'
+    puts "options are #{options.inspect}"
+    require File.expand_path('./config/environment', "./") 
+    
+    #INDEXBOX,FULLBOOKNO,ORDERNO,GAMENO,BOOKLETNO,INVOICE_ID,DATE_INVOICE,OLD_DEALER_ID,NEW_DEALER_ID
+
+    # self.bulk_installation_assign(oldid,order,gameref,booklet)
+    
+    CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+     begin
+       puts "row is #{row.inspect}"   
+       
+       if !row.empty?
+         Booklet.bulk_installation_assign(row['OLD_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO'])
+           
+        end
+           
+     end 
+     }
+  
+   
+  end
+  
   
   #  bin/scratch_import_file.rb heinekenwinner --debug=true --game=heineken --filename=hhtest --order=false
  
