@@ -185,9 +185,14 @@ class LaoImportWinners < Thor
      begin
        puts "row is #{row.inspect}"   
        
-       if !row.empty?
-         Booklet.bulk_installation_assign(row['NEW_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) if row['NEW_DEALER_ID']!="NULL"
-           
+       if !row.empty? and row['NEW_DEALER_ID']!="NULL"
+          if row['NEW_DEALER_ID']=="39"
+            Booklet.bulk_installation_assign(row['NEW_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) 
+          else
+            Booklet.bulk_installation_assign(row['OLD_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) 
+            
+          end
+          
         end
            
      end 
