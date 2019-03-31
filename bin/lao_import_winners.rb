@@ -189,8 +189,14 @@ class LaoImportWinners < Thor
           if row['NEW_DEALER_ID']=="39"
             Booklet.bulk_installation_assign(row['NEW_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) 
           else
-            Booklet.bulk_installation_assign(row['OLD_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) 
-            
+            begin
+               Booklet.bulk_installation_assign(row['OLD_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO']) 
+            rescue RuntimeError
+              u=User.find(row['NEW_DEALER_ID'].to_i)
+              flag=u.oldid==0
+              u.oldid=row['OLD_DEALER_ID']
+              u.save if flag
+            end
           end
           
         end
