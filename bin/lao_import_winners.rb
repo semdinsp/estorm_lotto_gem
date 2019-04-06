@@ -208,6 +208,58 @@ class LaoImportWinners < Thor
   end
   
   
+  #lao_import_winners.rb  laoloadstrange --debug=true --filename=booklet.csv   --order=987 --game=test
+  desc "laoloadstrange", " lao import strange file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
+  option :debug
+  option :order, required: true
+  option :game, required: true
+  option :filename, :required => true
+  def laoloadstrange
+    env="production"
+    env="development" if options[:debug]=='true'
+    puts "options are #{options.inspect}"
+    require File.expand_path('./config/environment', "./") 
+    
+    game=Game.find_by_name(options[:game])
+    count=0
+    #INDEXKEY,SERIALNO,PRICE,BILLNO,DATEREC,PRICERL,LOTNO,USERID,STATUS
+    #  1,00000161,K20000,00661/1217BT,2017-12-27 00:00:00.000,20000,006,32,1
+    order=options[:order]
+    CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+     begin
+       count=count+1
+       puts "count: #{count} row is #{row.inspect}"  
+       if !row.empty? 
+        row['value']=row['PRICE']
+       row['prizeValue']=row['PRICE'].gsub("K","")
+       row['VIRN']=row["SERIALNO"]
+       tmpvirn="#{order}#{game.vendorreference}#{row['VIRN']}"
+       w=Winner.find_by_virn(tmpvirn)
+       msg=""
+         if w.nil?
+         #    w.virn="#{order}#{game.vendorreference}#{row['VIRN']}"
+         #create if does not exist
+         msg="creating #{row}"
+           w=Winner.create_from_row(row,game,"",order)
+         else
+           #update
+           msg="updating  #{row}"
+           
+           w.prize=row['value']
+           w.prize_value=row['prizeValue'].to_f 
+         end
+        w.save if !w.nil?
+        puts "action: #{msg} #{w.inspect}" 
+      end  #if empty
+         
+           
+     end #BEGIN
+     }
+  
+   
+  end
+  
+  
   #  bin/scratch_import_file.rb heinekenwinner --debug=true --game=heineken --filename=hhtest --order=false
  
   
