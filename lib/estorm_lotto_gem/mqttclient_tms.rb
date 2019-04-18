@@ -114,11 +114,10 @@ module EstormLottoGem
      winlist="\n"
      #     result[w.game.name][:total]=result[w.game.name][:total]+val
      #   result[w.game.name][val.to_s] = 0 if result[w.game.name][val.to_s].nil?
-     hashmsg['cardsummary'].each { |w| if !w[:total].nil?
-                                          winlist << "Total: #{w}\n----------------------\n" 
-                                        else
-                                          winlist << "#{w.inspect} \n"  
-                                        end
+     puts "CARD SUMMARY #{hashmsg['cardsummary'].inspect}"
+     hashmsg['cardsummary'].each { |k,v | 
+                          winlist << "Total Validated #{v}\n" if k=="total"
+                          winlist << "Game: #{k}\n   Cards: #{v}\n" if k!="total" and v['total']!=0
                                        } if !hashmsg['cardsummary'].nil?
      options['contents']=winlist
      system("/usr/bin/python","#{basegem.python_directory}/tms_validation.py", msg, printer_type,seller,options.to_json,title,logo) if printer_type!= "none"  
