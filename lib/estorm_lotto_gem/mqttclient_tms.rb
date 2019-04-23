@@ -39,8 +39,10 @@ module EstormLottoGem
        payload={:game => game, :params => list}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
+   #had to add vendortothis
+   # EstormLottoGem::MqttclientTms.send(func,options[:app],options[:game],list,vendor,options[:order],options,env)
    
-   def self.mqtt_send_winnerimport_message(appname,game,list,order,options,env='production')
+   def self.mqtt_send_winnerimport_message(appname,game,list,vendor,order,options,env='production')
        topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/winnerimport"
        payload={:game => game, :list => list, :vendor => vendor,:order => order}
        payload[:validate]="true" if options[:validate]=='true'

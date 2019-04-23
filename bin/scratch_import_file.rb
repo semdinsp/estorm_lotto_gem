@@ -14,6 +14,8 @@ class ScratchImportFile < Thor
     def publish_to_api(func,list,options,vendor,env)
       tries ||= 3
       # res=EstormLottoGem::MqttclientTms.mqtt_send_winnerimport_message(options[:app],options[:game],list,vendor,options[:order],options,env)
+        # self.mqtt_send_winnerimport_message(appname,game,list,vendor,order,options,env='production')
+      
       res=EstormLottoGem::MqttclientTms.send(func,options[:app],options[:game],list,vendor,options[:order],options,env)
    
     rescue Exception => e
