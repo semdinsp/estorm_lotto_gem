@@ -82,7 +82,7 @@ module EstormLottoGem
     build_array(['Asia/Dili','Asia/Vientiane','Asia/Singapore'])
   end
   def self.upgrade_types
-    build_array(['gems','system','sound','script','views','bundle','scratch','scratch_vmbox'])
+    build_array(['gems','system','sound','script','views','bundle','scratch','scratch_vmbox','scdirectory','scdirectory_vmbox'])
   end
 
   def self.customer_status
