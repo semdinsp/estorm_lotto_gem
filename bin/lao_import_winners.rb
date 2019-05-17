@@ -166,7 +166,7 @@ class LaoImportWinners < Thor
    
   end
   
-  #lao_import_winners.rb  loadbookletdata --debug=true --filename=booklet.csv 
+  #
   desc "loadbookletdata", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
   #option :game, :required => true
@@ -186,18 +186,14 @@ class LaoImportWinners < Thor
        puts "row is #{row.inspect}"   
        
        if !row.empty? and row['NEW_DEALER_ID']!="NULL"
-          if row['NEW_DEALER_ID']=="39"
-            Booklet.bulk_installation_assign(row['NEW_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO'],row['REAL_OLD_DEALER_ID']) 
-          else
             begin
-               Booklet.bulk_installation_assign(row['OLD_DEALER_ID'],row['ORDERNO'],row['GAMENO'],row['BOOKLETNO'],row['REAL_OLD_DEALER_ID']) 
+              Booklet.bulk_installation_assign(row['NEW_DEALER_ID'],row['ORDERNO'],"00#{row['GAMENO']}",row['BOOKLETNO'],row['REAL_OLD_DEALER_ID'],row) 
             rescue RuntimeError
               u=User.find(row['NEW_DEALER_ID'].to_i)
               flag=u.oldid==0
               u.oldid=row['OLD_DEALER_ID']
               u.save if flag
             end
-          end
           
         end
            
