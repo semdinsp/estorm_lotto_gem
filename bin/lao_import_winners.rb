@@ -181,10 +181,11 @@ class LaoImportWinners < Thor
     #INDEXBOX,FULLBOOKNO,ORDERNO,GAMENO,BOOKLETNO,INVOICE_ID,DATE_INVOICE,OLD_DEALER_ID,NEW_DEALER_ID
 
     # self.bulk_installation_assign(oldid,order,gameref,booklet)
-    
+    count=0
     CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
      begin
-       puts "row is #{row.inspect}"   
+       count=count+1
+       puts "[count: #{count}] row is #{row.inspect} #{Time.now}"   
        
        if !row.empty? and row['NEW_DEALER_ID']!="NULL"
             begin
