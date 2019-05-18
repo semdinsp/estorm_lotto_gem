@@ -185,7 +185,9 @@ class LaoImportWinners < Thor
     CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
      begin
        count=count+1
-       puts "[count: #{count}] row is #{row.inspect} #{Time.now}"   
+       puts ""
+       puts "------------------------------------[#{Time.now}]"
+       puts "[count: #{count}] row is #{row.inspect} "   
        
        if !row.empty? and row['NEW_DEALER_ID']!="NULL"
             begin
