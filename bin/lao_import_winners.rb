@@ -186,7 +186,7 @@ class LaoImportWinners < Thor
      begin
        count=count+1
        puts ""
-       puts "------------------------------------[#{Time.now}]"
+       puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
        puts "[count: #{count}] row is #{row.inspect} "   
        
        if !row.empty? and row['NEW_DEALER_ID']!="NULL"
