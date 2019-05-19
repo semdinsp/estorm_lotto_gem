@@ -225,6 +225,7 @@ def laowinners
   list={}
   currentuser=-1
   tempcount=0
+  oldid=0
   CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
    begin
      count=count+1
@@ -261,6 +262,8 @@ def laowinners
          
    end 
    }
+   Validation.bulk_load_winners(currentuser,oldid,list)
+   
 
  
 end
