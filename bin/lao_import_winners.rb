@@ -238,7 +238,7 @@ def laowinners
      oldid=row['REAL_OLD_DEALER_ID']
      
      flag= currentuser!=tuser
-     flag=true if tempcount=1500
+     flag=true if tempcount==1500
      if flag 
        begin
          list['count']=tempcount
