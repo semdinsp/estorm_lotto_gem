@@ -207,6 +207,64 @@ class LaoImportWinners < Thor
    
   end
   
+  # lao_import_winners.rb  laowinners --debug=trueff --filename=userids.csv 
+
+desc "laowinners", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
+option :debug
+#option :game, :required => true
+option :filename, :required => true
+def laowinners
+  env="production"
+  env="development" if options[:debug]=='true'
+  puts "options are #{options.inspect}"
+  require File.expand_path('./config/environment', "./") 
+  
+  # TICKET_INDEXKEYDT, TICKET_BILLRC, TICKET_LOTNO[order],TICKET_GAMENO[game],TICKET_SERIALNO[virn],TICKET_PRICE[prize],TICKET_CARDNO[booklet],TICKET_BILLSALE,REAL_OLD_DEALER_ID,OLD_DEALER_ID, NEW_DEALER_ID
+    #2061248,00001/0119DL,006,5,006005312322512,30000.00,NULL,00002/0518HO,3015,3015,51
+  count=0
+  list={}
+  currentuser=-1
+  tempcount=0
+  CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+   begin
+     count=count+1
+     puts ""
+     puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
+     puts "[count: #{count} tempcount: #{tempcount}] row is #{row.inspect} "   
+     tempcount=tempcount+1
+     tuser=row['NEW_DEALER_ID']
+     currentuser=tuser if currentuser==-1
+     oldid=row['REAL_OLD_DEALER_ID']
+     
+     flag= currentuser!=tuser
+     if flag 
+       begin
+         list['count']=tempcount
+         puts "loading #{currentuser}  list: #{list.inspect}"
+         
+         Validation.bulk_load_winners(currentuser,oldid,list)
+       rescue RuntimeError
+         puts "exception RuntimeError"
+       end
+       list={}
+       currentuser=tuser
+       tempcount=1
+       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
+       list["serial#{tempcount}"]=row['TICKET_CARDNO']
+     else
+       currentuser=tuser
+       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
+       list["serial#{tempcount}"]=row['TICKET_CARDNO']
+       puts "listsize :#{list.size} tempcount: #{tempcount}"
+     end
+     
+         
+   end 
+   }
+
+ 
+end
+  
   
   #lao_import_winners.rb  laoloadstrange --debug=true --filename=booklet.csv   --order=987 --game=test
   desc "laoloadstrange", " lao import strange file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
