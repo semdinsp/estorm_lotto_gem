@@ -295,7 +295,7 @@ def laofixdates
   CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
    begin
      count=count+1
-     printflag=[true,false,false,false,false,false].sample
+     printflag=[true,false,false,false,false,false,false,false,false].sample
      if printflag
        puts ""
        puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
@@ -303,7 +303,7 @@ def laofixdates
      end  
      begin
        billdate=row['BILL_DATERC']
-       billmemo=row['TICKET_BILLSALE']
+       billmemo="#{row['TICKET_BILLRC']} : #{row['TICKET_BILLSALE']}"
        virn=row['TICKET_SERIALNO']
        w=Winner.find_by_virn(virn[0..-2])
        if !w.nil?
