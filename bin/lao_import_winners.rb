@@ -304,7 +304,8 @@ def laofixdates
      begin
        billdate=row['BILL_DATERC']
        billmemo=row['TICKET_BILLSALE']
-       w=Winner.find_by_virn(row['TICKET_SERIALNO'])
+       virn=row['TICKET_SERIALNO']
+       w=Winner.find_by_virn(virn[0..-2])
        if !w.nil?
           w.memo=billmemo
           w.redeption_time=billdate
@@ -314,7 +315,7 @@ def laofixdates
           val.save
           puts "updating memo/date #{w.inspect} val date: #{val.created_at}" if printflag
         else
-          puts "VIRN not found #{row['TICKET_SERIALNO']}"
+          puts "VIRN not found #{virn}"
        end
      rescue Exception => e
          puts "exception #{billdate}  #{row['TICKET_SERIALNO']} #{e.inspect}"
