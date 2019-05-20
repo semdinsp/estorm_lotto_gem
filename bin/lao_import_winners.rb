@@ -268,6 +268,60 @@ def laowinners
 
  
 end
+
+desc "laofixdates", " lao fix dates of winners and validations"
+option :debug
+#option :game, :required => true
+option :filename, :required => true
+def laofixdates
+  env="production"
+  env="development" if options[:debug]=='true'
+  puts "options are #{options.inspect}"
+  require File.expand_path('./config/environment', "./") 
+  
+  # TICKET_INDEXKEYDT, TICKET_BILLRC, TICKET_LOTNO[order],TICKET_GAMENO[game],TICKET_SERIALNO[virn],TICKET_PRICE[prize],TICKET_CARDNO[booklet],TICKET_BILLSALE,REAL_OLD_DEALER_ID,OLD_DEALER_ID, NEW_DEALER_ID
+    #2061248,00001/0119DL,006,5,006005312322512,30000.00,NULL,00002/0518HO,3015,3015,51
+    
+    #Ticket bill rc
+    #TICKET_INDEXKEYDT,TICKET_BILLRC,TICKET_LOTNO,TICKET_GAMENO,TICKET_SERIALNO,TICKET_PRICE,TICKET_CARDNO,TICKET_BILLSALE,BILL_DATERC,REAL_OLD_DEALER_ID,OLD_DEALER_ID,NEW_DEALER_ID
+  count=0
+  list={}
+  currentuser=-1
+  tempcount=0
+  oldid=0
+  CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+   begin
+     count=count+1
+     if [true,false,false,false,false,false].sample
+       puts ""
+       puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
+       puts "[count: #{count} tempcount: #{tempcount}] row is #{row.inspect} " 
+     end  
+     begin
+       billdate=row['BILL_DATERC']
+       billmemo=row['TICKET_BILLSALE']
+       w.Winner.find_by_virn(row['TICKET_SERIALNO'])
+       w.memo=billmemo
+       w.redeption_time=billdate
+       val=w.validation
+       val.created_at=billdate
+       w.save
+       val.save
+       puts "updating memo/date #{w.inspect} val date: #{val.created_at}"
+     rescue Exception => e
+         puts "exception #{e.inspect}"
+     end
+     
+     
+         
+   end 
+   }
+   puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
+   puts "[count: #{count} ]  " 
+   
+
+ 
+end
   
   
   #lao_import_winners.rb  laoloadstrange --debug=true --filename=booklet.csv   --order=987 --game=test
