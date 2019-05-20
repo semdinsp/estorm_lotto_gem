@@ -269,6 +269,9 @@ def laowinners
  
 end
 
+# lao_import_winners.rb  laofixdates --debug=trueff --filename=userids.csv 
+
+
 desc "laofixdates", " lao fix dates of winners and validations"
 option :debug
 #option :game, :required => true
@@ -292,7 +295,8 @@ def laofixdates
   CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
    begin
      count=count+1
-     if [true,false,false,false,false,false].sample
+     printflag=[true,false,false,false,false,false].sample
+     if printflag
        puts ""
        puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
        puts "[count: #{count} tempcount: #{tempcount}] row is #{row.inspect} " 
@@ -300,16 +304,20 @@ def laofixdates
      begin
        billdate=row['BILL_DATERC']
        billmemo=row['TICKET_BILLSALE']
-       w.Winner.find_by_virn(row['TICKET_SERIALNO'])
-       w.memo=billmemo
-       w.redeption_time=billdate
-       val=w.validation
-       val.created_at=billdate
-       w.save
-       val.save
-       puts "updating memo/date #{w.inspect} val date: #{val.created_at}"
+       w=Winner.find_by_virn(row['TICKET_SERIALNO'])
+       if !w.nil?
+          w.memo=billmemo
+          w.redeption_time=billdate
+          val=w.validation
+          val.created_at=billdate
+          w.save
+          val.save
+          puts "updating memo/date #{w.inspect} val date: #{val.created_at}" if printflag
+        else
+          puts "VIRN not found #{row['TICKET_SERIALNO']}"
+       end
      rescue Exception => e
-         puts "exception #{e.inspect}"
+         puts "exception #{billdate}  #{row['TICKET_SERIALNO']} #{e.inspect}"
      end
      
      
