@@ -308,7 +308,7 @@ def laofixdates
        w=Winner.find_by_virn(virn[0..-2])
        if !w.nil?
           w.memo=billmemo
-          w.redeption_time=billdate
+          w.redemption_time=billdate
           val=w.validation
           val.created_at=billdate
           w.save
