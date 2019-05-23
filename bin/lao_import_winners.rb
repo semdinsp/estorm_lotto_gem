@@ -320,15 +320,69 @@ def laofixdates
      rescue Exception => e
          puts "exception #{billdate}  #{row['TICKET_SERIALNO']} #{e.inspect}"
      end
-     
-     
-         
+              
    end 
    }
    puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
    puts "[count: #{count} ]  " 
-   
+  
+ 
+end
 
+# lao_import_winners.rb  laofixdates --debug=trueff --filename=userids.csv 
+
+
+desc "laofixwinbooks", " lao fix books and winners validations"
+option :debug
+#option :game, :required => true
+option :filename, :required => true
+def laofixwinbooks
+  env="production"
+  env="development" if options[:debug]=='true'
+  puts "options are #{options.inspect}"
+  require File.expand_path('./config/environment', "./") 
+  
+  # TICKET_INDEXKEYDT, TICKET_BILLRC, TICKET_LOTNO[order],TICKET_GAMENO[game],TICKET_SERIALNO[virn],TICKET_PRICE[prize],TICKET_CARDNO[booklet],TICKET_BILLSALE,REAL_OLD_DEALER_ID,OLD_DEALER_ID, NEW_DEALER_ID
+    #2061248,00001/0119DL,006,5,006005312322512,30000.00,NULL,00002/0518HO,3015,3015,51
+    
+    #Ticket bill rc
+    #TICKET_INDEXKEYDT,TICKET_BILLRC,TICKET_LOTNO,TICKET_GAMENO,TICKET_SERIALNO,TICKET_PRICE,TICKET_CARDNO,TICKET_BILLSALE,BILL_DATERC,REAL_OLD_DEALER_ID,OLD_DEALER_ID,NEW_DEALER_ID
+  count=0
+  list={}
+  currentuser=-1
+  tempcount=0
+  oldid=0
+  CSV.foreach(options["filename"],{col_sep: ",", headers: true, return_headers: false }) { |row|
+   begin
+     count=count+1
+     printflag=[true,false,false,false,false,false,false,false,false].sample
+     if printflag
+       puts ""
+       puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
+       puts "[count: #{count} tempcount: #{tempcount}] row is #{row.inspect} " 
+     end  
+     begin
+       book=row['TICKET_CARDNO']
+       virn=row['TICKET_SERIALNO']
+       w=Winner.find_by_virn(virn[0..-2])
+       if !w.nil? and book!='NULL'
+         fvirn,game,order =Winner.process_virn(virn)
+         b=Booklet.by_game(game).by_order_reference(order).where("serial_number= :serial",{serial: serial}).first
+          w.booklet=b
+          w.save
+          puts "updating booklet #{w.inspect} val date: #{b.inspect}" if printflag
+        else
+          puts "VIRN not found #{virn}"
+       end
+     rescue Exception => e
+         puts "exception #{billdate}  #{row['TICKET_SERIALNO']} #{e.inspect}"
+     end
+              
+   end 
+   }
+   puts "------------------------------------[#{Time.now} filename: #{options["filename"]}]"
+   puts "[count: #{count} ]  " 
+  
  
 end
   
