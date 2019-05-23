@@ -329,7 +329,7 @@ def laofixdates
  
 end
 
-# lao_import_winners.rb  laofixdates --debug=trueff --filename=userids.csv 
+# lao_import_winners.rb  laofixwinbooks --debug=trueff --filename=userids.csv 
 
 
 desc "laofixwinbooks", " lao fix books and winners validations"
@@ -366,16 +366,16 @@ def laofixwinbooks
        virn=row['TICKET_SERIALNO']
        w=Winner.find_by_virn(virn[0..-2])
        if !w.nil? and book!='NULL'
-         fvirn,game,order =Winner.process_virn(virn)
-         b=Booklet.by_game(game).by_order_reference(order).where("serial_number= :serial",{serial: serial}).first
+          fvirn,game,order =Winner.process_virn(virn)
+          b=Booklet.by_game(game).by_order_reference(order).where("serial_number = :serial",{serial: book}).first
           w.booklet=b
           w.save
-          puts "updating booklet #{w.inspect} val date: #{b.inspect}" if printflag
+          puts "updating booklet #{w.inspect} val booklet: #{b.inspect}" if printflag
         else
           puts "VIRN not found #{virn}"
        end
      rescue Exception => e
-         puts "exception #{billdate}  #{row['TICKET_SERIALNO']} #{e.inspect}"
+         puts "exception  #{row['TICKET_SERIALNO']} #{e.inspect}"
      end
               
    end 
