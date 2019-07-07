@@ -249,20 +249,18 @@ def laowinners
          puts "exception RuntimeError"
        end
        list={}
-       currentuser=tuser
        tempcount=1
-       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
-       list["serial#{tempcount}"]=row['TICKET_CARDNO']
-     else
-       currentuser=tuser
-       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
-       list["serial#{tempcount}"]=row['TICKET_CARDNO']
-       puts "listsize :#{list.size} tempcount: #{tempcount}"
      end
-     
+     currentuser=tuser
+     if Winner.by_virn(row['TICKET_SERIALNO']).not_validated.size>0
+       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
+       list["serial#{tempcount}"]=row['TICKET_CARDNO']
+     end
          
    end 
    }
+   list['count']=tempcount
+   
    Validation.bulk_load_winners(currentuser,oldid,list)
    
 
