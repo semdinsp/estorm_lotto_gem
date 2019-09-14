@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (3.1.115)
+    estorm_lotto_gem (3.1.116)
       estorm_lotto_tools (~> 0.3)
       httpclient (~> 2)
       hurley (~> 0.1)
@@ -35,17 +35,17 @@ GEM
     mustermann (1.0.3)
     parseconfig (1.0.8)
     rack (2.0.7)
-    rack-protection (2.0.5)
+    rack-protection (2.0.7)
       rack
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sinatra (2.0.5)
+    sinatra (2.0.7)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.5)
+      rack-protection (= 2.0.7)
       tilt (~> 2.0)
     sinatra-support (1.2.2)
       sinatra (>= 1.0)
