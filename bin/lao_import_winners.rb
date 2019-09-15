@@ -254,8 +254,8 @@ def laowinners
      currentuser=tuser
      # orig      if Winner.by_virn(row['TICKET_SERIALNO'][0..-2]).not_validated.size>0
 
-     if Winner.by_virn(row['TICKET_SERIALNO']).not_validated.size>0
-       list["virn#{tempcount}"]=row['TICKET_SERIALNO']+"0"
+     if Winner.by_virn(row['TICKET_SERIALNO'][0..-2]).not_validated.size>0
+       list["virn#{tempcount}"]=row['TICKET_SERIALNO']
        list["serial#{tempcount}"]=row['TICKET_CARDNO']
      end
          
