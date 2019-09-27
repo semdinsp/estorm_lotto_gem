@@ -168,7 +168,7 @@ class LaoImportWinners < Thor
   
     # lao_import_winners.rb  loadbookletdata --debug=trueff --filename=userids.csv 
 
-  desc "loadbookletdata", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"
+  desc "loadbookletdata", " lao booklet data size of chunks.  Validate flag validates entries"
   option :debug
   #option :game, :required => true
   option :filename, :required => true
@@ -254,7 +254,7 @@ def laowinners
      currentuser=tuser
      # orig      if Winner.by_virn(row['TICKET_SERIALNO'][0..-2]).not_validated.size>0
 
-     if Winner.by_virn(row['TICKET_SERIALNO'][0..-2]).not_validated.size>0
+     if !row.nil? and !row['TICKET_SERIALNO'].nil? and Winner.by_virn(row['TICKET_SERIALNO'][0..-2]).not_validated.size>0
        list["virn#{tempcount}"]=row['TICKET_SERIALNO']
        list["serial#{tempcount}"]=row['TICKET_CARDNO']
      end

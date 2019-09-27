@@ -121,10 +121,10 @@ module EstormLottoGem
         self.mqtt_send_base_message(payload,env,topic) 
     end
     
-    def self.mqtt_send_lottery_message(game,entries,tc=1,env='production',delayed=false)
+    def self.mqtt_send_lottery_message(game,entries,tc=1,env='production',delayed=false,options={})
        mq,config,client,src=self.mqtt_common_setup(env)
        topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/lottery"
-       payload={game: game,entries: entries, ticket_count: tc, delayed_charging: delayed}
+       payload={game: game,entries: entries, ticket_count: tc, delayed_charging: delayed}.merge(options)
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
        client.disconnect
        response
