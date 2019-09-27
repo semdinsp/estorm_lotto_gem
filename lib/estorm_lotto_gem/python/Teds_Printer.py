@@ -298,6 +298,8 @@ class Teds_Printer(object):
         brandlogo=newlogo+".jpg"
         if newlogo=="timorscratch":
             brandurl="www.timor-scratch.com"
+        elif newlogo=="furak":
+            brandurl="www.furak-timor.com"
         elif newlogo=="timortoto":
             brandurl="www.timor-lotto.com"
         else:
