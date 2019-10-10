@@ -38,6 +38,7 @@ shiolist3="20:Cow-Karau 21:Owl-Manu_kakuuk\n22:Goat-Bibi_Malae 23:Eagle-Makikit\
 #shiolist3="Monyet 09,21,33,45,57,69,81,93\nKuda 11,23,35,47,59,71,83,95\nUlar 12,24,36,48,60,72,84,96"
 year=date.today().year
 tms_printer.large()
+tms_printer.println("America Ramalan")
 #ada_printer.printImage(Image.open('/home/pi/Python-Thermal-Printer/gfx/luckysms.png'), True)
 tms_printer.println("Lucky Ramalan")
 tms_printer.normal()
@@ -45,7 +46,8 @@ tms_printer.println("Prediksi Tahun Kuda " + str(year))
 tms_printer.println(drawtype)
 tms_printer.println("Past Draws Date")
 tms_printer.println(pastdraws)
-tms_printer.println("Shio")
+#tms_printer.println("Furak")
+tms_printer.printbrandlogo()
 tms_printer.large()
 tms_printer.println(shio)
 tms_printer.normal()

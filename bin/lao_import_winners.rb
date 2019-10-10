@@ -207,6 +207,8 @@ class LaoImportWinners < Thor
    
   end
   
+  
+  # WINNER IMPORT
   # lao_import_winners.rb  laowinners --debug=trueff --filename=userids.csv 
 
 desc "laowinners", " lao import file VIRN, prize, prizeValue order and blocksize to change size of chunks.  Validate flag validates entries"

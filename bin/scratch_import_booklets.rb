@@ -42,7 +42,7 @@ class ScratchImportBooklets  < Thor
        begin
          puts "row is #{row.inspect}"   if options[:debug]=='true'
          if !row.empty?
-           list << { "carton" => row[0],"booklet_number" => row[1]} 
+           list << { "carton" => row[0],"booklet_number" => row[1], "special" => options[:special]} 
          end
          count=count+1
          if list.size == max
@@ -67,8 +67,8 @@ class ScratchImportBooklets  < Thor
     
   }
   # EXAMPLE
-  # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv --blocksize=200
-  # end example
+  # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv --blocksize=200  --special=true   
+  # end example  FOR SPECIAL SALES
   desc "bzpimportbooklets", " bzp import file booklets and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
   option :app, :required => true
@@ -76,6 +76,7 @@ class ScratchImportBooklets  < Thor
   option :order, :required => true
   option :filename, :required => true
   option :validate
+  option :special
   option :blocksize, :default => "100"
   def bzpimportbooklets
     env="production"

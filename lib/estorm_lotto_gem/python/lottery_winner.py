@@ -35,9 +35,9 @@ if str(options['game_title'])=="powerball":
     tms_printer.println("Digits: " + str(options['digits']))
     tms_printer.println("Powerball: " + str(options['powerball']))
 else:
-    tms_printer.println("Animals: " + str(options['digits']))
+    tms_printer.println("Digits: " + str(options['digits']))
 tms_printer.normal()
-tms_printer.println("Ticket Count: " + str(options['ticket_count']))
+tms_printer.println("Price: " + str(options['ticket_count']))
 tms_printer.space()
 tms_printer.tms_end_ticket("Processed by:",seller)
 

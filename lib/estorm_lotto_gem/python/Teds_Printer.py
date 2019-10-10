@@ -86,11 +86,13 @@ class Epson_Printer(Base_Printer):
         self.my_printer.text("\n")
     def cut(self):
         self.my_printer.cut()
+    def printlogo(self,imagename):
+        self.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+imagename)
     def private_closing(self,urlname,imagename):
         now=str(datetime.now())
         self.my_printer.set("CENTER", "A", "normal", 1, 1)
         self.my_printer.text(now+"\n")
-        self.image(os.path.dirname(os.path.realpath(__file__))+"/images/"+imagename)
+        self.printlogo(imagename)
         self.my_printer.text(urlname+"\n")
         self.space()
         # self.my_printer.hw("RESET")
@@ -257,6 +259,12 @@ class Teds_Printer(object):
     def security_code(self,code):     
         self.my_printer.security_code(code,"Security Code") 
     def get_prizes(self,drawtype):
+        if drawtype=='425':
+            return ["4D  ------> $3250/2000", "Red -------> $1000", "Green -------> $1000", "Consolation ----> $225", "Starter ---> $75"]
+        if drawtype=='625':
+            return ["6D  ------> $25,000"]
+        if drawtype=='4D':
+            return ["4D  ------> $3250/2000", "Red -------> $1000", "Green -------> $1000", "Consolation ----> $225", "Starter ---> $75"]    
         if drawtype=='4d':
             return ["4D  ------> $3000", "3D -------> $50", "2D -------> $10", "1D ----> Free entry", "Reverse ---> $200", "Consolation -> $50"]
         if drawtype=='combo':
@@ -304,6 +312,8 @@ class Teds_Printer(object):
             brandurl="www.timor-lotto.com"
         else:
             brandurl="www.scratchcardlao.com"
+    def printbrandlogo(self):
+        self.printlogo(brandlogo)
     def lotto_qr_code(self,code,label):
         self.my_printer.lotto_qr_code(code,label)
     def print_message(self,msg,title):

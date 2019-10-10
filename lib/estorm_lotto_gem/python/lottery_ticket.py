@@ -36,12 +36,12 @@ if str(options['game_title'])=="powerball":
     tms_printer.println("Powerball: " + str(options['powerball']))
 else:
     tms_printer.normal()
-    tms_printer.println("Animals:")
+    tms_printer.println("Digits:")
     tms_printer.large()
     tms_printer.println(str(options['digits']))
     
 tms_printer.normal()
-tms_printer.println("Ticket Count: " + str(options['ticket_count']))
+#tms_printer.println("Ticket Count: " + str(options['ticket_count']))
 tms_printer.println("Ticket Price: " + str(options['txfee']))
 tms_printer.space()
 tms_printer.lotto_qr_code(options['qrcode'],str(options['md5code']))
