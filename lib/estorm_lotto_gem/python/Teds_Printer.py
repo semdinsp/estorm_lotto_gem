@@ -313,7 +313,7 @@ class Teds_Printer(object):
         else:
             brandurl="www.scratchcardlao.com"
     def printbrandlogo(self):
-        self.printlogo(brandlogo)
+        self.my_printer.printlogo(brandlogo)
     def lotto_qr_code(self,code,label):
         self.my_printer.lotto_qr_code(code,label)
     def print_message(self,msg,title):

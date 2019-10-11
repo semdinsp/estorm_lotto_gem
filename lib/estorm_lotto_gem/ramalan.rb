@@ -23,7 +23,8 @@ module EstormLottoGem
     
     def draw_range(name)
       return (1..25) if name.include?("shio")
-      (1..32)
+      # (1..32)
+      (0..9)
     end
     
     def build_cube(name)
@@ -36,13 +37,15 @@ module EstormLottoGem
       yest,older,r0,r1= wbp_get_yest(draws)
       ekor= 120 - yest[-2].to_i*10 - yest[-1].to_i
       kapala= older[0].to_i*10 - yest[0].to_i*10 - yest[1].to_i + older[1].to_i
+      # orgi return ekor.abs % 25 ,kapala.abs % 25 ,r0,r1
       return ekor.abs % 25 ,kapala.abs % 25 ,r0,r1
+      
     end
     
     def build_hash(res)
       ekor,kapala,r0,r1=wbp_ekor_kapala(res)
       {ekor: ekor, kapala: kapala, r0: r0, r1: r1, shio: EstormLottoGem::Constants.shio_list.sample.last, 
-            rama: build_cube('shioboot'), pastdraws: r0['drawdate']}
+            rama: build_cube('425'), pastdraws: r0['drawdate']}
     end
   end #Class
 end
