@@ -7,7 +7,7 @@ gem "multi_json"
 gem "minitest"
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-support'
-gem 'bcrypt'
+gem 'bcrypt', '~> 3.1.12' 
 gem 'i18n'
 gem 'mqtt'
 gem 'hwid'
