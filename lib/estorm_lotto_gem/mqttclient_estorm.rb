@@ -66,9 +66,11 @@ module EstormLottoGem
     
     def self.mqtt_send_base_message(payload,env,topic) 
        mq,config,client,src=self.mqtt_common_setup(env)
-       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
-       client.disconnect
-       response
+       self.common_closure(mq,config,client,topic,payload)
+       
+       #readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+       #client.disconnect
+       # response
       
     end
     
@@ -95,23 +97,39 @@ module EstormLottoGem
   #     client.disconnect
   #     response
   #  end
-    
+  def self.common_closure(mq,config,client,topic,payload={})
+    readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+    client.disconnect
+    response
+  end
     
     def self.mqtt_send_balance_message(env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
        topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/balance"
-       readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
-       client.disconnect
-       response
+       self.common_closure(mq,config,client,topic)
+      # readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
+      # client.disconnect
+      # response
+    end
+    
+    def self.mqtt_send_report_message(env='production')
+       mq,config,client,src=self.mqtt_common_setup(env)
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/reporting"
+       self.common_closure(mq,config,client,topic)
+      # readtopic,response =mq.send_message_wait_confirmation(config,client,topic)
+      # client.disconnect
+      # response
     end
     
     def self.mqtt_send_charging_message(txid,env='production')
        mq,config,client,src=self.mqtt_common_setup(env)
        topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/charging"
        payload={wallet_tx_uuid: txid}
-       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
-       client.disconnect
-       response
+       self.common_closure(mq,config,client,topic,payload)
+       
+      # readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+      # client.disconnect
+      # response
     end
     
     def self.mqtt_check_lottery_winner_message(appname,md5code,topicname,options={},env='production')
