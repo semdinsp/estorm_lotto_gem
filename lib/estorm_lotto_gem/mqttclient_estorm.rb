@@ -79,7 +79,7 @@ module EstormLottoGem
       list=['1']
       list=['1','2','3','4','5'] if ['sms3'].include?(app)
       list=['1','2','3'] if ['425'].include?(app)
-      list=['1','2'] if ['225','525','625','632','425','timor','scratchlao'].include?(app)
+      list=['1','2'] if ['225','525','625','632','timor','scratchlao'].include?(app)
       "loadbalancer"+list.sample
     end
     
@@ -143,6 +143,15 @@ module EstormLottoGem
        mq,config,client,src=self.mqtt_common_setup(env)
        topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/lottery"
        payload={game: game,entries: entries, ticket_count: tc, delayed_charging: delayed}.merge(options)
+       readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
+       client.disconnect
+       response
+    end
+    
+    def self.mqtt_send_bulk_lottery_message(payload,env='production',delayed=true,options={})
+       mq,config,client,src=self.mqtt_common_setup(env)
+       topic="sms3/#{env}/#{MqttclientEstorm.mqtt_load_balance_topic('sms3')}/lotterybulk"
+       payload=payload.merge(options)
        readtopic,response =mq.send_message_wait_confirmation(config,client,topic,payload)
        client.disconnect
        response
