@@ -71,7 +71,7 @@ module EstormLottoGem
    
    def self.mqtt_send_creditnote_message(appname,memo,options,env='production')
        topic="tms/#{env}/#{appname}/#{MqttclientTms.mqtt_load_balance_topic(appname)}/credit_note"
-       payload={time: Time.now, memo: memo, cashcollected: options['cash']}
+       payload={time: Time.now, memo: memo, cashcollected: options[:cash]}
        MqttclientTms.mqtt_send_base_message(payload,env,topic) 
    end
    
