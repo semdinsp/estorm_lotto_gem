@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "estorm_lotto_gem"
-  s.version     = "3.1.135"
+  s.version     = "3.1.136"
   s.author      = "Scott Sproule"
   s.email       = "scott.sproule@ficonab.com"
   s.homepage    = "http://github.com/semdinsp/estorm_lotto_gem"
@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'mqtt','~> 0.1'
   #s.add_runtime_dependency 'bcrypt'
   s.add_runtime_dependency 'hurley', '~> 0.1'
-  s.add_runtime_dependency 'estorm_lotto_tools', '~> 0.3'
+  #s.add_runtime_dependency 'estorm_lotto_tools', '~> 0.3'
+  s.add_runtime_dependency 'estorm_lotto_tools'
   signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
     if File.exist?(signing_key)
