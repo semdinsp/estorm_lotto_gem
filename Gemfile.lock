@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/semdinsp/estorm_lotto_tools.git
+  revision: 1877061842c0a7fc3ff54d8748f7ffffaaaac428
+  specs:
+    estorm_lotto_tools (0.5.1)
+      hurley (~> 0.1)
+      hwid (~> 0.2)
+      parseconfig (~> 1.0)
+      thor (~> 0.19)
+
 PATH
   remote: .
   specs:
@@ -11,18 +21,12 @@ PATH
 
 GEM
   remote: https://rubygems.org/
-  remote: https://n6ojjVsAxpecp7UjaAzD@gem.fury.io/semdinsp/
   specs:
     bcrypt (3.1.13)
     codeclimate-test-reporter (1.0.9)
       simplecov (<= 0.13)
     concurrent-ruby (1.1.6)
     docile (1.1.5)
-    estorm_lotto_tools (0.5.1)
-      hurley (~> 0.1)
-      hwid (~> 0.2)
-      parseconfig (~> 1.0)
-      thor (~> 0.19)
     httpclient (2.8.3)
     hurley (0.2)
     hwid (0.3.1)
@@ -34,7 +38,7 @@ GEM
     multi_json (1.14.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    parseconfig (1.0.8)
+    parseconfig (1.1.2)
     rack (2.2.2)
     rack-protection (2.0.8.1)
       rack
