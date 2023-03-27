@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/semdinsp/estorm_lotto_tools.git
-  revision: 1877061842c0a7fc3ff54d8748f7ffffaaaac428
+  revision: c570d51095d81ed774805b35f3645c5754fdfd34
   specs:
-    estorm_lotto_tools (0.5.1)
+    estorm_lotto_tools (0.5.2)
       hurley (~> 0.1)
       hwid (~> 0.2)
       parseconfig (~> 1.0)
@@ -11,8 +11,8 @@ GIT
 PATH
   remote: .
   specs:
-    estorm_lotto_gem (3.1.136)
-      estorm_lotto_tools
+    estorm_lotto_gem (3.1.138)
+      estorm_lotto_tools (~> 0.5.2)
       httpclient (~> 2)
       hurley (~> 0.1)
       hwid (~> 0.1)
@@ -22,41 +22,41 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    bcrypt (3.1.13)
+    bcrypt (3.1.18)
     codeclimate-test-reporter (1.0.9)
       simplecov (<= 0.13)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.2.2)
     docile (1.1.5)
     httpclient (2.8.3)
     hurley (0.2)
-    hwid (0.3.1)
-    i18n (1.8.2)
+    hwid (0.4.5)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    json (2.3.0)
-    minitest (5.14.0)
-    mqtt (0.5.0)
-    multi_json (1.14.1)
-    mustermann (1.1.1)
+    json (2.6.3)
+    minitest (5.18.0)
+    mqtt (0.6.0)
+    multi_json (1.15.0)
+    mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     parseconfig (1.1.2)
-    rack (2.2.2)
-    rack-protection (2.0.8.1)
+    rack (2.2.6.4)
+    rack-protection (3.0.5)
       rack
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.5)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sinatra (2.0.8.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+    sinatra (3.0.5)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.0.5)
       tilt (~> 2.0)
     sinatra-support (1.2.2)
       sinatra (>= 1.0)
     thor (0.20.3)
-    tilt (2.0.10)
+    tilt (2.1.0)
 
 PLATFORMS
   ruby
