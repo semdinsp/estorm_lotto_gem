@@ -67,8 +67,10 @@ class ScratchImportBooklets  < Thor
     
   }
   # EXAMPLE
+  # Backup system db.  
   # scratch_import_booklets.rb bzpimportbooklets  --debug=true --app=timor --game=lafaek --order=003 --filename=invshort.csv --blocksize=200  --special=true   
   # end example  FOR SPECIAL SALES
+  # scratch_import_booklets.rb bzpimportbooklets   --app=scratchlao --game=moneytree --order=24002 --filename=~/Downloads/L0004-24002Inventory.csv --blocksize=300  --special=false
   desc "bzpimportbooklets", " bzp import file booklets and blocksize to change size of chunks.  Validate flag validates entries"
   option :debug
   option :app, :required => true
